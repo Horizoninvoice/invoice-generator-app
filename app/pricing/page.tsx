@@ -59,7 +59,7 @@ export default function PricingPage() {
                   ) : feature.free === false ? (
                     <FiX className="text-gray-400 flex-shrink-0" size={18} />
                   ) : (
-                    <span className="text-xs text-primary-600 dark:text-primary-400 font-medium w-5 text-center">
+                    <span className="text-sm text-primary-600 dark:text-primary-400 font-semibold min-w-[60px] text-right">
                       {feature.free}
                     </span>
                   )}
@@ -100,7 +100,7 @@ export default function PricingPage() {
                   ) : feature.pro === false ? (
                     <FiX className="text-gray-400 flex-shrink-0" size={18} />
                   ) : (
-                    <span className="text-xs text-primary-600 dark:text-primary-400 font-medium w-5 text-center">
+                    <span className="text-sm text-primary-600 dark:text-primary-400 font-semibold min-w-[60px] text-right">
                       {feature.pro}
                     </span>
                   )}
@@ -138,7 +138,7 @@ export default function PricingPage() {
                   ) : feature.max === false ? (
                     <FiX className="text-gray-400 flex-shrink-0" size={18} />
                   ) : (
-                    <span className="text-xs text-primary-600 dark:text-primary-400 font-medium w-5 text-center">
+                    <span className="text-sm text-primary-600 dark:text-primary-400 font-semibold min-w-[60px] text-right">
                       {feature.max}
                     </span>
                   )}
