@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect, useMemo, useCallback } from 'react'
+import { useState, useRef, useEffect, useMemo, useCallback, memo } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { useUser } from '@/lib/hooks/useUser'
@@ -19,7 +19,14 @@ function getSupabaseClient() {
   return supabaseClient
 }
 
-export function UserMenu() {
+const menuItems = [
+  { href: '/dashboard', label: 'Dashboard', icon: FiLayout },
+  { href: '/customers', label: 'Customers', icon: FiUsers },
+  { href: '/products', label: 'Products', icon: FiPackage },
+  { href: '/invoices', label: 'Invoices', icon: FiFileText },
+]
+
+export const UserMenu = memo(function UserMenu() {
   const router = useRouter()
   const pathname = usePathname()
   const supabase = useMemo(() => getSupabaseClient(), [])
@@ -54,23 +61,18 @@ export function UserMenu() {
     return user?.email?.split('@')[0] || 'User'
   }, [user?.email])
 
-  const isActive = (href: string) => {
+  const isActive = useCallback((href: string) => {
     if (href === '/dashboard') {
       return pathname === '/dashboard'
     }
     return pathname?.startsWith(href)
-  }
+  }, [pathname])
+
+  const accountType = useMemo(() => {
+    return profile?.role === 'max' ? 'Max' : profile?.role === 'pro' ? 'Pro' : 'Free'
+  }, [profile?.role])
 
   if (!user) return null
-
-  const menuItems = [
-    { href: '/dashboard', label: 'Dashboard', icon: FiLayout },
-    { href: '/customers', label: 'Customers', icon: FiUsers },
-    { href: '/products', label: 'Products', icon: FiPackage },
-    { href: '/invoices', label: 'Invoices', icon: FiFileText },
-  ]
-
-  const accountType = profile?.role === 'max' ? 'Max' : profile?.role === 'pro' ? 'Pro' : 'Free'
 
   return (
     <div className="flex items-center gap-3">
@@ -198,4 +200,4 @@ export function UserMenu() {
       </div>
     </div>
   )
-}
+})
