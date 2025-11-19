@@ -47,7 +47,7 @@ export default async function ProfilePage() {
               {profile && (
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 text-sm font-medium">
                   <FiAward size={14} />
-                  {profile.role === 'pro' ? 'Pro Account' : 'Free Account'}
+                  {profile.role === 'max' ? 'Max Account' : profile.role === 'pro' ? 'Pro Account' : 'Free Account'}
                 </div>
               )}
             </div>
@@ -84,8 +84,17 @@ export default async function ProfilePage() {
                     </div>
                     <div className="flex-1">
                       <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Account Type</h3>
-                      <p className="text-sm text-gray-600 dark:text-gray-400 capitalize">{profile.role}</p>
-                      {profile.role === 'pro' && profile.subscription_status && (
+                      <p className="text-sm text-gray-600 dark:text-gray-400 capitalize">
+                        {profile.role === 'max' ? 'Max (Lifetime)' : profile.role === 'pro' ? 'Pro (Monthly)' : 'Free'}
+                      </p>
+                      {profile.subscription_type && (
+                        <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                          {profile.subscription_type === 'max_lifetime' ? 'Lifetime Access' : 
+                           profile.subscription_type === 'pro_monthly' ? 'Monthly Subscription' : 
+                           'Free Plan'}
+                        </p>
+                      )}
+                      {profile.subscription_status && (
                         <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
                           Status: {profile.subscription_status}
                         </p>

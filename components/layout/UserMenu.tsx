@@ -73,25 +73,26 @@ export function UserMenu() {
     <div className="relative" ref={menuRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+        className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 transition-colors"
+        aria-label="User menu"
       >
-        <div className="w-8 h-8 rounded-full bg-primary-600 dark:bg-primary-500 flex items-center justify-center text-white text-sm font-medium">
+        <div className="w-8 h-8 rounded-full bg-primary-600 dark:bg-primary-500 flex items-center justify-center text-white text-sm font-medium flex-shrink-0">
           {userInitials}
         </div>
-        <div className="hidden md:block text-left">
-          <p className="text-sm font-medium text-gray-900 dark:text-white">
+        <div className="hidden md:block text-left min-w-0">
+          <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
             {userName}
           </p>
           {isPro && (
             <p className="text-xs text-primary-600 dark:text-primary-400 flex items-center gap-1">
               <FiAward size={12} />
-              Pro
+              {profile?.role === 'max' ? 'Max' : 'Pro'}
             </p>
           )}
         </div>
         <FiChevronDown
           size={16}
-          className={`text-gray-600 dark:text-gray-400 transition-transform ${
+          className={`text-gray-600 dark:text-gray-400 transition-transform flex-shrink-0 ${
             isOpen ? 'rotate-180' : ''
           }`}
         />
@@ -105,7 +106,7 @@ export function UserMenu() {
             </p>
             {profile && (
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                {isPro ? 'Pro Account' : 'Free Account'}
+                {profile.role === 'max' ? 'Max Account' : profile.role === 'pro' ? 'Pro Account' : 'Free Account'}
               </p>
             )}
           </div>
