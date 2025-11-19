@@ -8,13 +8,16 @@ interface TemplatePreviewProps {
   isHovered?: boolean
 }
 
+// Set date to Nov 19, 2025
+const mockDate = new Date('2025-11-19')
+
 const mockInvoice: Invoice = {
   id: '1',
   user_id: '1',
   invoice_number: 'INV-000001',
   customer_id: '1',
-  issue_date: new Date().toISOString().split('T')[0],
-  due_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+  issue_date: mockDate.toISOString().split('T')[0],
+  due_date: new Date(mockDate.getTime() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
   status: 'sent',
   subtotal: 8530,
   tax_amount: 120.70,
