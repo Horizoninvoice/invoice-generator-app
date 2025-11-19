@@ -5,7 +5,7 @@ import { AdSense } from '@/components/layout/AdSense'
 import { Card } from '@/components/ui/Card'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
-import { FileText, Users, Package, DollarSign, TrendingUp } from 'react-icons/fi'
+import { FiFileText, FiUsers, FiPackage, FiDollarSign, FiTrendingUp } from 'react-icons/fi'
 import { formatCurrency, formatDate } from '@/lib/utils'
 
 export default async function DashboardPage() {
@@ -67,7 +67,7 @@ export default async function DashboardPage() {
                 <p className="text-2xl font-bold text-gray-900 mt-1">{customerCount}</p>
               </div>
               <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                <Users className="text-primary-600" size={24} />
+                <FiUsers className="text-primary-600" size={24} />
               </div>
             </div>
           </Card>
@@ -79,7 +79,7 @@ export default async function DashboardPage() {
                 <p className="text-2xl font-bold text-gray-900 mt-1">{productCount}</p>
               </div>
               <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                <Package className="text-green-600" size={24} />
+                <FiPackage className="text-green-600" size={24} />
               </div>
             </div>
           </Card>
@@ -91,7 +91,7 @@ export default async function DashboardPage() {
                 <p className="text-2xl font-bold text-gray-900 mt-1">{invoiceCount}</p>
               </div>
               <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                <FileText className="text-blue-600" size={24} />
+                <FiFileText className="text-blue-600" size={24} />
               </div>
             </div>
           </Card>
@@ -103,7 +103,7 @@ export default async function DashboardPage() {
                 <p className="text-2xl font-bold text-gray-900 mt-1">{formatCurrency(totalRevenue)}</p>
               </div>
               <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-                <DollarSign className="text-yellow-600" size={24} />
+                <FiDollarSign className="text-yellow-600" size={24} />
               </div>
             </div>
           </Card>
@@ -115,7 +115,7 @@ export default async function DashboardPage() {
             <Card className="hover:shadow-md transition-shadow cursor-pointer">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center">
-                  <FileText className="text-white" size={24} />
+                  <FiFileText className="text-white" size={24} />
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900">Create Invoice</h3>
@@ -129,7 +129,7 @@ export default async function DashboardPage() {
             <Card className="hover:shadow-md transition-shadow cursor-pointer">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
-                  <Users className="text-white" size={24} />
+                  <FiUsers className="text-white" size={24} />
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900">Manage Customers</h3>
@@ -143,7 +143,7 @@ export default async function DashboardPage() {
             <Card className="hover:shadow-md transition-shadow cursor-pointer">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <Package className="text-white" size={24} />
+                  <FiPackage className="text-white" size={24} />
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900">Manage Products</h3>
@@ -209,7 +209,7 @@ export default async function DashboardPage() {
             </div>
           ) : (
             <div className="text-center py-8">
-              <FileText className="mx-auto text-gray-400" size={48} />
+              <FiFileText className="mx-auto text-gray-400" size={48} />
               <p className="mt-4 text-gray-600">No invoices yet</p>
               <Link href="/invoices/new" className="mt-4 inline-block">
                 <Button>Create Your First Invoice</Button>

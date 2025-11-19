@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import { Navbar } from '@/components/layout/Navbar'
 import { AdSense } from '@/components/layout/AdSense'
-import { FileText, Users, Package, Zap, Shield, Download, Crown } from 'react-icons/fi'
+import { FiFileText, FiUsers, FiPackage, FiZap, FiShield, FiDownload, FiCrown } from 'react-icons/fi'
 
 export default function HomePage() {
   return (
@@ -43,7 +43,7 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                <FileText className="text-primary-600" size={24} />
+                <FiFileText className="text-primary-600" size={24} />
               </div>
               <h3 className="text-xl font-semibold mb-2">Easy Invoice Creation</h3>
               <p className="text-gray-600">
@@ -53,7 +53,7 @@ export default function HomePage() {
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                <Users className="text-primary-600" size={24} />
+                <FiUsers className="text-primary-600" size={24} />
               </div>
               <h3 className="text-xl font-semibold mb-2">Customer Management</h3>
               <p className="text-gray-600">
@@ -63,7 +63,7 @@ export default function HomePage() {
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                <Package className="text-primary-600" size={24} />
+                <FiPackage className="text-primary-600" size={24} />
               </div>
               <h3 className="text-xl font-semibold mb-2">Product Catalog</h3>
               <p className="text-gray-600">
@@ -73,7 +73,7 @@ export default function HomePage() {
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                <Zap className="text-primary-600" size={24} />
+                <FiZap className="text-primary-600" size={24} />
               </div>
               <h3 className="text-xl font-semibold mb-2">Fast & Reliable</h3>
               <p className="text-gray-600">
@@ -83,7 +83,7 @@ export default function HomePage() {
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                <Shield className="text-primary-600" size={24} />
+                <FiShield className="text-primary-600" size={24} />
               </div>
               <h3 className="text-xl font-semibold mb-2">Secure & Private</h3>
               <p className="text-gray-600">
@@ -93,7 +93,7 @@ export default function HomePage() {
             </div>
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                <Download className="text-primary-600" size={24} />
+                <FiDownload className="text-primary-600" size={24} />
               </div>
               <h3 className="text-xl font-semibold mb-2">Export Options</h3>
               <p className="text-gray-600">
@@ -112,7 +112,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-gradient-to-r from-primary-600 to-primary-800 rounded-2xl p-12 text-white">
             <div className="flex items-center gap-3 mb-4">
-              <Crown size={32} />
+              <FiCrown size={32} />
               <h2 className="text-3xl font-bold">Upgrade to Pro</h2>
             </div>
             <p className="text-xl mb-8 text-primary-100">

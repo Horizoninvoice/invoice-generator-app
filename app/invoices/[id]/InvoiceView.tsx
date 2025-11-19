@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
-import { Download } from 'react-icons/fi'
+import { FiDownload } from 'react-icons/fi'
 import { formatCurrency, formatDate } from '@/lib/utils'
 import { generateInvoicePDF } from '@/lib/pdf'
 import type { Invoice, InvoiceItem, Customer } from '@/lib/types'
@@ -49,7 +49,7 @@ export function InvoiceView({ invoice, items }: { invoice: any; items: InvoiceIt
               {invoice.status}
             </span>
             <Button onClick={handleDownloadPDF} isLoading={isGenerating}>
-              <Download size={18} className="mr-2" />
+              <FiDownload size={18} className="mr-2" />
               Download PDF
             </Button>
           </div>

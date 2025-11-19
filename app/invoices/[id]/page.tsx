@@ -4,7 +4,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
-import { Download, ArrowLeft } from 'react-icons/fi'
+import { FiDownload, FiArrowLeft } from 'react-icons/fi'
 import { formatCurrency, formatDate } from '@/lib/utils'
 import { InvoiceView } from './InvoiceView'
 
@@ -40,7 +40,7 @@ export default async function InvoiceDetailPage({ params }: { params: { id: stri
         <div className="flex items-center justify-between mb-8">
           <Link href="/invoices">
             <Button variant="outline">
-              <ArrowLeft size={18} className="mr-2" />
+              <FiArrowLeft size={18} className="mr-2" />
               Back to Invoices
             </Button>
           </Link>

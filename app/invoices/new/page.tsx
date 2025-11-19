@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
 import { Textarea } from '@/components/ui/Textarea'
-import { Plus, Trash2 } from 'react-icons/fi'
+import { FiPlus, FiTrash2 } from 'react-icons/fi'
 import toast from 'react-hot-toast'
 import type { Customer, Product } from '@/lib/types'
 import { formatCurrency } from '@/lib/utils'
@@ -230,7 +230,7 @@ export default function NewInvoicePage() {
             title="Invoice Items"
             actions={
               <Button type="button" onClick={addItem} size="sm">
-                <Plus size={16} className="mr-2" />
+                <FiPlus size={16} className="mr-2" />
                 Add Item
               </Button>
             }
@@ -299,7 +299,7 @@ export default function NewInvoicePage() {
                         size="sm"
                         onClick={() => removeItem(item.id)}
                       >
-                        <Trash2 size={16} />
+                        <FiTrash2 size={16} />
                       </Button>
                     </div>
                   </div>
@@ -309,7 +309,7 @@ export default function NewInvoicePage() {
               <div className="text-center py-8">
                 <p className="text-gray-600 mb-4">No items added yet</p>
                 <Button type="button" onClick={addItem}>
-                  <Plus size={18} className="mr-2" />
+                  <FiPlus size={18} className="mr-2" />
                   Add First Item
                 </Button>
               </div>

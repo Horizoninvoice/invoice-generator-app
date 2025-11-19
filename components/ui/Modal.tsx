@@ -2,7 +2,7 @@
 
 import { ReactNode, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { X } from 'react-icons/fi'
+import { FiX } from 'react-icons/fi'
 import { cn } from '@/lib/utils'
 
 interface ModalProps {
@@ -47,7 +47,7 @@ export function Modal({ isOpen, onClose, title, children, size = 'md' }: ModalPr
               onClick={onClose}
               className="text-gray-400 hover:text-gray-600 transition-colors"
             >
-              <X size={24} />
+              <FiX size={24} />
             </button>
           </div>
         )}

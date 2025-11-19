@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
-import { Eye, Trash2 } from 'react-icons/fi'
+import { FiEye, FiTrash2 } from 'react-icons/fi'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
@@ -35,11 +35,11 @@ export function InvoiceActions({ invoice }: { invoice: any }) {
     <div className="flex items-center justify-end gap-2">
       <Link href={`/invoices/${invoice.id}`}>
         <Button variant="ghost" size="sm">
-          <Eye size={16} />
+          <FiEye size={16} />
         </Button>
       </Link>
       <Button variant="ghost" size="sm" onClick={handleDelete} isLoading={isDeleting}>
-        <Trash2 size={16} className="text-red-600" />
+        <FiTrash2 size={16} className="text-red-600" />
       </Button>
     </div>
   )

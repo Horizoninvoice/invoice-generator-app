@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useUser } from '@/lib/hooks/useUser'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
-import { FileText, Users, Package, LayoutDashboard, LogOut, Crown } from 'react-icons/fi'
+import { FiFileText, FiUsers, FiPackage, FiLayoutDashboard, FiLogOut, FiCrown } from 'react-icons/fi'
 import toast from 'react-hot-toast'
 
 export function Navbar() {
@@ -71,7 +71,7 @@ export function Navbar() {
                     : 'text-gray-700 hover:bg-gray-100'
                 }`}
               >
-                <LayoutDashboard size={18} />
+                <FiLayoutDashboard size={18} />
                 Dashboard
               </Link>
               <Link
@@ -82,7 +82,7 @@ export function Navbar() {
                     : 'text-gray-700 hover:bg-gray-100'
                 }`}
               >
-                <Users size={18} />
+                <FiUsers size={18} />
                 Customers
               </Link>
               <Link
@@ -93,7 +93,7 @@ export function Navbar() {
                     : 'text-gray-700 hover:bg-gray-100'
                 }`}
               >
-                <Package size={18} />
+                <FiPackage size={18} />
                 Products
               </Link>
               <Link
@@ -104,7 +104,7 @@ export function Navbar() {
                     : 'text-gray-700 hover:bg-gray-100'
                 }`}
               >
-                <FileText size={18} />
+                <FiFileText size={18} />
                 Invoices
               </Link>
             </div>
@@ -113,13 +113,13 @@ export function Navbar() {
             {!isPro && (
               <Link href="/upgrade">
                 <Button variant="outline" size="sm" className="flex items-center gap-2">
-                  <Crown size={16} />
+                  <FiCrown size={16} />
                   Upgrade to Pro
                 </Button>
               </Link>
             )}
             <Button variant="ghost" size="sm" onClick={handleLogout}>
-              <LogOut size={18} />
+              <FiLogOut size={18} />
             </Button>
           </div>
         </div>

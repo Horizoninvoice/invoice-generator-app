@@ -5,7 +5,7 @@ import { AdSense } from '@/components/layout/AdSense'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
-import { Plus, Edit, Trash2 } from 'react-icons/fi'
+import { FiPlus, FiEdit, FiTrash2 } from 'react-icons/fi'
 import { formatDate } from '@/lib/utils'
 import { CustomerActions } from './CustomerActions'
 
@@ -42,7 +42,7 @@ export default async function CustomersPage() {
           </div>
           <Link href="/customers/new">
             <Button>
-              <Plus size={18} className="mr-2" />
+              <FiPlus size={18} className="mr-2" />
               Add Customer
             </Button>
           </Link>
@@ -78,7 +78,7 @@ export default async function CustomersPage() {
                         <div className="flex items-center justify-end gap-2">
                           <Link href={`/customers/${customer.id}`}>
                             <Button variant="ghost" size="sm">
-                              <Edit size={16} />
+                              <FiEdit size={16} />
                             </Button>
                           </Link>
                           <CustomerActions customerId={customer.id} />
@@ -94,7 +94,7 @@ export default async function CustomersPage() {
               <p className="text-gray-600 mb-4">No customers yet</p>
               <Link href="/customers/new">
                 <Button>
-                  <Plus size={18} className="mr-2" />
+                  <FiPlus size={18} className="mr-2" />
                   Add Your First Customer
                 </Button>
               </Link>

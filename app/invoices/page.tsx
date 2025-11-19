@@ -5,7 +5,7 @@ import { AdSense } from '@/components/layout/AdSense'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
-import { Plus, FileText, Download } from 'react-icons/fi'
+import { FiPlus, FiFileText, FiDownload } from 'react-icons/fi'
 import { formatCurrency, formatDate } from '@/lib/utils'
 import { InvoiceActions } from './InvoiceActions'
 import { ExportButton } from './ExportButton'
@@ -47,7 +47,7 @@ export default async function InvoicesPage() {
             )}
             <Link href="/invoices/new">
               <Button>
-                <Plus size={18} className="mr-2" />
+                <FiPlus size={18} className="mr-2" />
                 Create Invoice
               </Button>
             </Link>
@@ -114,11 +114,11 @@ export default async function InvoicesPage() {
             </div>
           ) : (
             <div className="text-center py-12">
-              <FileText className="mx-auto text-gray-400" size={48} />
+              <FiFileText className="mx-auto text-gray-400" size={48} />
               <p className="text-gray-600 mb-4 mt-4">No invoices yet</p>
               <Link href="/invoices/new">
                 <Button>
-                  <Plus size={18} className="mr-2" />
+                  <FiPlus size={18} className="mr-2" />
                   Create Your First Invoice
                 </Button>
               </Link>

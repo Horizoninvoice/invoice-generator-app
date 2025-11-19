@@ -5,7 +5,7 @@ import { AdSense } from '@/components/layout/AdSense'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
-import { Plus, Edit, Trash2 } from 'react-icons/fi'
+import { FiPlus, FiEdit, FiTrash2 } from 'react-icons/fi'
 import { formatCurrency, formatDate } from '@/lib/utils'
 import { ProductActions } from './ProductActions'
 
@@ -42,7 +42,7 @@ export default async function ProductsPage() {
           </div>
           <Link href="/products/new">
             <Button>
-              <Plus size={18} className="mr-2" />
+              <FiPlus size={18} className="mr-2" />
               Add Product
             </Button>
           </Link>
@@ -88,7 +88,7 @@ export default async function ProductsPage() {
                         <div className="flex items-center justify-end gap-2">
                           <Link href={`/products/${product.id}`}>
                             <Button variant="ghost" size="sm">
-                              <Edit size={16} />
+                              <FiEdit size={16} />
                             </Button>
                           </Link>
                           <ProductActions productId={product.id} />
@@ -104,7 +104,7 @@ export default async function ProductsPage() {
               <p className="text-gray-600 mb-4">No products yet</p>
               <Link href="/products/new">
                 <Button>
-                  <Plus size={18} className="mr-2" />
+                  <FiPlus size={18} className="mr-2" />
                   Add Your First Product
                 </Button>
               </Link>

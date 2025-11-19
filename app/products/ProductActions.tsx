@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
-import { Trash2 } from 'react-icons/fi'
+import { FiTrash2 } from 'react-icons/fi'
 import toast from 'react-hot-toast'
 
 export function ProductActions({ productId }: { productId: string }) {
@@ -32,7 +32,7 @@ export function ProductActions({ productId }: { productId: string }) {
 
   return (
     <Button variant="ghost" size="sm" onClick={handleDelete} isLoading={isDeleting}>
-      <Trash2 size={16} className="text-red-600" />
+      <FiTrash2 size={16} className="text-red-600" />
     </Button>
   )
 }
