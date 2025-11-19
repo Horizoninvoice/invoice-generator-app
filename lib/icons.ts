@@ -1,0 +1,28 @@
+// Optimized icon imports - tree-shakeable
+// Import only what you need from react-icons/fi
+
+export {
+  FiFileText,
+  FiUsers,
+  FiPackage,
+  FiLayout,
+  FiAward,
+  FiZap,
+  FiShield,
+  FiDownload,
+  FiCheck,
+  FiStar,
+  FiDollarSign,
+  FiTrendingUp,
+  FiEdit,
+  FiTrash2,
+  FiEye,
+  FiX,
+  FiPlus,
+  FiChevronDown,
+  FiUser,
+  FiLogOut,
+  FiSettings,
+  FiMail,
+} from 'react-icons/fi'
+
