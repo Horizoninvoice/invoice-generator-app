@@ -12,10 +12,8 @@ const ColorSchemeContext = createContext<ColorSchemeContextType | undefined>(und
 
 export function ColorSchemeProvider({ children }: { children: React.ReactNode }) {
   const [colorScheme, setColorSchemeState] = useState<ColorScheme>('minimalist')
-  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true)
     const savedScheme = localStorage.getItem('colorScheme') as ColorScheme
     if (savedScheme && ['minimalist', 'classic', 'earthy', 'coastline'].includes(savedScheme)) {
       setColorSchemeState(savedScheme)
@@ -23,26 +21,20 @@ export function ColorSchemeProvider({ children }: { children: React.ReactNode })
   }, [])
 
   useEffect(() => {
-    if (mounted) {
-      // Remove all color scheme classes
-      document.documentElement.classList.remove(
-        'theme-minimalist',
-        'theme-classic',
-        'theme-earthy',
-        'theme-coastline'
-      )
-      // Add current color scheme class
-      document.documentElement.classList.add(`theme-${colorScheme}`)
-      localStorage.setItem('colorScheme', colorScheme)
-    }
-  }, [colorScheme, mounted])
+    // Remove all color scheme classes
+    document.documentElement.classList.remove(
+      'theme-minimalist',
+      'theme-classic',
+      'theme-earthy',
+      'theme-coastline'
+    )
+    // Add current color scheme class
+    document.documentElement.classList.add(`theme-${colorScheme}`)
+    localStorage.setItem('colorScheme', colorScheme)
+  }, [colorScheme])
 
   const setColorScheme = (scheme: ColorScheme) => {
     setColorSchemeState(scheme)
-  }
-
-  if (!mounted) {
-    return <>{children}</>
   }
 
   return (
