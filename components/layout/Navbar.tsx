@@ -23,10 +23,10 @@ export function Navbar() {
 
   if (loading) {
     return (
-      <nav className="bg-white border-b border-gray-200">
+      <nav className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
-            <div className="h-8 w-32 bg-gray-200 animate-pulse rounded"></div>
+            <div className="h-8 w-32 bg-gray-200 dark:bg-gray-700 animate-pulse rounded"></div>
           </div>
         </div>
       </nav>
@@ -42,6 +42,7 @@ export function Navbar() {
               InvoiceGen
             </Link>
             <div className="flex gap-4">
+              <ThemeToggle />
               <Link href="/login">
                 <Button variant="ghost">Login</Button>
               </Link>
@@ -56,11 +57,11 @@ export function Navbar() {
   }
 
   return (
-    <nav className="bg-white border-b border-gray-200">
+    <nav className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center gap-8">
-            <Link href="/dashboard" className="text-xl font-bold text-primary-600">
+            <Link href="/dashboard" className="text-xl font-bold text-primary-600 dark:text-primary-400">
               InvoiceGen
             </Link>
             <div className="hidden md:flex gap-4">
@@ -68,8 +69,8 @@ export function Navbar() {
                 href="/dashboard"
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
                   pathname === '/dashboard'
-                    ? 'bg-primary-50 text-primary-600'
-                    : 'text-gray-700 hover:bg-gray-100'
+                    ? 'bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                 }`}
               >
                 <FiLayout size={18} />
@@ -79,8 +80,8 @@ export function Navbar() {
                 href="/customers"
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
                   pathname?.startsWith('/customers')
-                    ? 'bg-primary-50 text-primary-600'
-                    : 'text-gray-700 hover:bg-gray-100'
+                    ? 'bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                 }`}
               >
                 <FiUsers size={18} />
@@ -90,8 +91,8 @@ export function Navbar() {
                 href="/products"
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
                   pathname?.startsWith('/products')
-                    ? 'bg-primary-50 text-primary-600'
-                    : 'text-gray-700 hover:bg-gray-100'
+                    ? 'bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                 }`}
               >
                 <FiPackage size={18} />
@@ -101,8 +102,8 @@ export function Navbar() {
                 href="/invoices"
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
                   pathname?.startsWith('/invoices')
-                    ? 'bg-primary-50 text-primary-600'
-                    : 'text-gray-700 hover:bg-gray-100'
+                    ? 'bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400'
+                    : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
                 }`}
               >
                 <FiFileText size={18} />
