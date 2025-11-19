@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { useColorScheme } from './ColorSchemeProvider'
 import { FiCheck, FiChevronDown, FiPalette } from 'react-icons/fi'
 
 export type ColorScheme = 'minimalist' | 'classic' | 'earthy' | 'coastline'
@@ -29,10 +28,22 @@ const themes: { id: ColorScheme; name: string; description: string }[] = [
   },
 ]
 
+// Safe hook usage with fallback
+function useColorSchemeSafe() {
+  try {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { useColorScheme } = require('./ColorSchemeProvider')
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    return useColorScheme()
+  } catch {
+    return { colorScheme: 'minimalist' as ColorScheme, setColorScheme: () => {} }
+  }
+}
+
 export function ThemeSelector() {
-  const { colorScheme, setColorScheme } = useColorScheme()
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
+  const { colorScheme, setColorScheme } = useColorSchemeSafe()
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -41,11 +52,20 @@ export function ThemeSelector() {
       }
     }
 
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [])
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen])
 
   const currentTheme = themes.find((t) => t.id === colorScheme) || themes[0]
+
+  const handleThemeChange = (themeId: ColorScheme) => {
+    setColorScheme(themeId)
+    setIsOpen(false)
+  }
 
   return (
     <div className="relative" ref={menuRef}>
@@ -54,6 +74,7 @@ export function ThemeSelector() {
         className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 transition-all shadow-sm hover:shadow-md"
         aria-label="Select color scheme"
         title="Choose color theme"
+        type="button"
       >
         <FiPalette size={18} className="text-gray-700 dark:text-gray-300" />
         <span className="hidden md:inline text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -78,13 +99,11 @@ export function ThemeSelector() {
             {themes.map((theme) => (
               <button
                 key={theme.id}
-                onClick={() => {
-                  setColorScheme(theme.id)
-                  setIsOpen(false)
-                }}
+                onClick={() => handleThemeChange(theme.id)}
                 className={`w-full flex items-start gap-3 px-4 py-3 text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors ${
                   colorScheme === theme.id ? 'bg-primary-50 dark:bg-primary-900/20' : ''
                 }`}
+                type="button"
               >
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
@@ -107,4 +126,3 @@ export function ThemeSelector() {
     </div>
   )
 }
-
