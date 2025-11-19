@@ -40,6 +40,7 @@ export default function NewInvoicePage() {
     currency: 'USD',
     notes: '',
     terms: '',
+    template: 'default',
   })
 
   useEffect(() => {
@@ -131,10 +132,15 @@ export default function NewInvoicePage() {
       const { data: invoice, error: invoiceError } = await supabase
         .from('invoices')
         .insert({
-          ...formData,
           invoice_number: invoiceNumber,
           customer_id: formData.customer_id || null,
+          issue_date: formData.issue_date,
           due_date: formData.due_date || null,
+          status: formData.status,
+          currency: formData.currency,
+          notes: formData.notes,
+          terms: formData.terms,
+          template: formData.template,
           subtotal,
           tax_amount: taxAmount,
           discount_amount: 0,
@@ -222,6 +228,18 @@ export default function NewInvoicePage() {
                 label="Currency"
                 value={formData.currency}
                 onChange={(e) => setFormData({ ...formData, currency: e.target.value })}
+              />
+              <Select
+                label="Invoice Template"
+                options={[
+                  { value: 'default', label: 'Default Template' },
+                  { value: 'modern', label: 'Modern Template' },
+                  { value: 'classic', label: 'Classic Template' },
+                  { value: 'minimal', label: 'Minimal Template' },
+                ]}
+                value={formData.template}
+                onChange={(e) => setFormData({ ...formData, template: e.target.value })}
+                className="md:col-span-2"
               />
             </div>
           </Card>

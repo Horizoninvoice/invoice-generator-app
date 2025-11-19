@@ -2,7 +2,8 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import { Navbar } from '@/components/layout/Navbar'
 import { AdSense } from '@/components/layout/AdSense'
-import { FiFileText, FiUsers, FiPackage, FiZap, FiShield, FiDownload, FiAward } from 'react-icons/fi'
+import { Footer } from '@/components/layout/Footer'
+import { FiFileText, FiUsers, FiPackage, FiZap, FiShield, FiDownload, FiAward, FiCheck, FiStar } from 'react-icons/fi'
 
 export default function HomePage() {
   return (
@@ -108,70 +109,102 @@ export default function HomePage() {
       <AdSense />
 
       {/* Pro Features Section */}
-      <section className="py-20">
+      <section className="py-20 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-gray-800 dark:to-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-primary-600 to-primary-800 rounded-2xl p-12 text-white">
-            <div className="flex items-center gap-3 mb-4">
-              <FiAward size={32} />
-              <h2 className="text-3xl font-bold">Upgrade to Pro</h2>
+          <div className="text-center mb-12">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <FiAward className="text-primary-600 dark:text-primary-400" size={40} />
+              <h2 className="text-4xl font-bold text-gray-900 dark:text-white">Upgrade to Pro</h2>
             </div>
-            <p className="text-xl mb-8 text-primary-100">
+            <p className="text-xl text-gray-600 dark:text-gray-300 mb-2">
               Unlock advanced features and take your invoicing to the next level
             </p>
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-white text-primary-600 flex items-center justify-center font-bold mt-1">✓</div>
+            <p className="text-lg text-gray-500 dark:text-gray-400">
+              Join thousands of businesses using Pro features to streamline their invoicing
+            </p>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+              <div className="flex items-start gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50">
+                <div className="w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900 flex items-center justify-center flex-shrink-0">
+                  <FiCheck className="text-primary-600 dark:text-primary-400" size={20} />
+                </div>
                 <div>
-                  <h3 className="font-semibold mb-1">No Ads</h3>
-                  <p className="text-primary-100 text-sm">Ad-free experience</p>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">No Ads</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">Enjoy a completely ad-free experience with no distractions</p>
                 </div>
               </div>
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-white text-primary-600 flex items-center justify-center font-bold mt-1">✓</div>
+
+              <div className="flex items-start gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50">
+                <div className="w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900 flex items-center justify-center flex-shrink-0">
+                  <FiFileText className="text-primary-600 dark:text-primary-400" size={20} />
+                </div>
                 <div>
-                  <h3 className="font-semibold mb-1">Unlimited Invoices</h3>
-                  <p className="text-primary-100 text-sm">Create as many invoices as you need</p>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Unlimited Invoices</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">Create as many invoices as you need without any restrictions</p>
                 </div>
               </div>
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-white text-primary-600 flex items-center justify-center font-bold mt-1">✓</div>
+
+              <div className="flex items-start gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50">
+                <div className="w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900 flex items-center justify-center flex-shrink-0">
+                  <FiStar className="text-primary-600 dark:text-primary-400" size={20} />
+                </div>
                 <div>
-                  <h3 className="font-semibold mb-1">Multiple Templates</h3>
-                  <p className="text-primary-100 text-sm">Choose from professional invoice templates</p>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Multiple Templates</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">Choose from 4+ professional invoice templates to match your brand</p>
                 </div>
               </div>
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-white text-primary-600 flex items-center justify-center font-bold mt-1">✓</div>
+
+              <div className="flex items-start gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50">
+                <div className="w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900 flex items-center justify-center flex-shrink-0">
+                  <FiDownload className="text-primary-600 dark:text-primary-400" size={20} />
+                </div>
                 <div>
-                  <h3 className="font-semibold mb-1">Excel Export</h3>
-                  <p className="text-primary-100 text-sm">Export all your data to Excel</p>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Excel Export</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">Export all your invoices, customers, and products to Excel for analysis</p>
                 </div>
               </div>
-              <div className="flex items-start gap-3">
-                <div className="w-6 h-6 rounded-full bg-white text-primary-600 flex items-center justify-center font-bold mt-1">✓</div>
+
+              <div className="flex items-start gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50">
+                <div className="w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900 flex items-center justify-center flex-shrink-0">
+                  <FiFileText className="text-primary-600 dark:text-primary-400" size={20} />
+                </div>
                 <div>
-                  <h3 className="font-semibold mb-1">Custom Logo</h3>
-                  <p className="text-primary-100 text-sm">Upload your company logo</p>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Custom Logo</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">Upload your company logo to brand your invoices professionally</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4 p-4 rounded-lg bg-gray-50 dark:bg-gray-700/50">
+                <div className="w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900 flex items-center justify-center flex-shrink-0">
+                  <FiShield className="text-primary-600 dark:text-primary-400" size={20} />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Priority Support</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">Get priority customer support with faster response times</p>
                 </div>
               </div>
             </div>
-            <Link href="/upgrade">
-              <Button variant="secondary" size="lg">Upgrade Now</Button>
-            </Link>
+
+            <div className="text-center pt-6 border-t border-gray-200 dark:border-gray-700">
+              <div className="mb-6">
+                <span className="text-5xl font-bold text-gray-900 dark:text-white">₹999</span>
+                <span className="text-gray-600 dark:text-gray-400 ml-2">/month</span>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">Cancel anytime • No hidden fees</p>
+              </div>
+              <Link href="/upgrade">
+                <Button size="lg" className="px-8">
+                  <FiAward className="mr-2" size={20} />
+                  Upgrade to Pro Now
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h3 className="text-2xl font-bold mb-4">InvoiceGen</h3>
-            <p className="text-gray-400 mb-4">Free Invoice Generator for Everyone</p>
-            <p className="text-gray-500 text-sm">© 2024 InvoiceGen. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

@@ -7,6 +7,7 @@ import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import { FiFileText, FiUsers, FiPackage, FiLayout, FiLogOut, FiAward } from 'react-icons/fi'
 import toast from 'react-hot-toast'
+import { ThemeToggle } from '@/components/theme/ThemeToggle'
 
 export function Navbar() {
   const pathname = usePathname()
@@ -34,10 +35,10 @@ export function Navbar() {
 
   if (!user) {
     return (
-      <nav className="bg-white border-b border-gray-200">
+      <nav className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
-            <Link href="/" className="text-xl font-bold text-primary-600">
+            <Link href="/" className="text-xl font-bold text-primary-600 dark:text-primary-400">
               InvoiceGen
             </Link>
             <div className="flex gap-4">
@@ -110,6 +111,7 @@ export function Navbar() {
             </div>
           </div>
           <div className="flex items-center gap-4">
+            <ThemeToggle />
             {!isPro && (
               <Link href="/upgrade">
                 <Button variant="outline" size="sm" className="flex items-center gap-2">
