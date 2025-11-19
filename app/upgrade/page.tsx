@@ -151,7 +151,7 @@ function UpgradeContent() {
         <Navbar />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center mb-12">
-            <Crown className="mx-auto text-primary-600 mb-4" size={64} />
+            <FiAward className="mx-auto text-primary-600 mb-4" size={64} />
             <h1 className="text-4xl font-bold text-gray-900 mb-4">Upgrade to Pro</h1>
             <p className="text-xl text-gray-600">
               Unlock advanced features and take your invoicing to the next level

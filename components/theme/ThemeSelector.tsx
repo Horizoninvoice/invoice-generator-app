@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { FiCheck, FiChevronDown, FiPalette } from 'react-icons/fi'
+import { FiCheck, FiChevronDown, FiLayers } from 'react-icons/fi'
 import { useColorScheme } from './ColorSchemeProvider'
 
 export type ColorScheme = 'minimalist' | 'classic' | 'earthy' | 'coastline'
@@ -65,7 +65,7 @@ export function ThemeSelector() {
         title="Choose color theme"
         type="button"
       >
-        <FiPalette size={18} className="text-gray-700 dark:text-gray-300" />
+        <FiLayers size={18} className="text-gray-700 dark:text-gray-300" />
         <span className="hidden md:inline text-sm font-medium text-gray-700 dark:text-gray-300">
           {currentTheme.name}
         </span>
