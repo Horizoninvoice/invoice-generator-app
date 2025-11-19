@@ -240,6 +240,7 @@ export default function NewInvoicePage() {
               <Select
                 label="Invoice Template"
                 options={[
+                  { value: 'professional', label: 'Professional Template' },
                   { value: 'default', label: 'Default Template' },
                   { value: 'modern', label: 'Modern Template' },
                   { value: 'classic', label: 'Classic Template' },

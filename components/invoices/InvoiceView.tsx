@@ -7,6 +7,7 @@ import { FiDownload } from '@/lib/icons'
 import { formatCurrency, formatDate } from '@/lib/utils'
 import { generateInvoicePDF } from '@/lib/pdf'
 import type { Invoice, InvoiceItem, Customer } from '@/lib/types'
+import { ProfessionalTemplate } from './templates/ProfessionalTemplate'
 
 export function InvoiceView({ invoice, items }: { invoice: any; items: InvoiceItem[] }) {
   const [isGenerating, setIsGenerating] = useState(false)
@@ -21,6 +22,42 @@ export function InvoiceView({ invoice, items }: { invoice: any; items: InvoiceIt
     } finally {
       setIsGenerating(false)
     }
+  }
+
+  // Use Professional Template if template is 'professional' or 'default'
+  if (invoice.template === 'professional' || invoice.template === 'default') {
+    return (
+      <>
+        <div className="mb-6 flex justify-end gap-4">
+          <span
+            className={`inline-flex px-3 py-1 text-sm font-semibold rounded-full ${
+              invoice.status === 'paid'
+                ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+                : invoice.status === 'sent'
+                ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+                : invoice.status === 'overdue'
+                ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                : 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200'
+            }`}
+          >
+            {invoice.status}
+          </span>
+          <Button onClick={handleDownloadPDF} isLoading={isGenerating}>
+            <FiDownload size={18} className="mr-2" />
+            Download PDF
+          </Button>
+        </div>
+        <Card className="p-0 overflow-hidden shadow-xl">
+          <ProfessionalTemplate
+            invoice={invoice}
+            items={items}
+            customer={invoice.customers as Customer}
+            companyName="Horizon"
+            companyEmail="info@horizon.com"
+          />
+        </Card>
+      </>
+    )
   }
 
   return (
