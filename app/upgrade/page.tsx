@@ -38,13 +38,14 @@ function UpgradeContent() {
   }, [user, loading, router])
 
   useEffect(() => {
-    if (searchParams.get('success') === 'true') {
-      toast.success('Payment successful! Your account has been upgraded.')
+    // Only show toast if we're coming from a redirect (not from payment handler)
+    if (searchParams.get('success') === 'true' && !isProcessing) {
+      // Payment was already verified in handler, just refresh
       router.refresh()
     } else if (searchParams.get('failed') === 'true') {
       toast.error('Payment failed. Please try again.')
     }
-  }, [searchParams, router])
+  }, [searchParams, router, isProcessing])
 
   const isPro = profile?.role === 'pro' || profile?.role === 'max'
   const isMax = profile?.role === 'max'
@@ -89,9 +90,39 @@ function UpgradeContent() {
         name: `Horizon ${planName}`,
         description: planDesc,
         order_id: orderId,
-        handler: function (response: any) {
+        handler: async function (response: any) {
           if (response.razorpay_payment_id) {
-            router.push('/upgrade?success=true')
+            setIsProcessing(true)
+            try {
+              // Verify payment with backend
+              const verifyResponse = await fetch('/api/payment/verify', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_signature: response.razorpay_signature,
+                }),
+              })
+
+              const verifyData = await verifyResponse.json()
+
+              if (!verifyResponse.ok) {
+                throw new Error(verifyData.error || 'Payment verification failed')
+              }
+
+              toast.success(verifyData.message || 'Payment successful! Your account has been upgraded.')
+              // Refresh user data
+              router.refresh()
+              // Redirect after a short delay to allow refresh
+              setTimeout(() => {
+                router.push('/upgrade?success=true')
+              }, 1000)
+            } catch (error: any) {
+              console.error('Payment verification error:', error)
+              toast.error(error.message || 'Payment verification failed. Please contact support.')
+              setIsProcessing(false)
+            }
           }
         },
         prefill: {
