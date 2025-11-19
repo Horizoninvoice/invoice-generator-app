@@ -5,21 +5,13 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useUser } from '@/lib/hooks/useUser'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
-import { FiFileText, FiUsers, FiPackage, FiLayout, FiLogOut, FiAward } from 'react-icons/fi'
-import toast from 'react-hot-toast'
+import { FiFileText, FiUsers, FiPackage, FiLayout, FiAward } from 'react-icons/fi'
 import { ThemeToggle } from '@/components/theme/ThemeToggle'
+import { UserMenu } from '@/components/layout/UserMenu'
 
 export function Navbar() {
   const pathname = usePathname()
-  const router = useRouter()
-  const { user, profile, loading, isPro } = useUser()
-  const supabase = createClient()
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut()
-    toast.success('Logged out successfully')
-    router.push('/login')
-  }
+  const { user, loading, isPro } = useUser()
 
   if (loading) {
     return (
@@ -111,7 +103,7 @@ export function Navbar() {
               </Link>
             </div>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <ThemeToggle />
             {!isPro && (
               <Link href="/upgrade">
@@ -121,9 +113,7 @@ export function Navbar() {
                 </Button>
               </Link>
             )}
-            <Button variant="ghost" size="sm" onClick={handleLogout}>
-              <FiLogOut size={18} />
-            </Button>
+            <UserMenu />
           </div>
         </div>
       </div>

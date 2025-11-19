@@ -1,11 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect, notFound } from 'next/navigation'
 import { Navbar } from '@/components/layout/Navbar'
-import { Card } from '@/components/ui/Card'
-import { Button } from '@/components/ui/Button'
-import Link from 'next/link'
-import { FiDownload, FiArrowLeft } from 'react-icons/fi'
-import { formatCurrency, formatDate } from '@/lib/utils'
+import { BackButton } from '@/components/ui/BackButton'
 import { InvoiceView } from './InvoiceView'
 
 export default async function InvoiceDetailPage({ params }: { params: { id: string } }) {
@@ -37,15 +33,10 @@ export default async function InvoiceDetailPage({ params }: { params: { id: stri
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex items-center justify-between mb-8">
-          <Link href="/invoices">
-            <Button variant="outline">
-              <FiArrowLeft size={18} className="mr-2" />
-              Back to Invoices
-            </Button>
-          </Link>
-          <InvoiceView invoice={invoice} items={items || []} />
+        <div className="mb-8">
+          <BackButton href="/invoices" />
         </div>
+        <InvoiceView invoice={invoice} items={items || []} />
       </div>
     </div>
   )

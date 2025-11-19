@@ -2,8 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect, notFound } from 'next/navigation'
 import { Navbar } from '@/components/layout/Navbar'
 import { Card } from '@/components/ui/Card'
-import { Button } from '@/components/ui/Button'
-import Link from 'next/link'
+import { BackButton } from '@/components/ui/BackButton'
 import { EditCustomerForm } from './EditCustomerForm'
 
 export default async function CustomerDetailPage({ params }: { params: { id: string } }) {
@@ -29,11 +28,9 @@ export default async function CustomerDetailPage({ params }: { params: { id: str
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Edit Customer</h1>
-          <Link href="/customers">
-            <Button variant="outline">Back to Customers</Button>
-          </Link>
+        <div className="flex items-center gap-4 mb-8">
+          <BackButton href="/customers" />
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Edit Customer</h1>
         </div>
         <Card>
           <EditCustomerForm customer={customer} />

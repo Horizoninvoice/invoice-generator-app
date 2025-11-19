@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
 import { Textarea } from '@/components/ui/Textarea'
+import { BackButton } from '@/components/ui/BackButton'
 import { FiPlus, FiTrash2 } from 'react-icons/fi'
 import toast from 'react-hot-toast'
 import type { Customer, Product } from '@/lib/types'
@@ -181,7 +182,10 @@ export default function NewInvoicePage() {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Create Invoice</h1>
+        <div className="flex items-center gap-4 mb-8">
+          <BackButton href="/invoices" />
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Create Invoice</h1>
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <Card title="Invoice Details">

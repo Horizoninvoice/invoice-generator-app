@@ -48,62 +48,62 @@ export default async function DashboardPage() {
   const isPro = profile?.role === 'pro'
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-          <p className="text-gray-600 mt-2">Welcome back! Here's an overview of your business.</p>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-2">Welcome back! Here's an overview of your business.</p>
         </div>
 
         {!isPro && <AdSense />}
 
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card>
+          <Card className="bg-primary-600 dark:bg-primary-700 border-0">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Total Customers</p>
-                <p className="text-2xl font-bold text-gray-900 mt-1">{customerCount}</p>
+                <p className="text-sm text-primary-100">Total Customers</p>
+                <p className="text-2xl font-bold text-white mt-1">{customerCount}</p>
               </div>
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                <FiUsers className="text-primary-600" size={24} />
+              <div className="w-12 h-12 bg-primary-500 dark:bg-primary-600 rounded-lg flex items-center justify-center">
+                <FiUsers className="text-white" size={24} />
               </div>
             </div>
           </Card>
 
-          <Card>
+          <Card className="bg-green-600 dark:bg-green-700 border-0">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Total Products</p>
-                <p className="text-2xl font-bold text-gray-900 mt-1">{productCount}</p>
+                <p className="text-sm text-green-100">Total Products</p>
+                <p className="text-2xl font-bold text-white mt-1">{productCount}</p>
               </div>
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                <FiPackage className="text-green-600" size={24} />
+              <div className="w-12 h-12 bg-green-500 dark:bg-green-600 rounded-lg flex items-center justify-center">
+                <FiPackage className="text-white" size={24} />
               </div>
             </div>
           </Card>
 
-          <Card>
+          <Card className="bg-blue-600 dark:bg-blue-700 border-0">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Total Invoices</p>
-                <p className="text-2xl font-bold text-gray-900 mt-1">{invoiceCount}</p>
+                <p className="text-sm text-blue-100">Total Invoices</p>
+                <p className="text-2xl font-bold text-white mt-1">{invoiceCount}</p>
               </div>
-              <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                <FiFileText className="text-blue-600" size={24} />
+              <div className="w-12 h-12 bg-blue-500 dark:bg-blue-600 rounded-lg flex items-center justify-center">
+                <FiFileText className="text-white" size={24} />
               </div>
             </div>
           </Card>
 
-          <Card>
+          <Card className="bg-yellow-600 dark:bg-yellow-700 border-0">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Total Revenue</p>
-                <p className="text-2xl font-bold text-gray-900 mt-1">{formatCurrency(totalRevenue)}</p>
+                <p className="text-sm text-yellow-100">Total Revenue</p>
+                <p className="text-2xl font-bold text-white mt-1">{formatCurrency(totalRevenue)}</p>
               </div>
-              <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-                <FiDollarSign className="text-yellow-600" size={24} />
+              <div className="w-12 h-12 bg-yellow-500 dark:bg-yellow-600 rounded-lg flex items-center justify-center">
+                <FiDollarSign className="text-white" size={24} />
               </div>
             </div>
           </Card>
@@ -112,42 +112,42 @@ export default async function DashboardPage() {
         {/* Quick Actions */}
         <div className="grid md:grid-cols-3 gap-6 mb-8">
           <Link href="/invoices/new">
-            <Card className="hover:shadow-md transition-shadow cursor-pointer">
+            <Card className="bg-primary-600 dark:bg-primary-700 border-0 hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors cursor-pointer">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-primary-500 dark:bg-primary-600 rounded-lg flex items-center justify-center">
                   <FiFileText className="text-white" size={24} />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Create Invoice</h3>
-                  <p className="text-sm text-gray-600">Generate a new invoice</p>
+                  <h3 className="font-semibold text-white">Create Invoice</h3>
+                  <p className="text-sm text-primary-100">Generate a new invoice</p>
                 </div>
               </div>
             </Card>
           </Link>
 
           <Link href="/customers">
-            <Card className="hover:shadow-md transition-shadow cursor-pointer">
+            <Card className="bg-green-600 dark:bg-green-700 border-0 hover:bg-green-700 dark:hover:bg-green-600 transition-colors cursor-pointer">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-green-500 dark:bg-green-600 rounded-lg flex items-center justify-center">
                   <FiUsers className="text-white" size={24} />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Manage Customers</h3>
-                  <p className="text-sm text-gray-600">View and edit customers</p>
+                  <h3 className="font-semibold text-white">Manage Customers</h3>
+                  <p className="text-sm text-green-100">View and edit customers</p>
                 </div>
               </div>
             </Card>
           </Link>
 
           <Link href="/products">
-            <Card className="hover:shadow-md transition-shadow cursor-pointer">
+            <Card className="bg-blue-600 dark:bg-blue-700 border-0 hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors cursor-pointer">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                <div className="w-12 h-12 bg-blue-500 dark:bg-blue-600 rounded-lg flex items-center justify-center">
                   <FiPackage className="text-white" size={24} />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900">Manage Products</h3>
-                  <p className="text-sm text-gray-600">View and edit products</p>
+                  <h3 className="font-semibold text-white">Manage Products</h3>
+                  <p className="text-sm text-blue-100">View and edit products</p>
                 </div>
               </div>
             </Card>
@@ -155,43 +155,43 @@ export default async function DashboardPage() {
         </div>
 
         {/* Recent Invoices */}
-        <Card title="Recent Invoices">
+        <Card title="Recent Invoices" className="bg-primary-600 dark:bg-primary-700 border-0">
           {recentInvoices && recentInvoices.length > 0 ? (
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Invoice #</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Customer</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Date</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Amount</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Status</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Actions</th>
+                  <tr className="border-b border-primary-500 dark:border-primary-600">
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-white">Invoice #</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-white">Customer</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-white">Date</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-white">Amount</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-white">Status</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-white">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {recentInvoices.map((invoice: any) => (
-                    <tr key={invoice.id} className="border-b border-gray-100">
-                      <td className="py-3 px-4 text-sm text-gray-900">{invoice.invoice_number}</td>
-                      <td className="py-3 px-4 text-sm text-gray-600">
+                    <tr key={invoice.id} className="border-b border-primary-500/30 dark:border-primary-600/30">
+                      <td className="py-3 px-4 text-sm text-white">{invoice.invoice_number}</td>
+                      <td className="py-3 px-4 text-sm text-primary-100">
                         {invoice.customers?.name || 'N/A'}
                       </td>
-                      <td className="py-3 px-4 text-sm text-gray-600">
+                      <td className="py-3 px-4 text-sm text-primary-100">
                         {formatDate(invoice.issue_date)}
                       </td>
-                      <td className="py-3 px-4 text-sm font-medium text-gray-900">
+                      <td className="py-3 px-4 text-sm font-medium text-white">
                         {formatCurrency(invoice.total_amount)}
                       </td>
                       <td className="py-3 px-4">
                         <span
                           className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
                             invoice.status === 'paid'
-                              ? 'bg-green-100 text-green-800'
+                              ? 'bg-green-500 text-white'
                               : invoice.status === 'sent'
-                              ? 'bg-blue-100 text-blue-800'
+                              ? 'bg-blue-500 text-white'
                               : invoice.status === 'overdue'
-                              ? 'bg-red-100 text-red-800'
-                              : 'bg-gray-100 text-gray-800'
+                              ? 'bg-red-500 text-white'
+                              : 'bg-gray-500 text-white'
                           }`}
                         >
                           {invoice.status}
@@ -199,7 +199,7 @@ export default async function DashboardPage() {
                       </td>
                       <td className="py-3 px-4">
                         <Link href={`/invoices/${invoice.id}`}>
-                          <Button variant="ghost" size="sm">View</Button>
+                          <Button variant="secondary" size="sm">View</Button>
                         </Link>
                       </td>
                     </tr>
@@ -209,10 +209,10 @@ export default async function DashboardPage() {
             </div>
           ) : (
             <div className="text-center py-8">
-              <FiFileText className="mx-auto text-gray-400" size={48} />
-              <p className="mt-4 text-gray-600">No invoices yet</p>
+              <FiFileText className="mx-auto text-primary-200 dark:text-primary-300" size={48} />
+              <p className="mt-4 text-primary-100 dark:text-primary-200">No invoices yet</p>
               <Link href="/invoices/new" className="mt-4 inline-block">
-                <Button>Create Your First Invoice</Button>
+                <Button variant="secondary">Create Your First Invoice</Button>
               </Link>
             </div>
           )}

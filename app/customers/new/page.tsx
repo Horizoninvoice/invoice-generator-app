@@ -8,6 +8,7 @@ import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
+import { BackButton } from '@/components/ui/BackButton'
 import toast from 'react-hot-toast'
 
 export default function NewCustomerPage() {
@@ -54,7 +55,10 @@ export default function NewCustomerPage() {
     <div className="min-h-screen bg-gray-50">
       <Navbar />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">New Customer</h1>
+        <div className="flex items-center gap-4 mb-8">
+          <BackButton href="/customers" />
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">New Customer</h1>
+        </div>
         <Card>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-6">
