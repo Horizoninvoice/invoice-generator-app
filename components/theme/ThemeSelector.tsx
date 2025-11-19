@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react'
 import { FiCheck, FiChevronDown, FiPalette } from 'react-icons/fi'
+import { useColorScheme } from './ColorSchemeProvider'
 
 export type ColorScheme = 'minimalist' | 'classic' | 'earthy' | 'coastline'
 
@@ -28,22 +29,21 @@ const themes: { id: ColorScheme; name: string; description: string }[] = [
   },
 ]
 
-// Safe hook usage with fallback
-function useColorSchemeSafe() {
-  try {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { useColorScheme } = require('./ColorSchemeProvider')
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    return useColorScheme()
-  } catch {
-    return { colorScheme: 'minimalist' as ColorScheme, setColorScheme: () => {} }
-  }
-}
-
 export function ThemeSelector() {
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
-  const { colorScheme, setColorScheme } = useColorSchemeSafe()
+  
+  let colorScheme: ColorScheme = 'minimalist'
+  let setColorScheme: (scheme: ColorScheme) => void = () => {}
+  
+  try {
+    const scheme = useColorScheme()
+    colorScheme = scheme.colorScheme
+    setColorScheme = scheme.setColorScheme
+  } catch (error) {
+    // ColorSchemeProvider not available, use default
+    // This is safe as it's just a fallback
+  }
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
