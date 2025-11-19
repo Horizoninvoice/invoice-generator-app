@@ -24,6 +24,11 @@
     --accent: 59 130 246; /* Blue accent */
   }
 
+  /* Ensure default is minimalist */
+  html {
+    @apply theme-minimalist;
+  }
+
   /* Classic Neutrals Theme - Black, white, anthracite, metallic gray */
   .theme-classic {
     --primary-50: 249 250 251;
