@@ -9,7 +9,7 @@ interface Invoice {
   total_amount: number
   status: string
   issue_date: string
-  customers?: { name: string } | null
+  customers?: { name: string } | { name: string }[] | null
 }
 
 interface RecentInvoicesProps {
@@ -65,7 +65,9 @@ export function RecentInvoices({ invoices }: RecentInvoicesProps) {
                     {invoice.invoice_number}
                   </td>
                   <td className="py-3 px-4 text-sm text-gray-600 dark:text-gray-400">
-                    {invoice.customers?.name || 'N/A'}
+                    {Array.isArray(invoice.customers) 
+                      ? invoice.customers[0]?.name || 'N/A'
+                      : invoice.customers?.name || 'N/A'}
                   </td>
                   <td className="py-3 px-4 text-sm text-gray-600 dark:text-gray-400">
                     {formatDate(invoice.issue_date)}
