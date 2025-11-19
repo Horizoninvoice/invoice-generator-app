@@ -6,7 +6,9 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
+import { Select } from '@/components/ui/Select'
 import { Navbar } from '@/components/layout/Navbar'
+import { countries, getCurrencyByCountry } from '@/lib/currency'
 import toast from 'react-hot-toast'
 
 export default function SignupPage() {
@@ -15,6 +17,7 @@ export default function SignupPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
+  const [country, setCountry] = useState('IN')
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -33,12 +36,31 @@ export default function SignupPage() {
     setIsLoading(true)
 
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password,
       })
 
-      if (error) throw error
+      if (authError) throw authError
+
+      // Create user profile with country and currency
+      if (authData.user) {
+        const currency = getCurrencyByCountry(country)
+        const { error: profileError } = await supabase
+          .from('user_profiles')
+          .upsert({
+            user_id: authData.user.id,
+            role: 'free',
+            subscription_type: 'free',
+            country: country,
+            currency: currency.code,
+          })
+
+        if (profileError) {
+          console.error('Profile creation error:', profileError)
+          // Don't fail signup if profile creation fails, it will be created by trigger
+        }
+      }
 
       toast.success('Account created successfully! Please check your email to verify your account.')
       router.push('/login')
@@ -72,6 +94,13 @@ export default function SignupPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
+              />
+              <Select
+                label="Country"
+                required
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+                options={countries.map(c => ({ value: c.code, label: c.name }))}
               />
               <Input
                 label="Password"

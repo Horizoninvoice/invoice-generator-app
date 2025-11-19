@@ -7,6 +7,11 @@ const razorpay = new Razorpay({
   key_secret: process.env.RAZORPAY_KEY_SECRET!,
 })
 
+const PLAN_PRICES = {
+  pro: 14900, // ₹149.00 in paise
+  max: 149900, // ₹1,499.00 in paise
+}
+
 export async function POST(request: NextRequest) {
   try {
     const supabase = await createClient()
@@ -18,18 +23,29 @@ export async function POST(request: NextRequest) {
 
     const { plan } = await request.json()
 
-    if (plan !== 'pro') {
-      return NextResponse.json({ error: 'Invalid plan' }, { status: 400 })
+    if (plan !== 'pro' && plan !== 'max') {
+      return NextResponse.json({ error: 'Invalid plan. Must be "pro" or "max"' }, { status: 400 })
     }
+
+    // Get user's country and currency
+    const { data: profile } = await supabase
+      .from('user_profiles')
+      .select('country, currency')
+      .eq('user_id', user.id)
+      .single()
+
+    const currency = profile?.currency || 'INR'
+    const amount = PLAN_PRICES[plan as keyof typeof PLAN_PRICES]
 
     // Create Razorpay order
     const options = {
-      amount: 99900, // ₹999.00 in paise (or $9.99 = 99900 cents)
-      currency: 'INR', // Change to USD if needed
-      receipt: `pro_${user.id}_${Date.now()}`,
+      amount: amount,
+      currency: currency,
+      receipt: `${plan}_${user.id}_${Date.now()}`,
       notes: {
         user_id: user.id,
-        plan: 'pro',
+        plan: plan,
+        subscription_type: plan === 'pro' ? 'pro_monthly' : 'max_lifetime',
       },
     }
 

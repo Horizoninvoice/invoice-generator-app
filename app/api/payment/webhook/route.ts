@@ -36,21 +36,33 @@ export async function POST(request: NextRequest) {
         const payment = event.payload.payment.entity
         const orderId = payment.order_id
 
-        // Get order to extract user_id from order notes
+        // Get order to extract user_id and plan from order notes
         try {
           const order = await razorpay.orders.fetch(orderId)
           const userId = order.notes?.user_id
+          const plan = order.notes?.plan
+          const subscriptionType = order.notes?.subscription_type
 
           if (userId) {
-            // Update user profile to pro
+            const updateData: any = {
+              subscription_id: payment.id,
+              subscription_status: 'active',
+            }
+
+            if (plan === 'max') {
+              // Max is lifetime, no end date
+              updateData.role = 'max'
+              updateData.subscription_type = 'max_lifetime'
+            } else if (plan === 'pro') {
+              // Pro is monthly, set end date to 30 days from now
+              updateData.role = 'pro'
+              updateData.subscription_type = 'pro_monthly'
+              updateData.subscription_end_date = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
+            }
+
             await supabase
               .from('user_profiles')
-              .update({
-                role: 'pro',
-                subscription_id: payment.id,
-                subscription_status: 'active',
-                subscription_end_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days from now
-              })
+              .update(updateData)
               .eq('user_id', userId)
           }
         } catch (error) {
@@ -83,7 +95,10 @@ export async function POST(request: NextRequest) {
           if (endDate <= new Date()) {
             await supabase
               .from('user_profiles')
-              .update({ role: 'free' })
+              .update({ 
+                role: 'free',
+                subscription_type: 'free',
+              })
               .eq('user_id', userId)
           }
         }

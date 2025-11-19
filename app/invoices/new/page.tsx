@@ -49,13 +49,17 @@ export default function NewInvoicePage() {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) return
 
-      const [customersRes, productsRes] = await Promise.all([
+      const [customersRes, productsRes, profileRes] = await Promise.all([
         supabase.from('customers').select('*').eq('user_id', user.id),
         supabase.from('products').select('*').eq('user_id', user.id),
+        supabase.from('user_profiles').select('currency').eq('user_id', user.id).single(),
       ])
 
       if (customersRes.data) setCustomers(customersRes.data)
       if (productsRes.data) setProducts(productsRes.data)
+      if (profileRes.data?.currency) {
+        setFormData(prev => ({ ...prev, currency: profileRes.data.currency }))
+      }
     }
 
     loadData()

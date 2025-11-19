@@ -264,9 +264,15 @@ CREATE POLICY "Users can update their own profile"
 -- Function to create user profile on signup
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
+DECLARE
+  user_country VARCHAR(2) := 'IN';
+  user_currency VARCHAR(3) := 'INR';
 BEGIN
-  INSERT INTO public.user_profiles (user_id, role)
-  VALUES (NEW.id, 'free');
+  -- Try to get country from metadata if available
+  -- Default to IN/INR if not specified
+  INSERT INTO public.user_profiles (user_id, role, subscription_type, country, currency)
+  VALUES (NEW.id, 'free', 'free', user_country, user_currency)
+  ON CONFLICT (user_id) DO NOTHING;
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;

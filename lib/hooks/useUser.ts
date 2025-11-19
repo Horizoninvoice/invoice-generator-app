@@ -38,7 +38,7 @@ export function useUser() {
           // Only select needed fields for better performance
           const { data: profileData } = await supabase
             .from('user_profiles')
-            .select('role, subscription_status')
+            .select('role, subscription_status, subscription_type, country, currency')
             .eq('user_id', user.id)
             .single()
 
@@ -65,7 +65,7 @@ export function useUser() {
           setUser(session.user)
           const { data: profileData } = await supabase
             .from('user_profiles')
-            .select('role, subscription_status')
+            .select('role, subscription_status, subscription_type, country, currency')
             .eq('user_id', session.user.id)
             .single()
           if (mounted) {
@@ -87,8 +87,9 @@ export function useUser() {
     }
   }, [supabase])
 
-  const isPro = useMemo(() => profile?.role === 'pro', [profile?.role])
+  const isPro = useMemo(() => profile?.role === 'pro' || profile?.role === 'max', [profile?.role])
+  const isMax = useMemo(() => profile?.role === 'max', [profile?.role])
 
-  return { user, profile, loading, isPro }
+  return { user, profile, loading, isPro, isMax }
 }
 

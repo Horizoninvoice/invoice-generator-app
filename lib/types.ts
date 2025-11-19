@@ -79,10 +79,13 @@ export interface Payment {
 export interface UserProfile {
   id: string
   user_id: string
-  role: 'free' | 'pro'
+  role: 'free' | 'pro' | 'max'
+  subscription_type?: 'free' | 'pro_monthly' | 'max_lifetime' | 'personalized'
   subscription_id?: string
   subscription_status?: string
   subscription_end_date?: string
+  country?: string
+  currency?: string
   created_at: string
   updated_at: string
 }
