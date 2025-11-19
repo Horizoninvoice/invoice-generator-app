@@ -32,13 +32,13 @@ export default async function ProductsPage() {
   const isPro = profile?.role === 'pro'
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Products</h1>
-            <p className="text-gray-600 mt-2">Manage your product catalog</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Products</h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">Manage your product catalog</p>
           </div>
           <Link href="/products/new">
             <Button>
@@ -55,28 +55,28 @@ export default async function ProductsPage() {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Name</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Description</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Price</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Tax Rate</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">SKU</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Created</th>
-                    <th className="text-right py-3 px-4 text-sm font-semibold text-gray-700">Actions</th>
+                  <tr className="border-b border-gray-200 dark:border-gray-700">
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Name</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Description</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Price</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Tax Rate</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">SKU</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Created</th>
+                    <th className="text-right py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {products.map((product) => (
-                    <tr key={product.id} className="border-b border-gray-100 hover:bg-gray-50">
-                      <td className="py-3 px-4 text-sm font-medium text-gray-900">{product.name}</td>
-                      <td className="py-3 px-4 text-sm text-gray-600">
+                    <tr key={product.id} className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
+                      <td className="py-3 px-4 text-sm font-medium text-gray-900 dark:text-white">{product.name}</td>
+                      <td className="py-3 px-4 text-sm text-gray-600 dark:text-gray-400">
                         {product.description ? (
                           <span className="truncate block max-w-xs">{product.description}</span>
                         ) : (
                           '—'
                         )}
                       </td>
-                      <td className="py-3 px-4 text-sm text-gray-900">
+                      <td className="py-3 px-4 text-sm text-gray-900 dark:text-white">
                         {formatCurrency(product.price)}
                       </td>
                       <td className="py-3 px-4 text-sm text-gray-600">{product.tax_rate}%</td>

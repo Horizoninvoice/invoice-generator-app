@@ -33,13 +33,13 @@ export default async function InvoicesPage() {
   const isPro = profile?.role === 'pro'
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Invoices</h1>
-            <p className="text-gray-600 mt-2">Manage and track your invoices</p>
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Invoices</h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">Manage and track your invoices</p>
           </div>
           <div className="flex gap-4">
             {isPro && invoices && invoices.length > 0 && (
@@ -61,20 +61,20 @@ export default async function InvoicesPage() {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Invoice #</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Customer</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Issue Date</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Due Date</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Total</th>
-                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700">Status</th>
-                    <th className="text-right py-3 px-4 text-sm font-semibold text-gray-700">Actions</th>
+                  <tr className="border-b border-gray-200 dark:border-gray-700">
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Invoice #</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Customer</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Issue Date</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Due Date</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Total</th>
+                    <th className="text-left py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Status</th>
+                    <th className="text-right py-3 px-4 text-sm font-semibold text-gray-700 dark:text-gray-300">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {invoices.map((invoice: any) => (
-                    <tr key={invoice.id} className="border-b border-gray-100 hover:bg-gray-50">
-                      <td className="py-3 px-4 text-sm font-medium text-gray-900">
+                    <tr key={invoice.id} className="border-b border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800">
+                      <td className="py-3 px-4 text-sm font-medium text-gray-900 dark:text-white">
                         {invoice.invoice_number}
                       </td>
                       <td className="py-3 px-4 text-sm text-gray-600">

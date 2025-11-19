@@ -7,18 +7,18 @@ import { FiFileText, FiUsers, FiPackage, FiZap, FiShield, FiDownload, FiAward, F
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       <Navbar />
       <AdSense />
 
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center">
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">
+          <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-6">
             Create Professional Invoices
-            <span className="text-primary-600"> in Minutes</span>
+            <span className="text-primary-600 dark:text-primary-400"> in Minutes</span>
           </h1>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
             Free invoice generator to create, manage, and send professional invoices. 
             Perfect for freelancers, small businesses, and entrepreneurs.
           </p>
@@ -36,68 +36,68 @@ export default function HomePage() {
       <AdSense />
 
       {/* Features Section */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gray-50 dark:bg-gray-800 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
             Everything You Need to Manage Invoices
           </h2>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                <FiFileText className="text-primary-600" size={24} />
+            <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600">
+              <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center mb-4">
+                <FiFileText className="text-primary-600 dark:text-primary-400" size={24} />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Easy Invoice Creation</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Easy Invoice Creation</h3>
+              <p className="text-gray-600 dark:text-gray-300">
                 Create professional invoices with our intuitive invoice builder. 
                 Add items, calculate totals automatically, and generate PDFs instantly.
               </p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                <FiUsers className="text-primary-600" size={24} />
+            <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600">
+              <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center mb-4">
+                <FiUsers className="text-primary-600 dark:text-primary-400" size={24} />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Customer Management</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Customer Management</h3>
+              <p className="text-gray-600 dark:text-gray-300">
                 Keep track of all your customers in one place. Store contact information, 
                 addresses, and payment history.
               </p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                <FiPackage className="text-primary-600" size={24} />
+            <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600">
+              <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center mb-4">
+                <FiPackage className="text-primary-600 dark:text-primary-400" size={24} />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Product Catalog</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Product Catalog</h3>
+              <p className="text-gray-600 dark:text-gray-300">
                 Build a product library with prices, descriptions, and tax rates. 
                 Add products to invoices with a single click.
               </p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                <FiZap className="text-primary-600" size={24} />
+            <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600">
+              <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center mb-4">
+                <FiZap className="text-primary-600 dark:text-primary-400" size={24} />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Fast & Reliable</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Fast & Reliable</h3>
+              <p className="text-gray-600 dark:text-gray-300">
                 Built with modern technology for speed and reliability. 
                 Your data is secure and backed up automatically.
               </p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                <FiShield className="text-primary-600" size={24} />
+            <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600">
+              <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center mb-4">
+                <FiShield className="text-primary-600 dark:text-primary-400" size={24} />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Secure & Private</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Secure & Private</h3>
+              <p className="text-gray-600 dark:text-gray-300">
                 Your data is encrypted and secure. We never share your information 
                 with third parties.
               </p>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-sm">
-              <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mb-4">
-                <FiDownload className="text-primary-600" size={24} />
+            <div className="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600">
+              <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center mb-4">
+                <FiDownload className="text-primary-600 dark:text-primary-400" size={24} />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Export Options</h3>
-              <p className="text-gray-600">
+              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Export Options</h3>
+              <p className="text-gray-600 dark:text-gray-300">
                 Download invoices as PDF or export data to Excel. 
                 Pro users get unlimited exports.
               </p>
