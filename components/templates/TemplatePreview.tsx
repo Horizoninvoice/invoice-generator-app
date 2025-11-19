@@ -87,7 +87,7 @@ export function TemplatePreview({ template, isHovered = false }: TemplatePreview
   // Use Professional Template for professional template
   if (template === 'professional') {
     return (
-      <div className={`transition-all duration-300 ${isHovered ? 'scale-105 shadow-2xl' : 'scale-100'} transform origin-center`} style={{ transform: 'scale(0.7)' }}>
+      <div className={`transition-all duration-300 ${isHovered ? 'scale-110' : 'scale-100'} transform origin-center`} style={{ transform: isHovered ? 'scale(0.75)' : 'scale(0.65)' }}>
         <ProfessionalTemplate
           invoice={mockInvoice}
           items={mockItems.slice(0, 2)}
