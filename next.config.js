@@ -21,7 +21,7 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
   
-  // Webpack optimizations
+  // Webpack optimizations (only if not using Turbopack)
   webpack: (config, { dev, isServer }) => {
     // Optimize module resolution
     config.resolve.alias = {
@@ -51,6 +51,15 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ['react-icons', 'date-fns'],
+    // Enable Turbopack for faster builds (Next.js 14+)
+    turbo: {
+      rules: {
+        '*.svg': {
+          loaders: ['@svgr/webpack'],
+          as: '*.js',
+        },
+      },
+    },
   },
   
   // Faster development builds

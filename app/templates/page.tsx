@@ -1,13 +1,22 @@
 'use client'
 
 import { useState } from 'react'
+import dynamic from 'next/dynamic'
 import { Navbar } from '@/components/layout/Navbar'
-import { Footer } from '@/components/layout/Footer'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
 import { FiFileText, FiAward, FiCheck } from 'react-icons/fi'
-import { TemplatePreview } from '@/components/templates/TemplatePreview'
+
+// Dynamic imports for heavy components
+const Footer = dynamic(() => import('@/components/layout/Footer').then(mod => ({ default: mod.Footer })), {
+  ssr: true,
+})
+
+const TemplatePreview = dynamic(() => import('@/components/templates/TemplatePreview').then(mod => ({ default: mod.TemplatePreview })), {
+  ssr: false,
+  loading: () => <div className="w-full max-w-md h-96 bg-gray-200 dark:bg-gray-700 animate-pulse rounded-lg" />,
+})
 
 export default function TemplatesPage() {
   const [hoveredTemplate, setHoveredTemplate] = useState<string | null>(null)
