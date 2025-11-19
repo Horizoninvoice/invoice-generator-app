@@ -142,8 +142,6 @@ export const Navbar = memo(function Navbar() {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <ThemeSelector />
-            <ThemeToggle />
             {!isPro && (
               <Link href="/upgrade">
                 <Button variant="outline" size="sm" className="flex items-center gap-2">

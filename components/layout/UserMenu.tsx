@@ -112,6 +112,14 @@ export function UserMenu() {
               <FiSettings size={16} />
               Settings
             </Link>
+            <Link
+              href="/dashboard/profile"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            >
+              <FiUser size={16} />
+              Profile
+            </Link>
             {!isPro && (
               <Link
                 href="/upgrade"
