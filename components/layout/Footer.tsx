@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { FiFileText, FiMail, FiGithub, FiTwitter } from 'react-icons/fi'
+import Image from 'next/image'
+import { FiMail, FiGithub, FiTwitter } from 'react-icons/fi'
 
 export function Footer() {
   return (
@@ -9,8 +10,8 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <FiFileText className="text-primary-400" size={24} />
-              <h3 className="text-2xl font-bold">InvoiceGen</h3>
+              <Image src="/letter-h.ico" alt="Horizon" width={32} height={32} className="w-8 h-8" />
+              <h3 className="text-2xl font-bold">Horizon</h3>
             </div>
             <p className="text-gray-400 mb-4 max-w-md">
               Create professional invoices effortlessly. Manage customers, products, and invoices all in one place. 
@@ -92,7 +93,7 @@ export function Footer() {
         <div className="border-t border-gray-800 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} InvoiceGen. All rights reserved.
+              © {new Date().getFullYear()} Horizon. All rights reserved.
             </p>
             <p className="text-gray-400 text-sm mt-4 md:mt-0">
               Made with ❤️ for businesses worldwide

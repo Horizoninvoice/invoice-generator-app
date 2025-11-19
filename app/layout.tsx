@@ -8,9 +8,12 @@ import { ThemeProvider } from '@/components/theme/ThemeProvider'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Free Invoice Generator - Create Professional Invoices Online',
+  title: 'Horizon - Free Invoice Generator - Create Professional Invoices Online',
   description: 'Generate professional invoices for free. Manage customers, products, and invoices all in one place. Upgrade to Pro for advanced features.',
   keywords: 'invoice generator, free invoice, invoice maker, billing software, invoice creator',
+  icons: {
+    icon: '/letter-h.ico',
+  },
 }
 
 export default function RootLayout({

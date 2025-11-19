@@ -72,8 +72,8 @@ function UpgradeContent() {
         key: keyId,
         amount: amount,
         currency: currency,
-        name: 'InvoiceGen Pro',
-        description: 'Pro subscription for InvoiceGen',
+        name: 'Horizon Pro',
+        description: 'Pro subscription for Horizon',
         order_id: orderId,
         handler: function (response: any) {
           // Payment successful

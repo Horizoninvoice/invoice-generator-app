@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { memo } from 'react'
 import { useUser } from '@/lib/hooks/useUser'
@@ -30,8 +31,9 @@ export const Navbar = memo(function Navbar() {
       <nav className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
-            <Link href="/" className="text-xl font-bold text-primary-600 dark:text-primary-400">
-              InvoiceGen
+            <Link href="/" className="flex items-center gap-2 text-xl font-bold text-primary-600 dark:text-primary-400">
+              <Image src="/letter-h.ico" alt="Horizon" width={32} height={32} className="w-8 h-8" />
+              <span>Horizon</span>
             </Link>
             <div className="flex gap-4">
               <ThemeToggle />
@@ -53,8 +55,9 @@ export const Navbar = memo(function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex items-center gap-8">
-            <Link href="/dashboard" className="text-xl font-bold text-primary-600 dark:text-primary-400">
-              InvoiceGen
+            <Link href="/dashboard" className="flex items-center gap-2 text-xl font-bold text-primary-600 dark:text-primary-400">
+              <Image src="/letter-h.ico" alt="Horizon" width={32} height={32} className="w-8 h-8" />
+              <span>Horizon</span>
             </Link>
             <div className="hidden md:flex gap-4">
               <Link
