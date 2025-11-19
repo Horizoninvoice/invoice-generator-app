@@ -7,7 +7,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { useUser } from '@/lib/hooks/useUser'
-import { FiAward, FiZap, FiShield, FiDownload, FiFileText, FiMail, FiInfinity, FiCheck } from 'react-icons/fi'
+import { FiAward, FiZap, FiShield, FiDownload, FiFileText, FiMail, FiCheck } from 'react-icons/fi'
 import toast from 'react-hot-toast'
 
 declare global {
@@ -140,7 +140,7 @@ function UpgradeContent() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <Card>
             <div className="text-center py-12">
-              <FiInfinity className="mx-auto text-yellow-600 dark:text-yellow-400 mb-4" size={64} />
+              <div className="mx-auto text-yellow-600 dark:text-yellow-400 mb-4 text-6xl font-bold">∞</div>
               <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">You're on Max Plan!</h1>
               <p className="text-gray-600 dark:text-gray-400 mb-8">
                 You have lifetime access to all features. Thank you for your support!
@@ -294,7 +294,7 @@ function UpgradeContent() {
                   <span className="text-gray-900 dark:text-white">Future Features</span>
                 </li>
                 <li className="flex items-center gap-2">
-                  <FiInfinity className="text-yellow-600 dark:text-yellow-400" size={16} />
+                  <span className="text-yellow-600 dark:text-yellow-400 text-lg font-bold">∞</span>
                   <span className="text-gray-900 dark:text-white font-semibold">No Renewals</span>
                 </li>
               </ul>
