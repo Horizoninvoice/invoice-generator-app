@@ -7,8 +7,6 @@ import { memo } from 'react'
 import { useUser } from '@/lib/hooks/useUser'
 import { Button } from '@/components/ui/Button'
 import { FiFileText, FiUsers, FiPackage, FiLayout, FiAward } from 'react-icons/fi'
-import { ThemeToggle } from '@/components/theme/ThemeToggle'
-import { ThemeSelector } from '@/components/theme/ThemeSelector'
 import { UserMenu } from '@/components/layout/UserMenu'
 
 export const Navbar = memo(function Navbar() {
@@ -23,9 +21,9 @@ export const Navbar = memo(function Navbar() {
   )
 
   const publicLinks = [
-    { href: '/#features', label: 'Features' },
-    { href: '/#templates', label: 'Templates' },
-    { href: '/#pricing', label: 'Pricing' },
+    { href: '/features', label: 'Features' },
+    { href: '/templates', label: 'Templates' },
+    { href: '/pricing', label: 'Pricing' },
     { href: '/upgrade', label: 'Upgrade' },
   ]
 
@@ -53,9 +51,6 @@ export const Navbar = memo(function Navbar() {
                 </Link>
               ))}
             </div>
-
-            <ThemeSelector />
-            <ThemeToggle />
 
             {showAuthButtons && !showSkeletonButtons && (
               <>
