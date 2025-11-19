@@ -93,7 +93,7 @@ export function TemplatePreview({ template, isHovered = false }: TemplatePreview
       <div className={`transition-all duration-300 ${isHovered ? 'scale-110' : 'scale-100'} transform origin-center`} style={{ transform: isHovered ? 'scale(0.75)' : 'scale(0.65)' }}>
         <ProfessionalTemplate
           invoice={mockInvoice}
-          items={mockItems.slice(0, 2)}
+          items={mockItems}
           customer={mockCustomer}
           companyName="Horizon"
           companyEmail="info@horizon.com"
