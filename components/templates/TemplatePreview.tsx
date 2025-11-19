@@ -2,10 +2,15 @@
 
 import { Invoice, Customer, InvoiceItem } from '@/lib/types'
 import { ProfessionalTemplate } from '@/components/invoices/templates/ProfessionalTemplate'
+import { DefaultTemplate } from '@/components/invoices/templates/DefaultTemplate'
+import { ModernTemplate } from '@/components/invoices/templates/ModernTemplate'
+import { ClassicTemplate } from '@/components/invoices/templates/ClassicTemplate'
+import { MinimalTemplate } from '@/components/invoices/templates/MinimalTemplate'
 
 interface TemplatePreviewProps {
   template: 'professional' | 'default' | 'modern' | 'classic' | 'minimal'
   isHovered?: boolean
+  theme?: string
 }
 
 // Set date to Nov 19, 2025
@@ -83,120 +88,104 @@ const mockItems: InvoiceItem[] = [
   },
 ]
 
-export function TemplatePreview({ template, isHovered = false }: TemplatePreviewProps) {
-  const formatCurrency = (amount: number) => `$${amount.toFixed(2)}`
-  const formatDate = (date: string) => new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+export function TemplatePreview({ template, isHovered = false, theme }: TemplatePreviewProps) {
+  const scale = isHovered ? 0.75 : 0.65
 
-  // Use Professional Template for professional template
+  // Professional Template - Different layout with dark header
   if (template === 'professional') {
+    const professionalTheme = (theme as 'yellow' | 'amber' | 'orange' | 'red') || 'yellow'
     return (
-      <div className={`transition-all duration-300 ${isHovered ? 'scale-110' : 'scale-100'} transform origin-center`} style={{ transform: isHovered ? 'scale(0.75)' : 'scale(0.65)' }}>
+      <div
+        className="transition-all duration-300 transform origin-center"
+        style={{ transform: `scale(${scale})` }}
+      >
         <ProfessionalTemplate
           invoice={mockInvoice}
           items={mockItems}
           customer={mockCustomer}
           companyName="Horizon"
           companyEmail="info@horizon.com"
+          theme={professionalTheme}
         />
       </div>
     )
   }
 
-  const templateStyles = {
-    default: {
-      header: 'bg-gradient-to-r from-blue-600 to-blue-700 text-white',
-      accent: 'text-blue-600',
-      border: 'border-blue-200',
-      bg: 'bg-white',
-    },
-    modern: {
-      header: 'bg-gradient-to-r from-purple-600 to-purple-700 text-white',
-      accent: 'text-purple-600',
-      border: 'border-purple-200',
-      bg: 'bg-gray-50',
-    },
-    classic: {
-      header: 'bg-gradient-to-r from-gray-800 to-gray-900 text-white',
-      accent: 'text-gray-800',
-      border: 'border-gray-300',
-      bg: 'bg-white',
-    },
-    minimal: {
-      header: 'bg-gradient-to-r from-green-600 to-green-700 text-white',
-      accent: 'text-green-600',
-      border: 'border-green-200',
-      bg: 'bg-white',
-    },
+  // Default Template - Sidebar layout
+  if (template === 'default') {
+    const defaultTheme = (theme as 'blue' | 'green' | 'purple' | 'orange') || 'blue'
+    return (
+      <div
+        className="transition-all duration-300 transform origin-center"
+        style={{ transform: `scale(${scale})` }}
+      >
+        <DefaultTemplate
+          invoice={mockInvoice}
+          items={mockItems}
+          customer={mockCustomer}
+          companyName="Horizon"
+          theme={defaultTheme}
+        />
+      </div>
+    )
   }
 
-  const styles = templateStyles[template]
-
-  return (
-    <div className={`${styles.bg} rounded-lg shadow-lg overflow-hidden transition-all duration-300 ${isHovered ? 'scale-105 shadow-2xl' : 'scale-100'}`}>
-      {/* Header */}
-      <div className={`${styles.header} p-6`}>
-        <div className="flex justify-between items-start">
-          <div>
-            <h2 className="text-2xl font-bold mb-1">INVOICE</h2>
-            <p className="text-sm opacity-90">Professional Invoice</p>
-          </div>
-          <div className="text-right">
-            <p className="text-sm font-semibold">#{mockInvoice.invoice_number}</p>
-            <p className="text-xs opacity-90">{formatDate(mockInvoice.issue_date)}</p>
-          </div>
-        </div>
+  // Modern Template - Centered layout
+  if (template === 'modern') {
+    const modernTheme = (theme as 'purple' | 'pink' | 'indigo' | 'teal') || 'purple'
+    return (
+      <div
+        className="transition-all duration-300 transform origin-center"
+        style={{ transform: `scale(${scale})` }}
+      >
+        <ModernTemplate
+          invoice={mockInvoice}
+          items={mockItems}
+          customer={mockCustomer}
+          companyName="Horizon"
+          theme={modernTheme}
+        />
       </div>
+    )
+  }
 
-      {/* Content */}
-      <div className="p-6 space-y-6">
-        {/* Bill To */}
-        <div>
-          <h3 className={`text-sm font-semibold ${styles.accent} mb-2`}>Bill To:</h3>
-          <p className="text-sm font-medium text-gray-900">{mockCustomer.name}</p>
-          <p className="text-xs text-gray-600">{mockCustomer.address}</p>
-          <p className="text-xs text-gray-600">{mockCustomer.city}, {mockCustomer.state} {mockCustomer.zip_code}</p>
-        </div>
-
-        {/* Items Table */}
-        <div className="overflow-x-auto">
-          <table className="w-full text-xs">
-            <thead>
-              <tr className={`${styles.header} text-white`}>
-                <th className="text-left p-2">Description</th>
-                <th className="text-center p-2">Qty</th>
-                <th className="text-right p-2">Price</th>
-                <th className="text-right p-2">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {mockItems.map((item, idx) => (
-                <tr key={idx} className={idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                  <td className="p-2">{item.description}</td>
-                  <td className="p-2 text-center">{item.quantity}</td>
-                  <td className="p-2 text-right">{formatCurrency(item.unit_price)}</td>
-                  <td className="p-2 text-right font-medium">{formatCurrency(item.line_total)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {/* Totals */}
-        <div className="border-t-2 border-gray-200 pt-4 space-y-1">
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-600">Subtotal:</span>
-            <span className="font-medium">{formatCurrency(mockInvoice.subtotal)}</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-600">Tax:</span>
-            <span className="font-medium">{formatCurrency(mockInvoice.tax_amount)}</span>
-          </div>
-          <div className={`flex justify-between text-base font-bold ${styles.accent} pt-2 border-t ${styles.border}`}>
-            <span>Total:</span>
-            <span>{formatCurrency(mockInvoice.total_amount)}</span>
-          </div>
-        </div>
+  // Classic Template - Traditional two-column
+  if (template === 'classic') {
+    const classicTheme = (theme as 'gray' | 'slate' | 'zinc' | 'stone') || 'gray'
+    return (
+      <div
+        className="transition-all duration-300 transform origin-center"
+        style={{ transform: `scale(${scale})` }}
+      >
+        <ClassicTemplate
+          invoice={mockInvoice}
+          items={mockItems}
+          customer={mockCustomer}
+          companyName="Horizon"
+          theme={classicTheme}
+        />
       </div>
-    </div>
-  )
+    )
+  }
+
+  // Minimal Template - Clean minimal layout
+  if (template === 'minimal') {
+    const minimalTheme = (theme as 'green' | 'emerald' | 'lime' | 'cyan') || 'green'
+    return (
+      <div
+        className="transition-all duration-300 transform origin-center"
+        style={{ transform: `scale(${scale})` }}
+      >
+        <MinimalTemplate
+          invoice={mockInvoice}
+          items={mockItems}
+          customer={mockCustomer}
+          companyName="Horizon"
+          theme={minimalTheme}
+        />
+      </div>
+    )
+  }
+
+  return null
 }

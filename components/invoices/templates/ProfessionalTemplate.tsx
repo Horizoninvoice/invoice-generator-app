@@ -16,6 +16,26 @@ interface ProfessionalTemplateProps {
   companyCity?: string
   companyState?: string
   companyZip?: string
+  theme?: 'yellow' | 'amber' | 'orange' | 'red'
+}
+
+const professionalThemes = {
+  yellow: {
+    accent: 'bg-yellow-400',
+    text: 'text-gray-900',
+  },
+  amber: {
+    accent: 'bg-amber-400',
+    text: 'text-gray-900',
+  },
+  orange: {
+    accent: 'bg-orange-400',
+    text: 'text-gray-900',
+  },
+  red: {
+    accent: 'bg-red-400',
+    text: 'text-gray-900',
+  },
 }
 
 export function ProfessionalTemplate({
@@ -28,10 +48,12 @@ export function ProfessionalTemplate({
   companyWebsite = 'www.horizon.com',
   companyAddress = '123 Street Town',
   companyCity = 'Postal, County',
+  theme = 'yellow',
 }: ProfessionalTemplateProps) {
   const taxRate = invoice.tax_amount > 0 && invoice.subtotal > 0 
     ? ((invoice.tax_amount / invoice.subtotal) * 100).toFixed(0)
     : '0'
+  const colors = professionalThemes[theme]
 
   return (
     <div className="bg-white text-gray-900" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
@@ -40,8 +62,8 @@ export function ProfessionalTemplate({
         <div className="flex justify-between items-start">
           {/* Logo and Company Name */}
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-yellow-400 rounded-lg flex items-center justify-center">
-              <span className="text-gray-900 font-bold text-xl">H</span>
+            <div className={`w-12 h-12 ${colors.accent} rounded-lg flex items-center justify-center`}>
+              <span className={`${colors.text} font-bold text-xl`}>H</span>
             </div>
             <span className="text-2xl font-bold uppercase tracking-wider">{companyName}</span>
           </div>
@@ -123,7 +145,7 @@ export function ProfessionalTemplate({
           <table className="w-full border-collapse">
             <thead>
               <tr>
-                <th className="bg-yellow-400 text-gray-900 text-left py-3 px-4 font-bold uppercase text-sm">
+                <th className={`${colors.accent} ${colors.text} text-left py-3 px-4 font-bold uppercase text-sm`}>
                   Item Description
                 </th>
                 <th className="bg-gray-800 text-white text-center py-3 px-4 font-bold uppercase text-sm">
@@ -186,7 +208,7 @@ export function ProfessionalTemplate({
                 </span>
               </div>
             )}
-            <div className="bg-yellow-400 text-gray-900 flex justify-between py-3 px-4 font-bold uppercase">
+            <div className={`${colors.accent} ${colors.text} flex justify-between py-3 px-4 font-bold uppercase`}>
               <span>Grand Total</span>
               <span>{formatCurrency(invoice.total_amount, invoice.currency)}</span>
             </div>

@@ -8,6 +8,10 @@ import { formatCurrency, formatDate } from '@/lib/utils'
 import { generateInvoicePDF } from '@/lib/pdf'
 import type { Invoice, InvoiceItem, Customer } from '@/lib/types'
 import { ProfessionalTemplate } from './templates/ProfessionalTemplate'
+import { DefaultTemplate } from './templates/DefaultTemplate'
+import { ModernTemplate } from './templates/ModernTemplate'
+import { ClassicTemplate } from './templates/ClassicTemplate'
+import { MinimalTemplate } from './templates/MinimalTemplate'
 
 export function InvoiceView({ invoice, items }: { invoice: any; items: InvoiceItem[] }) {
   const [isGenerating, setIsGenerating] = useState(false)
@@ -24,8 +28,72 @@ export function InvoiceView({ invoice, items }: { invoice: any; items: InvoiceIt
     }
   }
 
-  // Use Professional Template if template is 'professional' or 'default'
-  if (invoice.template === 'professional' || invoice.template === 'default') {
+  // Render appropriate template based on invoice.template
+  const renderTemplate = () => {
+    const customer = invoice.customers as Customer
+    
+    switch (invoice.template) {
+      case 'professional':
+        return (
+          <ProfessionalTemplate
+            invoice={invoice}
+            items={items}
+            customer={customer}
+            companyName="Horizon"
+            companyEmail="info@horizon.com"
+          />
+        )
+      case 'default':
+        return (
+          <DefaultTemplate
+            invoice={invoice}
+            items={items}
+            customer={customer}
+            companyName="Horizon"
+          />
+        )
+      case 'modern':
+        return (
+          <ModernTemplate
+            invoice={invoice}
+            items={items}
+            customer={customer}
+            companyName="Horizon"
+          />
+        )
+      case 'classic':
+        return (
+          <ClassicTemplate
+            invoice={invoice}
+            items={items}
+            customer={customer}
+            companyName="Horizon"
+          />
+        )
+      case 'minimal':
+        return (
+          <MinimalTemplate
+            invoice={invoice}
+            items={items}
+            customer={customer}
+            companyName="Horizon"
+          />
+        )
+      default:
+        return (
+          <ProfessionalTemplate
+            invoice={invoice}
+            items={items}
+            customer={customer}
+            companyName="Horizon"
+            companyEmail="info@horizon.com"
+          />
+        )
+    }
+  }
+
+  // Use template rendering for all templates
+  if (['professional', 'default', 'modern', 'classic', 'minimal'].includes(invoice.template)) {
     return (
       <>
         <div className="mb-6 flex justify-end gap-4">
@@ -48,13 +116,7 @@ export function InvoiceView({ invoice, items }: { invoice: any; items: InvoiceIt
           </Button>
         </div>
         <Card className="p-0 overflow-hidden shadow-xl">
-          <ProfessionalTemplate
-            invoice={invoice}
-            items={items}
-            customer={invoice.customers as Customer}
-            companyName="Horizon"
-            companyEmail="info@horizon.com"
-          />
+          {renderTemplate()}
         </Card>
       </>
     )
