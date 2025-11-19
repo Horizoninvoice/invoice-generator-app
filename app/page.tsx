@@ -29,6 +29,9 @@ export default function HomePage() {
             <Link href="/login">
               <Button variant="outline" size="lg">Sign In</Button>
             </Link>
+            <Link href="/features">
+              <Button variant="outline" size="lg">View Features</Button>
+            </Link>
           </div>
         </div>
       </section>
