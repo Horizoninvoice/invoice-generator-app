@@ -20,13 +20,13 @@ export default async function InvoicesPage() {
 
   const { data: profile } = await supabase
     .from('user_profiles')
-    .select('*')
+    .select('role')
     .eq('user_id', user.id)
     .single()
 
   const { data: invoices } = await supabase
     .from('invoices')
-    .select('*, customers(name)')
+    .select('id, invoice_number, issue_date, due_date, total_amount, status, customers(name)')
     .eq('user_id', user.id)
     .order('created_at', { ascending: false })
 

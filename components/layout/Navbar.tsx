@@ -1,15 +1,15 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
+import { memo } from 'react'
 import { useUser } from '@/lib/hooks/useUser'
-import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import { FiFileText, FiUsers, FiPackage, FiLayout, FiAward } from 'react-icons/fi'
 import { ThemeToggle } from '@/components/theme/ThemeToggle'
 import { UserMenu } from '@/components/layout/UserMenu'
 
-export function Navbar() {
+export const Navbar = memo(function Navbar() {
   const pathname = usePathname()
   const { user, loading, isPro } = useUser()
 
@@ -119,5 +119,5 @@ export function Navbar() {
       </div>
     </nav>
   )
-}
+})
 

@@ -1,17 +1,26 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { useUser } from '@/lib/hooks/useUser'
 import { FiUser, FiLogOut, FiSettings, FiAward, FiChevronDown } from 'react-icons/fi'
-import { Button } from '@/components/ui/Button'
 import toast from 'react-hot-toast'
 import Link from 'next/link'
 
+// Cache Supabase client
+let supabaseClient: ReturnType<typeof createClient> | null = null
+
+function getSupabaseClient() {
+  if (!supabaseClient) {
+    supabaseClient = createClient()
+  }
+  return supabaseClient
+}
+
 export function UserMenu() {
   const router = useRouter()
-  const supabase = createClient()
+  const supabase = useMemo(() => getSupabaseClient(), [])
   const { user, profile, isPro } = useUser()
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -27,18 +36,23 @@ export function UserMenu() {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  const handleLogout = async () => {
+  const handleLogout = useCallback(async () => {
     await supabase.auth.signOut()
     toast.success('Logged out successfully')
     router.push('/login')
     setIsOpen(false)
-  }
+  }, [supabase, router])
+
+  const userInitials = useMemo(() => {
+    if (!user?.email) return 'U'
+    return user.email.substring(0, 2).toUpperCase()
+  }, [user?.email])
+
+  const userName = useMemo(() => {
+    return user?.email?.split('@')[0] || 'User'
+  }, [user?.email])
 
   if (!user) return null
-
-  const userInitials = user.email
-    ? user.email.substring(0, 2).toUpperCase()
-    : 'U'
 
   return (
     <div className="relative" ref={menuRef}>
@@ -51,7 +65,7 @@ export function UserMenu() {
         </div>
         <div className="hidden md:block text-left">
           <p className="text-sm font-medium text-gray-900 dark:text-white">
-            {user.email?.split('@')[0] || 'User'}
+            {userName}
           </p>
           {isPro && (
             <p className="text-xs text-primary-600 dark:text-primary-400 flex items-center gap-1">

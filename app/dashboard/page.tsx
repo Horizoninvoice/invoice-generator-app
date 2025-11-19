@@ -16,17 +16,17 @@ export default async function DashboardPage() {
     redirect('/login')
   }
 
-  // Get user profile
+  // Get user profile - only select needed fields
   const { data: profile } = await supabase
     .from('user_profiles')
-    .select('*')
+    .select('role')
     .eq('user_id', user.id)
     .single()
 
-  // Get stats
+  // Get stats - optimized queries with parallel execution
   const [customersResult, productsResult, invoicesResult, paymentsResult] = await Promise.all([
-    supabase.from('customers').select('id', { count: 'exact' }).eq('user_id', user.id),
-    supabase.from('products').select('id', { count: 'exact' }).eq('user_id', user.id),
+    supabase.from('customers').select('id', { count: 'exact', head: true }).eq('user_id', user.id),
+    supabase.from('products').select('id', { count: 'exact', head: true }).eq('user_id', user.id),
     supabase.from('invoices').select('id, total_amount, status', { count: 'exact' }).eq('user_id', user.id),
     supabase.from('payments').select('amount').eq('user_id', user.id).eq('status', 'completed'),
   ])

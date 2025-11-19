@@ -19,13 +19,13 @@ export default async function ProductsPage() {
 
   const { data: profile } = await supabase
     .from('user_profiles')
-    .select('*')
+    .select('role')
     .eq('user_id', user.id)
     .single()
 
   const { data: products } = await supabase
     .from('products')
-    .select('*')
+    .select('id, name, description, price, tax_rate, sku, created_at')
     .eq('user_id', user.id)
     .order('created_at', { ascending: false })
 
