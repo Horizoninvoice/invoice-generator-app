@@ -23,6 +23,14 @@ export default function TemplatesPage() {
 
   const templates = [
     {
+      id: 'professional',
+      name: 'Professional Template',
+      description: 'Premium design with dark header, golden accents, and modern layout',
+      preview: 'bg-gradient-to-br from-yellow-400 to-yellow-500',
+      free: true,
+      features: ['Dark header design', 'Golden yellow accents', 'Professional layout', 'Wavy separator', 'Modern aesthetics'],
+    },
+    {
       id: 'default',
       name: 'Default Template',
       description: 'Clean and professional design perfect for any business',
@@ -74,7 +82,7 @@ export default function TemplatesPage() {
 
       {/* Templates Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {templates.map((template) => (
             <div
               key={template.id}
@@ -91,7 +99,7 @@ export default function TemplatesPage() {
                       : 'scale-100 opacity-90'
                   }`}>
                     <TemplatePreview 
-                      template={template.id as 'default' | 'modern' | 'classic' | 'minimal'} 
+                      template={template.id as 'professional' | 'default' | 'modern' | 'classic' | 'minimal'} 
                       isHovered={hoveredTemplate === template.id}
                     />
                   </div>
@@ -188,8 +196,8 @@ export default function TemplatesPage() {
                 </tr>
                 <tr className="border-b border-gray-100 dark:border-gray-700">
                   <td className="py-4 px-4 text-sm text-gray-600 dark:text-gray-400">Multiple Styles</td>
-                  <td className="py-4 px-4 text-center"><span className="text-gray-400">1</span></td>
-                  <td className="py-4 px-4 text-center"><span className="text-primary-600 dark:text-primary-400 font-semibold">4+</span></td>
+                  <td className="py-4 px-4 text-center"><span className="text-gray-400">2</span></td>
+                  <td className="py-4 px-4 text-center"><span className="text-primary-600 dark:text-primary-400 font-semibold">3+</span></td>
                 </tr>
                 <tr>
                   <td className="py-4 px-4 text-sm text-gray-600 dark:text-gray-400">Brand Customization</td>

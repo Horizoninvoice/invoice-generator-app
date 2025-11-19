@@ -1,9 +1,10 @@
 'use client'
 
 import { Invoice, Customer, InvoiceItem } from '@/lib/types'
+import { ProfessionalTemplate } from '@/components/invoices/templates/ProfessionalTemplate'
 
 interface TemplatePreviewProps {
-  template: 'default' | 'modern' | 'classic' | 'minimal'
+  template: 'professional' | 'default' | 'modern' | 'classic' | 'minimal'
   isHovered?: boolean
 }
 
@@ -15,14 +16,14 @@ const mockInvoice: Invoice = {
   issue_date: new Date().toISOString().split('T')[0],
   due_date: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
   status: 'sent',
-  subtotal: 1500,
-  tax_amount: 150,
+  subtotal: 8530,
+  tax_amount: 120.70,
   discount_amount: 0,
-  total_amount: 1650,
+  total_amount: 8650.70,
   currency: 'USD',
   notes: 'Thank you for your business!',
   terms: 'Payment due within 30 days.',
-  template: 'default',
+  template: 'professional',
   created_at: new Date().toISOString(),
   updated_at: new Date().toISOString(),
 }
@@ -30,15 +31,15 @@ const mockInvoice: Invoice = {
 const mockCustomer: Customer = {
   id: '1',
   user_id: '1',
-  name: 'Acme Corporation',
-  email: 'billing@acme.com',
-  phone: '+1 (555) 123-4567',
-  address: '123 Business St',
-  city: 'New York',
-  state: 'NY',
-  zip_code: '10001',
+  name: 'JOHN SMITH',
+  email: 'john@example.com',
+  phone: '+55 12345678',
+  address: '123 Street, Town/City',
+  city: 'County',
+  state: '',
+  zip_code: '',
   country: 'USA',
-  tax_id: 'TAX-123456',
+  tax_id: '',
   created_at: new Date().toISOString(),
   updated_at: new Date().toISOString(),
 }
@@ -48,27 +49,55 @@ const mockItems: InvoiceItem[] = [
     id: '1',
     invoice_id: '1',
     product_id: null,
-    description: 'Web Development Services',
-    quantity: 10,
-    unit_price: 100,
-    tax_rate: 10,
-    line_total: 1100,
+    description: 'Web Design - Contrary to popular belief Lorem Ipsum simply random',
+    quantity: 2,
+    unit_price: 750,
+    tax_rate: 0,
+    line_total: 1500,
+    created_at: new Date().toISOString(),
   },
   {
     id: '2',
     invoice_id: '1',
     product_id: null,
-    description: 'Design Consultation',
+    description: 'Branding Design - popular belief Lorem Ipsum not ipsum simply',
+    quantity: 1,
+    unit_price: 1300,
+    tax_rate: 0,
+    line_total: 1300,
+    created_at: new Date().toISOString(),
+  },
+  {
+    id: '3',
+    invoice_id: '1',
+    product_id: null,
+    description: 'Web Development - Contrary to popular belief Lorem Ipsum not',
     quantity: 4,
-    unit_price: 100,
-    tax_rate: 10,
-    line_total: 440,
+    unit_price: 300,
+    tax_rate: 0,
+    line_total: 1200,
+    created_at: new Date().toISOString(),
   },
 ]
 
 export function TemplatePreview({ template, isHovered = false }: TemplatePreviewProps) {
   const formatCurrency = (amount: number) => `$${amount.toFixed(2)}`
   const formatDate = (date: string) => new Date(date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+
+  // Use Professional Template for professional template
+  if (template === 'professional') {
+    return (
+      <div className={`transition-all duration-300 ${isHovered ? 'scale-105 shadow-2xl' : 'scale-100'} transform origin-center`} style={{ transform: 'scale(0.7)' }}>
+        <ProfessionalTemplate
+          invoice={mockInvoice}
+          items={mockItems.slice(0, 2)}
+          customer={mockCustomer}
+          companyName="Horizon"
+          companyEmail="info@horizon.com"
+        />
+      </div>
+    )
+  }
 
   const templateStyles = {
     default: {
@@ -168,4 +197,3 @@ export function TemplatePreview({ template, isHovered = false }: TemplatePreview
     </div>
   )
 }
-
