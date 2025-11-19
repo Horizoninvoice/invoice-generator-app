@@ -30,20 +30,9 @@ const themes: { id: ColorScheme; name: string; description: string }[] = [
 ]
 
 export function ThemeSelector() {
+  const { colorScheme, setColorScheme } = useColorScheme()
   const [isOpen, setIsOpen] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
-  
-  let colorScheme: ColorScheme = 'minimalist'
-  let setColorScheme: (scheme: ColorScheme) => void = () => {}
-  
-  try {
-    const scheme = useColorScheme()
-    colorScheme = scheme.colorScheme
-    setColorScheme = scheme.setColorScheme
-  } catch (error) {
-    // ColorSchemeProvider not available, use default
-    // This is safe as it's just a fallback
-  }
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
