@@ -19,13 +19,13 @@ export default async function CustomersPage() {
 
   const { data: profile } = await supabase
     .from('user_profiles')
-    .select('*')
+    .select('role')
     .eq('user_id', user.id)
     .single()
 
   const { data: customers } = await supabase
     .from('customers')
-    .select('*')
+    .select('id, name, email, phone, city, created_at')
     .eq('user_id', user.id)
     .order('created_at', { ascending: false })
 
