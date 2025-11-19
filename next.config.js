@@ -17,9 +17,11 @@ const nextConfig = {
   swcMinify: true,
   
   // Compiler optimizations for faster builds
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
+  // Note: compiler.removeConsole is not supported by Turbopack yet
+  // Uncomment when Turbopack supports it:
+  // compiler: {
+  //   removeConsole: process.env.NODE_ENV === 'production',
+  // },
   
   // Webpack optimizations (only if not using Turbopack)
   webpack: (config, { dev, isServer }) => {
