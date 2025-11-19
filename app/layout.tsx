@@ -4,6 +4,7 @@ import './globals.css'
 import { Toaster } from 'react-hot-toast'
 import Script from 'next/script'
 import { ThemeProvider } from '@/components/theme/ThemeProvider'
+import { ColorSchemeProvider } from '@/components/theme/ColorSchemeProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -37,8 +38,10 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <ThemeProvider>
-          {children}
-          <Toaster position="top-right" />
+          <ColorSchemeProvider>
+            {children}
+            <Toaster position="top-right" />
+          </ColorSchemeProvider>
         </ThemeProvider>
       </body>
     </html>

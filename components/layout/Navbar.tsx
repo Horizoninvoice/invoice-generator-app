@@ -8,6 +8,7 @@ import { useUser } from '@/lib/hooks/useUser'
 import { Button } from '@/components/ui/Button'
 import { FiFileText, FiUsers, FiPackage, FiLayout, FiAward } from 'react-icons/fi'
 import { ThemeToggle } from '@/components/theme/ThemeToggle'
+import { ThemeSelector } from '@/components/theme/ThemeSelector'
 import { UserMenu } from '@/components/layout/UserMenu'
 
 export const Navbar = memo(function Navbar() {
@@ -35,7 +36,8 @@ export const Navbar = memo(function Navbar() {
               <Image src="/letter-h.ico" alt="Horizon" width={32} height={32} className="w-8 h-8" />
               <span>Horizon</span>
             </Link>
-            <div className="flex gap-4">
+            <div className="flex gap-3 items-center">
+              <ThemeSelector />
               <ThemeToggle />
               <Link href="/login">
                 <Button variant="ghost">Login</Button>
@@ -107,6 +109,7 @@ export const Navbar = memo(function Navbar() {
             </div>
           </div>
           <div className="flex items-center gap-3">
+            <ThemeSelector />
             <ThemeToggle />
             {!isPro && (
               <Link href="/upgrade">
