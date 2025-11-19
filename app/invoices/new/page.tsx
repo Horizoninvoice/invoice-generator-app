@@ -41,7 +41,7 @@ export default function NewInvoicePage() {
     currency: 'USD',
     notes: '',
     terms: '',
-    template: 'default',
+    template: 'professional',
   })
 
   useEffect(() => {
