@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import { Navbar } from '@/components/layout/Navbar'
 import { AdSense } from '@/components/layout/AdSense'
-import { FiFileText, FiUsers, FiPackage, FiZap, FiShield, FiDownload, FiCrown } from 'react-icons/fi'
+import { FiFileText, FiUsers, FiPackage, FiZap, FiShield, FiDownload, FiAward } from 'react-icons/fi'
 
 export default function HomePage() {
   return (
@@ -112,7 +112,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-gradient-to-r from-primary-600 to-primary-800 rounded-2xl p-12 text-white">
             <div className="flex items-center gap-3 mb-4">
-              <FiCrown size={32} />
+              <FiAward size={32} />
               <h2 className="text-3xl font-bold">Upgrade to Pro</h2>
             </div>
             <p className="text-xl mb-8 text-primary-100">

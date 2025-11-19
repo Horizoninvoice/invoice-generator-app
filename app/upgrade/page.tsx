@@ -7,7 +7,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { useUser } from '@/lib/hooks/useUser'
-import { FiCrown, FiZap, FiShield, FiDownload, FiFileText } from 'react-icons/fi'
+import { FiAward, FiZap, FiShield, FiDownload, FiFileText } from 'react-icons/fi'
 import toast from 'react-hot-toast'
 
 declare global {
@@ -127,7 +127,7 @@ function UpgradeContent() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <Card>
             <div className="text-center py-12">
-              <FiCrown className="mx-auto text-primary-600 mb-4" size={64} />
+              <FiAward className="mx-auto text-primary-600 mb-4" size={64} />
               <h1 className="text-3xl font-bold text-gray-900 mb-4">You're Already Pro!</h1>
               <p className="text-gray-600 mb-8">
                 You have access to all Pro features. Thank you for your support!

@@ -5,7 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useUser } from '@/lib/hooks/useUser'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
-import { FiFileText, FiUsers, FiPackage, FiLayoutDashboard, FiLogOut, FiCrown } from 'react-icons/fi'
+import { FiFileText, FiUsers, FiPackage, FiLayout, FiLogOut, FiAward } from 'react-icons/fi'
 import toast from 'react-hot-toast'
 
 export function Navbar() {
@@ -71,7 +71,7 @@ export function Navbar() {
                     : 'text-gray-700 hover:bg-gray-100'
                 }`}
               >
-                <FiLayoutDashboard size={18} />
+                <FiLayout size={18} />
                 Dashboard
               </Link>
               <Link
@@ -113,7 +113,7 @@ export function Navbar() {
             {!isPro && (
               <Link href="/upgrade">
                 <Button variant="outline" size="sm" className="flex items-center gap-2">
-                  <FiCrown size={16} />
+                  <FiAward size={16} />
                   Upgrade to Pro
                 </Button>
               </Link>
