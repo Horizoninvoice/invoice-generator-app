@@ -3,7 +3,7 @@ import { redirect, notFound } from 'next/navigation'
 import { Navbar } from '@/components/layout/Navbar'
 import { Card } from '@/components/ui/Card'
 import { BackButton } from '@/components/ui/BackButton'
-import { EditProductForm } from './EditProductForm'
+import { EditProductForm } from '@/components/products/EditProductForm'
 
 export default async function ProductDetailPage({ params }: { params: { id: string } }) {
   const supabase = await createClient()

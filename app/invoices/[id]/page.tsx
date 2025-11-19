@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect, notFound } from 'next/navigation'
 import { Navbar } from '@/components/layout/Navbar'
 import { BackButton } from '@/components/ui/BackButton'
-import { InvoiceView } from './InvoiceView'
+import { InvoiceView } from '@/components/invoices/InvoiceView'
 
 export default async function InvoiceDetailPage({ params }: { params: { id: string } }) {
   const supabase = await createClient()

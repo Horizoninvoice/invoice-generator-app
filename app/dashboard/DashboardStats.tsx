@@ -1,6 +1,6 @@
 import { Card } from '@/components/ui/Card'
 import Link from 'next/link'
-import { FiFileText, FiUsers, FiPackage, FiDollarSign, FiTrendingUp } from 'react-icons/fi'
+import { FiFileText, FiUsers, FiPackage, FiDollarSign, FiTrendingUp } from '@/lib/icons'
 import { formatCurrency } from '@/lib/utils'
 
 interface DashboardStatsProps {

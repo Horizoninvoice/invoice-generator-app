@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { FiMail, FiGithub, FiTwitter } from 'react-icons/fi'
+import { FiMail, FiGithub, FiTwitter } from '@/lib/icons'
 
 export function Footer() {
   return (

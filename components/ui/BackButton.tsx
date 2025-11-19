@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { FiArrowLeft } from 'react-icons/fi'
+import { FiArrowLeft } from '@/lib/icons'
 import { Button } from './Button'
 
 interface BackButtonProps {

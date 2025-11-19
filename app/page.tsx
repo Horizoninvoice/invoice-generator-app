@@ -2,7 +2,7 @@ import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { Button } from '@/components/ui/Button'
 import { Navbar } from '@/components/layout/Navbar'
-import { FiFileText, FiUsers, FiPackage, FiZap, FiShield, FiDownload, FiAward, FiCheck, FiStar } from 'react-icons/fi'
+import { FiFileText, FiUsers, FiPackage, FiZap, FiShield, FiDownload, FiAward, FiCheck, FiStar } from '@/lib/icons'
 
 // Dynamic imports for heavy components
 const AdSense = dynamic(() => import('@/components/layout/AdSense').then(mod => ({ default: mod.AdSense })), {

@@ -6,7 +6,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
-import { FiFileText, FiAward, FiCheck } from 'react-icons/fi'
+import { FiFileText, FiAward, FiCheck } from '@/lib/icons'
 
 // Dynamic imports for heavy components
 const Footer = dynamic(() => import('@/components/layout/Footer').then(mod => ({ default: mod.Footer })), {

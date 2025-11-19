@@ -16,6 +16,15 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   
+  // Disable source maps in dev for faster builds (large projects benefit)
+  productionBrowserSourceMaps: false,
+  
+  // Disable build activity indicator in dev
+  devIndicators: {
+    buildActivity: false,
+    buildActivityPosition: 'bottom-right',
+  },
+  
   // Compiler optimizations for faster builds
   // Note: compiler.removeConsole is not supported by Turbopack yet
   // Uncomment when Turbopack supports it:

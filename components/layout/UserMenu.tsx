@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { useUser } from '@/lib/hooks/useUser'
-import { FiUser, FiLogOut, FiSettings, FiAward, FiChevronDown, FiLayout, FiUsers, FiPackage, FiFileText } from 'react-icons/fi'
+import { FiUser, FiLogOut, FiSettings, FiAward, FiChevronDown, FiLayout, FiUsers, FiPackage, FiFileText } from '@/lib/icons'
 import toast from 'react-hot-toast'
 import Link from 'next/link'
 

@@ -3,7 +3,7 @@ import { Footer } from '@/components/layout/Footer'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
-import { FiCheck, FiX, FiMail } from 'react-icons/fi'
+import { FiCheck, FiX, FiMail } from '@/lib/icons'
 
 export default function PricingPage() {
   const features = [

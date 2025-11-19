@@ -1,7 +1,7 @@
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { Card } from '@/components/ui/Card'
-import { FiFileText, FiUsers, FiPackage, FiZap, FiShield, FiDownload, FiDollarSign, FiTrendingUp, FiCheck } from 'react-icons/fi'
+import { FiFileText, FiUsers, FiPackage, FiZap, FiShield, FiDownload, FiDollarSign, FiTrendingUp, FiCheck } from '@/lib/icons'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { FiCheck, FiChevronDown, FiLayers } from 'react-icons/fi'
+import { FiCheck, FiChevronDown, FiLayers } from '@/lib/icons'
 import { useColorScheme } from './ColorSchemeProvider'
 
 export type ColorScheme = 'minimalist' | 'classic' | 'earthy' | 'coastline'

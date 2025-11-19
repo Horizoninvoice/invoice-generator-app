@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 import { Navbar } from '@/components/layout/Navbar'
 import { Card } from '@/components/ui/Card'
 import { BackButton } from '@/components/ui/BackButton'
-import { FiUser, FiMail, FiAward, FiCalendar } from 'react-icons/fi'
+import { FiUser, FiMail, FiAward, FiCalendar } from '@/lib/icons'
 import { formatDate } from '@/lib/utils'
 
 export default async function ProfilePage() {

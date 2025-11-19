@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import { memo } from 'react'
 import { useUser } from '@/lib/hooks/useUser'
 import { Button } from '@/components/ui/Button'
-import { FiAward } from 'react-icons/fi'
+import { FiAward } from '@/lib/icons'
 import { UserMenu } from '@/components/layout/UserMenu'
 
 export const Navbar = memo(function Navbar() {

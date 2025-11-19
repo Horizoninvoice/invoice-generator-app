@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
-import { FiEye, FiTrash2 } from 'react-icons/fi'
+import { FiEye, FiTrash2 } from '@/lib/icons'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'

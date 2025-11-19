@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/Button'
-import { FiDownload } from 'react-icons/fi'
+import { FiDownload } from '@/lib/icons'
 import { exportInvoicesToExcel } from '@/lib/excel'
 import type { Invoice } from '@/lib/types'
 

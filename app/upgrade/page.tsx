@@ -7,7 +7,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import { useUser } from '@/lib/hooks/useUser'
-import { FiAward, FiZap, FiShield, FiDownload, FiFileText, FiMail, FiCheck } from 'react-icons/fi'
+import { FiAward, FiZap, FiShield, FiDownload, FiFileText, FiMail, FiCheck } from '@/lib/icons'
 import toast from 'react-hot-toast'
 
 declare global {

@@ -5,7 +5,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { Card } from '@/components/ui/Card'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
-import { FiFileText, FiUsers, FiPackage, FiDollarSign, FiTrendingUp } from 'react-icons/fi'
+import { FiFileText, FiUsers, FiPackage, FiDollarSign, FiTrendingUp } from '@/lib/icons'
 import { formatCurrency, formatDate } from '@/lib/utils'
 
 // Dynamic imports for heavy components

@@ -24,5 +24,12 @@ export {
   FiLogOut,
   FiSettings,
   FiMail,
+  FiSun,
+  FiMoon,
+  FiArrowLeft,
+  FiLayers,
+  FiGithub,
+  FiTwitter,
+  FiCalendar,
 } from 'react-icons/fi'
 

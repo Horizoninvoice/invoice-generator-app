@@ -1,7 +1,7 @@
 'use client'
 
 import { useTheme } from './ThemeProvider'
-import { FiSun, FiMoon } from 'react-icons/fi'
+import { FiSun, FiMoon } from '@/lib/icons'
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme()

@@ -5,10 +5,10 @@ import { AdSense } from '@/components/layout/AdSense'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
-import { FiPlus, FiFileText, FiDownload } from 'react-icons/fi'
+import { FiPlus, FiFileText, FiDownload } from '@/lib/icons'
 import { formatCurrency, formatDate } from '@/lib/utils'
-import { InvoiceActions } from './InvoiceActions'
-import { ExportButton } from './ExportButton'
+import { InvoiceActions } from '@/components/invoices/InvoiceActions'
+import { ExportButton } from '@/components/invoices/ExportButton'
 
 export default async function InvoicesPage() {
   const supabase = await createClient()

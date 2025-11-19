@@ -5,9 +5,9 @@ import { AdSense } from '@/components/layout/AdSense'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
 import Link from 'next/link'
-import { FiPlus, FiEdit, FiTrash2 } from 'react-icons/fi'
+import { FiPlus, FiEdit, FiTrash2 } from '@/lib/icons'
 import { formatDate } from '@/lib/utils'
-import { CustomerActions } from './CustomerActions'
+import { CustomerActions } from '@/components/customers/CustomerActions'
 
 export default async function CustomersPage() {
   const supabase = await createClient()
