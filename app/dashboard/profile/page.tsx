@@ -11,7 +11,10 @@ import Image from 'next/image'
 
 // Dynamically import client component wrapper
 const ProfileFormWrapper = dynamic(
-  () => import('@/components/profile/ProfileFormWrapper'),
+  () => import('@/components/profile/ProfileFormWrapper').catch(() => {
+    // Fallback if import fails
+    return { default: () => <div className="text-center py-8 text-red-500">Failed to load form. Please refresh the page.</div> }
+  }),
   { 
     ssr: false,
     loading: () => <div className="text-center py-8 text-gray-500 dark:text-gray-400">Loading form...</div>
