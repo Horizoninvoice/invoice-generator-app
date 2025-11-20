@@ -42,8 +42,7 @@ export default async function CustomersPage() {
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Customers</h1>
             <p className="text-gray-600 dark:text-gray-400 mt-2">Manage your customer database</p>
           </div>
-        </div>
-        <div className="flex items-center justify-end mb-8">
+        
           <Link href="/customers/new">
             <Button>
               <FiPlus size={18} className="mr-2" />

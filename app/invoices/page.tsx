@@ -43,8 +43,7 @@ export default async function InvoicesPage() {
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Invoices</h1>
             <p className="text-gray-600 dark:text-gray-400 mt-2">Manage and track your invoices</p>
           </div>
-        </div>
-        <div className="flex items-center justify-end mb-8">
+       
           <div className="flex gap-4">
             {isPro && invoices && invoices.length > 0 && (
               <ExportButton invoices={invoices as any} />
