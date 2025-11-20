@@ -25,19 +25,20 @@ interface InvoiceItem {
 export default function CreateInvoicePage() {
   const { user, profile, isPro, isMax } = useAuth()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const [customers, setCustomers] = useState<any[]>([])
   const [products, setProducts] = useState<any[]>([])
   const [items, setItems] = useState<InvoiceItem[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     invoice_number: '',
-    customer_id: '',
+    customer_id: searchParams.get('customer') || '',
     issue_date: new Date().toISOString().split('T')[0],
     due_date: '',
     status: 'draft',
     currency: profile?.currency || 'INR',
-    notes: '',
-    terms: '',
+    notes: localStorage.getItem('invoice_default_notes') || '',
+    terms: localStorage.getItem('invoice_default_terms') || '',
     template: 'professional',
   })
 
@@ -47,6 +48,20 @@ export default function CreateInvoicePage() {
       fetchProducts()
     }
   }, [user])
+
+  // Handle product selection from URL
+  useEffect(() => {
+    const productId = searchParams.get('product')
+    if (productId && products.length > 0) {
+      const product = products.find((p) => p.id === productId)
+      if (product && items.length === 0) {
+        addItem()
+        setTimeout(() => {
+          updateItem(items[items.length - 1]?.id || '', 'product_id', productId)
+        }, 100)
+      }
+    }
+  }, [searchParams, products])
 
   const fetchCustomers = async () => {
     const { data } = await supabase.from('customers').select('*').eq('user_id', user!.id).order('name')
