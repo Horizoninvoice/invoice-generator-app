@@ -43,11 +43,12 @@ const FormLoading = () => (
 
 // Dynamically loaded client wrapper
 const ProfileFormWrapper = dynamic(
-  () =>
-    import('@/components/profile/ProfileFormWrapper').catch(() => ({
-      default: FormFallback,
-    })),
-  { ssr: false, loading: FormLoading }
+  () => import('@/components/profile/ProfileFormWrapper'),
+  { 
+    ssr: false, 
+    loading: FormLoading,
+    onError: () => console.error('Failed to load ProfileFormWrapper')
+  }
 )
 
 /* ---------------------------------------------------------
