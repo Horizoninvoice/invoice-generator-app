@@ -16,6 +16,7 @@ import EditInvoicePage from './pages/invoices/EditInvoicePage'
 import CustomersPage from './pages/customers/CustomersPage'
 import CreateCustomerPage from './pages/customers/CreateCustomerPage'
 import CustomerDetailPage from './pages/customers/CustomerDetailPage'
+import EditCustomerPage from './pages/customers/EditCustomerPage'
 import ProductsPage from './pages/products/ProductsPage'
 import CreateProductPage from './pages/products/CreateProductPage'
 import ProductDetailPage from './pages/products/ProductDetailPage'
@@ -98,6 +99,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <CustomerDetailPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/customers/:id/edit"
+              element={
+                <ProtectedRoute>
+                  <EditCustomerPage />
                 </ProtectedRoute>
               }
             />

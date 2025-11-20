@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
 import { countries } from '@/lib/currency'
@@ -12,9 +12,10 @@ import Select from '@/components/ui/Select'
 import { ArrowLeft, Save } from 'lucide-react'
 import toast from 'react-hot-toast'
 
-export default function CreateCustomerPage() {
-  const { user } = useAuth()
+export default function EditCustomerPage() {
+  const { id } = useParams()
   const navigate = useNavigate()
+  const { user } = useAuth()
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
@@ -29,21 +30,56 @@ export default function CreateCustomerPage() {
     notes: '',
   })
 
+  useEffect(() => {
+    if (user && id) {
+      fetchCustomer()
+    }
+  }, [user, id])
+
+  const fetchCustomer = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('customers')
+        .select('*')
+        .eq('id', id)
+        .eq('user_id', user!.id)
+        .single()
+
+      if (error) throw error
+      setFormData({
+        name: data.name || '',
+        email: data.email || '',
+        phone: data.phone || '',
+        address: data.address || '',
+        city: data.city || '',
+        state: data.state || '',
+        zip_code: data.zip_code || '',
+        country: data.country || 'IN',
+        tax_id: data.tax_id || '',
+        notes: data.notes || '',
+      })
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to fetch customer')
+      navigate('/customers')
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
 
     try {
-      const { error } = await supabase.from('customers').insert({
-        ...formData,
-        user_id: user!.id,
-      })
+      const { error } = await supabase
+        .from('customers')
+        .update(formData)
+        .eq('id', id)
+        .eq('user_id', user!.id)
 
       if (error) throw error
-      toast.success('Customer created successfully!')
-      navigate('/customers')
+      toast.success('Customer updated successfully!')
+      navigate(`/customers/${id}`)
     } catch (error: any) {
-      toast.error(error.message || 'Failed to create customer')
+      toast.error(error.message || 'Failed to update customer')
     } finally {
       setIsLoading(false)
     }
@@ -56,13 +92,13 @@ export default function CreateCustomerPage() {
       <Navbar />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex items-center gap-4 mb-8">
-          <Link to="/customers">
+          <Link to={`/customers/${id}`}>
             <Button variant="ghost">
               <ArrowLeft size={18} className="mr-2" />
               Back
             </Button>
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Add Customer</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Edit Customer</h1>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -157,9 +193,9 @@ export default function CreateCustomerPage() {
               <div className="flex gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                 <Button type="submit" isLoading={isLoading} className="flex-1">
                   <Save size={18} className="mr-2" />
-                  Save Customer
+                  Update Customer
                 </Button>
-                <Link to="/customers">
+                <Link to={`/customers/${id}`}>
                   <Button type="button" variant="outline">
                     Cancel
                   </Button>
@@ -172,3 +208,4 @@ export default function CreateCustomerPage() {
     </div>
   )
 }
+
