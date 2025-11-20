@@ -11,8 +11,11 @@ import Image from 'next/image'
 
 // Dynamically import client component
 const EditProfileForm = dynamic(
-  () => import('@/components/profile/EditProfileForm').then(mod => ({ default: mod.EditProfileForm })),
-  { ssr: false }
+  () => import('@/components/profile/EditProfileForm').then((mod) => ({ default: mod.EditProfileForm })),
+  { 
+    ssr: false,
+    loading: () => <div className="text-center py-8 text-gray-500 dark:text-gray-400">Loading form...</div>
+  }
 )
 
 export default async function ProfilePage() {
