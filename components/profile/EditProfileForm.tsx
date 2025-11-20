@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
+import React from 'react'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
@@ -37,6 +38,7 @@ export function EditProfileForm({ profile, onUpdate }: EditProfileFormProps) {
   })
   const [logoUrl, setLogoUrl] = useState(profile.logo_url || '')
   const [selectedCurrency, setSelectedCurrency] = useState(profile.currency || 'INR')
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     // Update currency when country changes
@@ -173,24 +175,24 @@ export function EditProfileForm({ profile, onUpdate }: EditProfileFormProps) {
             </div>
           )}
           <div>
-            <label className="cursor-pointer">
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleLogoUpload}
-                className="hidden"
-                disabled={isUploading}
-              />
-              <Button
-                type="button"
-                variant="outline"
-                disabled={isUploading}
-                className="flex items-center gap-2"
-              >
-                <FiUpload size={16} />
-                {isUploading ? 'Uploading...' : logoUrl ? 'Change Logo' : 'Upload Logo'}
-              </Button>
-            </label>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleLogoUpload}
+              className="hidden"
+              disabled={isUploading}
+            />
+            <Button
+              type="button"
+              variant="outline"
+              disabled={isUploading}
+              onClick={() => fileInputRef.current?.click()}
+              className="flex items-center gap-2"
+            >
+              <FiUpload size={16} />
+              {isUploading ? 'Uploading...' : logoUrl ? 'Change Logo' : 'Upload Logo'}
+            </Button>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               Max 2MB. JPG, PNG, GIF, or WebP
             </p>

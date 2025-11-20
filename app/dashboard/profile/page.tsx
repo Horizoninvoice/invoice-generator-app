@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import React from 'react'
+import type React from 'react'
 
 import { Navbar } from '@/components/layout/Navbar'
 import { Card } from '@/components/ui/Card'
@@ -15,17 +15,7 @@ import { getCurrencyByCountry } from '@/lib/currency'
 /* ---------------------------------------------------------
   Reusable Information Block Component
 --------------------------------------------------------- */
-function InfoItem({ 
-  icon, 
-  title, 
-  value, 
-  sub 
-}: { 
-  icon: React.ReactNode
-  title: string
-  value: React.ReactNode
-  sub?: string | null
-}) {
+function InfoItem({ icon, title, value, sub }: { icon: React.ReactNode; title: string; value: React.ReactNode; sub?: string | null }) {
   return (
     <div className="flex items-start gap-4">
       <div className="w-10 h-10 rounded-lg bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center flex-shrink-0">
@@ -34,7 +24,9 @@ function InfoItem({
       <div className="flex-1">
         <h3 className="font-semibold text-gray-900 dark:text-white mb-1">{title}</h3>
         <p className="text-sm text-gray-600 dark:text-gray-400">{value}</p>
-        {sub && <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">{sub}</p>}
+        {sub && (
+          <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">{sub}</p>
+        )}
       </div>
     </div>
   )
