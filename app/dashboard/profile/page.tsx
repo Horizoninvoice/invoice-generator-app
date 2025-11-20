@@ -1,13 +1,19 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
+import dynamic from 'next/dynamic'
 import { Navbar } from '@/components/layout/Navbar'
 import { Card } from '@/components/ui/Card'
 import { BackButton } from '@/components/ui/BackButton'
 import { FiUser, FiMail, FiAward, FiCalendar, FiMapPin, FiBuilding, FiGlobe } from '@/lib/icons'
 import { formatDate } from '@/lib/utils'
-import { EditProfileForm } from '@/components/profile/EditProfileForm'
 import { getCurrencyByCountry } from '@/lib/currency'
 import Image from 'next/image'
+
+// Dynamically import client component
+const EditProfileForm = dynamic(
+  () => import('@/components/profile/EditProfileForm').then(mod => ({ default: mod.EditProfileForm })),
+  { ssr: false }
+)
 
 export default async function ProfilePage() {
   const supabase = await createClient()
