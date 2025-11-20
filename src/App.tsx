@@ -9,6 +9,8 @@ import ProtectedRoute from './components/auth/ProtectedRoute'
 const HomePage = lazy(() => import('./pages/HomePage'))
 const LoginPage = lazy(() => import('./pages/auth/LoginPage'))
 const SignupPage = lazy(() => import('./pages/auth/SignupPage'))
+const ConfirmEmailPage = lazy(() => import('./pages/auth/ConfirmEmailPage'))
+const ResendConfirmationPage = lazy(() => import('./pages/auth/ResendConfirmationPage'))
 const DashboardPage = lazy(() => import('./pages/DashboardPage'))
 const InvoicesPage = lazy(() => import('./pages/invoices/InvoicesPage'))
 const CreateInvoicePage = lazy(() => import('./pages/invoices/CreateInvoicePage'))
@@ -46,6 +48,8 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/auth/login" element={<LoginPage />} />
             <Route path="/auth/signup" element={<SignupPage />} />
+            <Route path="/auth/confirm-email" element={<ConfirmEmailPage />} />
+            <Route path="/auth/resend-confirmation" element={<ResendConfirmationPage />} />
 
             {/* Protected Routes */}
             <Route

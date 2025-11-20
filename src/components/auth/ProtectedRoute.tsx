@@ -21,6 +21,11 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
     return <Navigate to="/auth/login" replace />
   }
 
+  // Check if email is confirmed
+  if (user && !user.email_confirmed_at) {
+    return <Navigate to="/auth/confirm-email" replace />
+  }
+
   return <>{children}</>
 }
 

@@ -78,9 +78,14 @@ export default function LoginPage() {
                   />
                   Remember me
                 </label>
+              <div className="flex justify-between items-center">
+                <Link to="/auth/resend-confirmation" className="text-sm text-primary-600 dark:text-primary-400 hover:underline">
+                  Resend confirmation email
+                </Link>
                 <Link to="/auth/forgot-password" className="text-sm text-primary-600 dark:text-primary-400 hover:underline">
                   Forgot password?
                 </Link>
+              </div>
               </div>
               <Button type="submit" className="w-full" isLoading={isLoading}>
                 Login
