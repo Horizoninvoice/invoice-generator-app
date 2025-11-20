@@ -4,6 +4,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { AdSense } from '@/components/layout/AdSense'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
+import { BackButton } from '@/components/ui/BackButton'
 import Link from 'next/link'
 import { FiPlus, FiFileText, FiDownload } from '@/lib/icons'
 import { formatCurrency, formatDate } from '@/lib/utils'
@@ -36,11 +37,14 @@ export default async function InvoicesPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Invoices</h1>
+        <div className="flex items-center gap-4 mb-6">
+          <BackButton href="/dashboard" />
+          <div className="flex-1">
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Invoices</h1>
             <p className="text-gray-600 dark:text-gray-400 mt-2">Manage and track your invoices</p>
           </div>
+        </div>
+        <div className="flex items-center justify-end mb-8">
           <div className="flex gap-4">
             {isPro && invoices && invoices.length > 0 && (
               <ExportButton invoices={invoices as any} />
