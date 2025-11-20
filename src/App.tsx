@@ -20,6 +20,7 @@ import EditCustomerPage from './pages/customers/EditCustomerPage'
 import ProductsPage from './pages/products/ProductsPage'
 import CreateProductPage from './pages/products/CreateProductPage'
 import ProductDetailPage from './pages/products/ProductDetailPage'
+import EditProductPage from './pages/products/EditProductPage'
 import ProfilePage from './pages/ProfilePage'
 import SettingsPage from './pages/SettingsPage'
 import SubscriptionPage from './pages/SubscriptionPage'
@@ -131,6 +132,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <ProductDetailPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/products/:id/edit"
+              element={
+                <ProtectedRoute>
+                  <EditProductPage />
                 </ProtectedRoute>
               }
             />
