@@ -19,14 +19,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ error: 'Invalid plan. Must be "pro" or "max"' })
     }
 
-    // Get user from Authorization header (you'll need to verify the token)
-    const authHeader = req.headers.authorization
-    if (!authHeader) {
-      return res.status(401).json({ error: 'Unauthorized' })
-    }
-
     // Extract user ID from request body
-    // In production, verify the Supabase JWT token from Authorization header
+    // In production, you should verify the Supabase JWT token from Authorization header
     const userId = req.body.user_id
     if (!userId) {
       return res.status(400).json({ error: 'User ID is required' })
