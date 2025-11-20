@@ -1,7 +1,7 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
 import { useTheme } from '@/contexts/ThemeContext'
-import { Home, FileText, Users, Package, Settings, User, LogOut, Moon, Sun, Menu, X } from 'lucide-react'
+import { Home, FileText, Users, Package, Settings, User, LogOut, Moon, Sun, Menu, X, BarChart3 } from 'lucide-react'
 import { useState } from 'react'
 
 export default function Navbar() {
@@ -22,6 +22,7 @@ export default function Navbar() {
         { href: '/invoices', label: 'Invoices', icon: FileText },
         { href: '/customers', label: 'Customers', icon: Users },
         { href: '/products', label: 'Products', icon: Package },
+        ...(isPro || isMax ? [{ href: '/reports', label: 'Reports', icon: BarChart3 }] : []),
       ]
     : [
         { href: '/', label: 'Home', icon: Home },

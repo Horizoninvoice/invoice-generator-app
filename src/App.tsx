@@ -24,6 +24,7 @@ import EditProductPage from './pages/products/EditProductPage'
 import ProfilePage from './pages/ProfilePage'
 import SettingsPage from './pages/SettingsPage'
 import SubscriptionPage from './pages/SubscriptionPage'
+import ReportsPage from './pages/reports/ReportsPage'
 import PaymentSuccessPage from './pages/payment/PaymentSuccessPage'
 import PaymentCancelPage from './pages/payment/PaymentCancelPage'
 
@@ -31,8 +32,9 @@ function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-          <Routes>
+        <Suspense fallback={<LoadingFallback />}>
+          <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+            <Routes>
             {/* Public Routes */}
             <Route path="/" element={<HomePage />} />
             <Route path="/auth/login" element={<LoginPage />} />
@@ -164,6 +166,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <SubscriptionPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/reports"
+              element={
+                <ProtectedRoute>
+                  <ReportsPage />
                 </ProtectedRoute>
               }
             />

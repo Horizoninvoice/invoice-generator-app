@@ -11,6 +11,7 @@ import { formatCurrency } from '@/lib/currency'
 import { formatDate } from '@/lib/utils'
 import toast from 'react-hot-toast'
 import InvoiceTemplateRenderer from '@/components/invoices/InvoiceTemplateRenderer'
+import { sendInvoiceEmail } from '@/lib/email'
 
 export default function InvoiceDetailPage() {
   const { id } = useParams()
@@ -256,7 +257,22 @@ export default function InvoiceDetailPage() {
               <Share2 size={18} className="mr-2" />
               Share
             </Button>
-            <Button variant="outline">
+            <Button
+              variant="outline"
+              onClick={async () => {
+                if (!customer?.email) {
+                  toast.error('Customer email not found')
+                  return
+                }
+                toast('Opening email client...', { icon: '📧' })
+                const success = await sendInvoiceEmail(id!, customer.email, invoice.invoice_number)
+                if (success) {
+                  toast.success('Email opened successfully')
+                } else {
+                  toast.error('Failed to open email')
+                }
+              }}
+            >
               <Mail size={18} className="mr-2" />
               Email
             </Button>
