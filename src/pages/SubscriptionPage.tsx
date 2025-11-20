@@ -50,10 +50,12 @@ export default function SubscriptionPage() {
 
     setIsProcessing(true)
     try {
-      const response = await fetch('/api/payment/create', {
+      // Get API base URL (works for both local and Vercel)
+      const apiBaseUrl = import.meta.env.VITE_API_URL || window.location.origin
+      const response = await fetch(`${apiBaseUrl}/api/payment/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ plan }),
+        body: JSON.stringify({ plan, user_id: user.id }),
       })
 
       if (!response.ok) {
@@ -81,13 +83,15 @@ export default function SubscriptionPage() {
           if (response.razorpay_payment_id) {
             try {
               // Verify payment with backend
-              const verifyResponse = await fetch('/api/payment/verify', {
+              const apiBaseUrl = import.meta.env.VITE_API_URL || window.location.origin
+              const verifyResponse = await fetch(`${apiBaseUrl}/api/payment/verify`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                   razorpay_order_id: response.razorpay_order_id,
                   razorpay_payment_id: response.razorpay_payment_id,
                   razorpay_signature: response.razorpay_signature,
+                  user_id: user.id,
                 }),
               })
 
