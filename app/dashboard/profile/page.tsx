@@ -46,8 +46,7 @@ const ProfileFormWrapper = dynamic(
   () => import('@/components/profile/ProfileFormWrapper'),
   { 
     ssr: false, 
-    loading: FormLoading,
-    onError: () => console.error('Failed to load ProfileFormWrapper')
+    loading: FormLoading
   }
 )
 
