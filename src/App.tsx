@@ -199,6 +199,7 @@ function App() {
           </Routes>
           <Toaster position="top-right" />
         </div>
+        </Suspense>
       </AuthProvider>
     </ThemeProvider>
   )
