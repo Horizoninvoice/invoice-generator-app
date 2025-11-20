@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { Navbar } from '@/components/layout/Navbar'
@@ -10,10 +10,13 @@ import { Input } from '@/components/ui/Input'
 import { Select } from '@/components/ui/Select'
 import { Textarea } from '@/components/ui/Textarea'
 import { BackButton } from '@/components/ui/BackButton'
-import { FiPlus, FiTrash2 } from '@/lib/icons'
+import { FiPlus, FiTrash2, FiEye, FiAward } from '@/lib/icons'
 import toast from 'react-hot-toast'
 import type { Customer, Product } from '@/lib/types'
 import { formatCurrency } from '@/lib/utils'
+import { useUser } from '@/lib/hooks/useUser'
+import { InvoiceLivePreview } from '@/components/invoices/InvoiceLivePreview'
+import Link from 'next/link'
 
 interface InvoiceItem {
   id: string
@@ -25,10 +28,15 @@ interface InvoiceItem {
   line_total: number
 }
 
+const FREE_TEMPLATES = ['professional', 'default']
+const PRO_TEMPLATES = ['modern', 'classic', 'minimal']
+
 export default function NewInvoicePage() {
   const router = useRouter()
   const supabase = createClient()
+  const { isPro, isMax } = useUser()
   const [isLoading, setIsLoading] = useState(false)
+  const [showPreview, setShowPreview] = useState(true)
   const [customers, setCustomers] = useState<Customer[]>([])
   const [products, setProducts] = useState<Product[]>([])
   const [items, setItems] = useState<InvoiceItem[]>([])
@@ -116,11 +124,24 @@ export default function NewInvoicePage() {
 
   const { subtotal, taxAmount, total } = calculateTotals()
 
+  // Check if selected template is allowed for current user
+  const isTemplateAllowed = useMemo(() => {
+    if (isPro || isMax) return true // Pro/Max users can use all templates
+    return FREE_TEMPLATES.includes(formData.template)
+  }, [formData.template, isPro, isMax])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
 
     try {
+      // Check template access before saving
+      if (!isTemplateAllowed) {
+        toast.error('This template requires a Pro or Max subscription. Please upgrade or select a free template.')
+        setIsLoading(false)
+        return
+      }
+
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) throw new Error('Not authenticated')
 
@@ -185,13 +206,16 @@ export default function NewInvoicePage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navbar />
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex items-center gap-4 mb-8">
           <BackButton href="/invoices" />
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Create Invoice</h1>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid lg:grid-cols-2 gap-6">
+          {/* Form Section */}
+          <div className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
           <Card title="Invoice Details">
             <div className="grid md:grid-cols-2 gap-6">
               <Input
@@ -240,16 +264,37 @@ export default function NewInvoicePage() {
               <Select
                 label="Invoice Template"
                 options={[
-                  { value: 'professional', label: 'Professional Template' },
-                  { value: 'default', label: 'Default Template' },
-                  { value: 'modern', label: 'Modern Template' },
-                  { value: 'classic', label: 'Classic Template' },
-                  { value: 'minimal', label: 'Minimal Template' },
+                  { value: 'professional', label: 'Professional Template (Free)' },
+                  { value: 'default', label: 'Default Template (Free)' },
+                  { value: 'modern', label: 'Modern Template (Pro)' },
+                  { value: 'classic', label: 'Classic Template (Pro)' },
+                  { value: 'minimal', label: 'Minimal Template (Pro)' },
                 ]}
                 value={formData.template}
                 onChange={(e) => setFormData({ ...formData, template: e.target.value })}
                 className="md:col-span-2"
               />
+              {!isTemplateAllowed && (
+                <div className="md:col-span-2 p-4 bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+                  <div className="flex items-start gap-3">
+                    <FiAward className="text-yellow-600 dark:text-yellow-400 mt-0.5" size={20} />
+                    <div className="flex-1">
+                      <p className="text-sm font-semibold text-yellow-800 dark:text-yellow-300 mb-1">
+                        Pro Template Selected
+                      </p>
+                      <p className="text-xs text-yellow-700 dark:text-yellow-400 mb-3">
+                        This template requires a Pro or Max subscription. Free users can only save invoices with Professional or Default templates.
+                      </p>
+                      <Link href="/upgrade">
+                        <Button size="sm" className="w-full sm:w-auto">
+                          <FiAward size={16} className="mr-2" />
+                          Upgrade to Pro
+                        </Button>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
           </Card>
 
@@ -383,15 +428,67 @@ export default function NewInvoicePage() {
             </div>
           </Card>
 
-          <div className="flex gap-4">
-            <Button type="submit" isLoading={isLoading} disabled={items.length === 0}>
-              Create Invoice
-            </Button>
-            <Button type="button" variant="outline" onClick={() => router.back()}>
-              Cancel
-            </Button>
+              <div className="flex gap-4">
+                <Button 
+                  type="submit" 
+                  isLoading={isLoading} 
+                  disabled={items.length === 0 || !isTemplateAllowed}
+                >
+                  Create Invoice
+                </Button>
+                <Button type="button" variant="outline" onClick={() => router.back()}>
+                  Cancel
+                </Button>
+              </div>
+            </form>
           </div>
-        </form>
+
+          {/* Live Preview Section */}
+          <div className="lg:sticky lg:top-8 h-fit">
+            <Card 
+              title={
+                <div className="flex items-center justify-between w-full">
+                  <span className="flex items-center gap-2">
+                    <FiEye size={18} />
+                    Live Preview
+                  </span>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowPreview(!showPreview)}
+                  >
+                    {showPreview ? 'Hide' : 'Show'}
+                  </Button>
+                </div>
+              }
+            >
+              {showPreview ? (
+                <InvoiceLivePreview
+                  formData={formData}
+                  items={items}
+                  customers={customers}
+                  subtotal={subtotal}
+                  taxAmount={taxAmount}
+                  total={total}
+                />
+              ) : (
+                <div className="text-center py-12 text-gray-500 dark:text-gray-400">
+                  <p>Preview hidden</p>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setShowPreview(true)}
+                    className="mt-4"
+                  >
+                    Show Preview
+                  </Button>
+                </div>
+              )}
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   )
