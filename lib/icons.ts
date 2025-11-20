@@ -31,5 +31,10 @@ export {
   FiGithub,
   FiTwitter,
   FiCalendar,
+  FiMapPin,
+  FiBuilding,
+  FiGlobe,
+  FiUpload,
+  FiImage,
 } from 'react-icons/fi'
 
