@@ -107,7 +107,7 @@ export default function ConfirmEmailPage() {
 
   const handleResendConfirmation = async () => {
     try {
-      const email = searchParams.get('email') || user?.email
+      const email = searchParams.get('email') || emailFromState || user?.email
       if (!email) {
         toast.error('Email address not found')
         return

@@ -48,7 +48,7 @@ export default function SignupPage() {
 
     try {
       await signUp(email, password, country)
-      navigate('/dashboard')
+      navigate('/auth/confirm-email', { state: { email } })
     } catch (error: any) {
       toast.error(error.message || 'Failed to create account')
     } finally {
