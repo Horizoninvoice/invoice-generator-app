@@ -218,7 +218,11 @@ export default async function ProfilePage() {
 
         {/* ---------- Shop Settings ---------- */}
         <Card title="Shop Settings">
-          <ProfileFormWrapper profile={profile ?? {}} />
+          {typeof ProfileFormWrapper !== 'undefined' ? (
+            <ProfileFormWrapper profile={profile ?? {}} />
+          ) : (
+            <FormLoading />
+          )}
         </Card>
       </div>
     </div>
