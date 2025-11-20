@@ -183,12 +183,12 @@ export default function NewInvoicePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navbar />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex items-center gap-4 mb-8">
           <BackButton href="/invoices" />
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Create Invoice</h1>
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Create Invoice</h1>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">

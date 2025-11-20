@@ -21,7 +21,11 @@ export function BackButton({ href, label = 'Back' }: BackButtonProps) {
   }
 
   return (
-    <Button variant="ghost" onClick={handleClick} className="flex items-center gap-2">
+    <Button 
+      variant="outline" 
+      onClick={handleClick} 
+      className="flex items-center gap-2 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300 font-medium"
+    >
       <FiArrowLeft size={18} />
       {label}
     </Button>
