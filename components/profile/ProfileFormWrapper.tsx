@@ -13,7 +13,9 @@ interface ProfileFormWrapperProps {
   }
 }
 
-export function ProfileFormWrapper({ profile }: ProfileFormWrapperProps) {
+function ProfileFormWrapper({ profile }: ProfileFormWrapperProps) {
   return <EditProfileForm profile={profile} />
 }
+
+export default ProfileFormWrapper
 
