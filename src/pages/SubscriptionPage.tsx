@@ -60,7 +60,13 @@ export default function SubscriptionPage() {
 
       if (!response.ok) {
         const error = await response.json()
-        throw new Error(error.error || 'Failed to create payment order')
+        if (response.status === 503) {
+          toast.error('Payment gateway is not configured yet. Please contact support or try again later.')
+        } else {
+          throw new Error(error.error || 'Failed to create payment order')
+        }
+        setIsProcessing(false)
+        return
       }
 
       const { orderId, amount, currency, keyId } = await response.json()
@@ -268,6 +274,7 @@ export default function SubscriptionPage() {
                   onClick={() => handleUpgrade(plan.id as 'pro' | 'max')}
                   isLoading={isProcessing && selectedPlan === plan.id}
                   disabled={isProcessing}
+                  title={!razorpayLoaded ? 'Payment gateway loading...' : undefined}
                 >
                   {plan.id === 'max' ? 'Get Lifetime Access' : 'Upgrade to Pro'}
                 </Button>

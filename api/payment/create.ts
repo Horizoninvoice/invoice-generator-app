@@ -2,14 +2,25 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 import Razorpay from 'razorpay'
 import crypto from 'crypto'
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID || '',
-  key_secret: process.env.RAZORPAY_KEY_SECRET || '',
-})
+// Initialize Razorpay only if keys are available
+let razorpay: Razorpay | null = null
+if (process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET) {
+  razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
+  })
+}
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
+  }
+
+  // Check if Razorpay is configured
+  if (!razorpay) {
+    return res.status(503).json({ 
+      error: 'Payment gateway not configured. Please add RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET environment variables.' 
+    })
   }
 
   try {
