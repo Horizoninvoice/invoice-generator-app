@@ -10,6 +10,7 @@ import { ArrowLeft, Edit, Copy, Download, Printer, Trash2, Share2, Mail } from '
 import { formatCurrency } from '@/lib/currency'
 import { formatDate } from '@/lib/utils'
 import toast from 'react-hot-toast'
+import InvoiceTemplateRenderer from '@/components/invoices/InvoiceTemplateRenderer'
 
 export default function InvoiceDetailPage() {
   const { id } = useParams()
@@ -119,8 +120,48 @@ export default function InvoiceDetailPage() {
   }
 
   const handleExportPDF = async () => {
-    // TODO: Implement PDF export with react-pdf
-    toast('PDF export coming soon', { icon: 'ℹ️' })
+    try {
+      const { default: html2canvas } = await import('html2canvas')
+      const { default: jsPDF } = await import('jspdf')
+      
+      toast('Generating PDF...', { icon: '⏳' })
+      
+      const element = document.getElementById('invoice-preview')
+      if (!element) {
+        toast.error('Invoice preview not found')
+        return
+      }
+
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+      })
+
+      const imgData = canvas.toDataURL('image/png')
+      const pdf = new jsPDF('p', 'mm', 'a4')
+      const imgWidth = 210
+      const pageHeight = 297
+      const imgHeight = (canvas.height * imgWidth) / canvas.width
+      let heightLeft = imgHeight
+      let position = 0
+
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
+      heightLeft -= pageHeight
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight
+        pdf.addPage()
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight)
+        heightLeft -= pageHeight
+      }
+
+      pdf.save(`invoice-${invoice.invoice_number}.pdf`)
+      toast.success('PDF exported successfully!')
+    } catch (error: any) {
+      console.error('PDF export error:', error)
+      toast.error('Failed to export PDF: ' + error.message)
+    }
   }
 
   const getStatusColor = (status: string) => {
@@ -170,7 +211,7 @@ export default function InvoiceDetailPage() {
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-8 no-print">
           <div className="flex items-center gap-4">
             <Link to="/invoices">
               <Button variant="ghost">
@@ -191,7 +232,7 @@ export default function InvoiceDetailPage() {
         </div>
 
         {/* Action Toolbar */}
-        <Card className="mb-6">
+        <Card className="mb-6 no-print">
           <div className="flex flex-wrap items-center gap-2">
             <Link to={`/invoices/${id}/edit`}>
               <Button variant="outline">
@@ -241,125 +282,14 @@ export default function InvoiceDetailPage() {
 
         {/* Invoice Preview */}
         <Card>
-          <div className="p-8">
-            {/* Header */}
-            <div className="flex justify-between items-start mb-8">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                  {profile?.shop_name || 'Horizon Invoice Generator'}
-                </h2>
-                {profile?.shop_address && (
-                  <p className="text-gray-600 dark:text-gray-400 text-sm">{profile.shop_address}</p>
-                )}
-                {profile?.shop_email && (
-                  <p className="text-gray-600 dark:text-gray-400 text-sm">{profile.shop_email}</p>
-                )}
-              </div>
-              <div className="text-right">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">INVOICE</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Invoice #: {invoice.invoice_number}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Date: {formatDate(invoice.issue_date)}</p>
-                {invoice.due_date && (
-                  <p className="text-sm text-gray-600 dark:text-gray-400">Due: {formatDate(invoice.due_date)}</p>
-                )}
-              </div>
-            </div>
-
-            {/* Customer Info */}
-            {customer && (
-              <div className="mb-8">
-                <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Bill To:</h4>
-                <p className="text-gray-900 dark:text-white font-medium">{customer.name}</p>
-                {customer.email && <p className="text-gray-600 dark:text-gray-400 text-sm">{customer.email}</p>}
-                {customer.phone && <p className="text-gray-600 dark:text-gray-400 text-sm">{customer.phone}</p>}
-                {customer.address && <p className="text-gray-600 dark:text-gray-400 text-sm">{customer.address}</p>}
-                {customer.city && customer.state && (
-                  <p className="text-gray-600 dark:text-gray-400 text-sm">
-                    {customer.city}, {customer.state} {customer.zip_code}
-                  </p>
-                )}
-              </div>
-            )}
-
-            {/* Items Table */}
-            <div className="mb-8 overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-gray-200 dark:border-gray-700">
-                    <th className="text-left py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300">Description</th>
-                    <th className="text-right py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300">Quantity</th>
-                    <th className="text-right py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300">Unit Price</th>
-                    <th className="text-right py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300">Tax</th>
-                    <th className="text-right py-3 px-4 text-sm font-medium text-gray-700 dark:text-gray-300">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {items.map((item) => (
-                    <tr key={item.id} className="border-b border-gray-100 dark:border-gray-800">
-                      <td className="py-3 px-4 text-gray-900 dark:text-white">{item.description}</td>
-                      <td className="py-3 px-4 text-right text-gray-600 dark:text-gray-400">{item.quantity}</td>
-                      <td className="py-3 px-4 text-right text-gray-600 dark:text-gray-400">
-                        {formatCurrency(item.unit_price, invoice.currency)}
-                      </td>
-                      <td className="py-3 px-4 text-right text-gray-600 dark:text-gray-400">{item.tax_rate}%</td>
-                      <td className="py-3 px-4 text-right font-medium text-gray-900 dark:text-white">
-                        {formatCurrency(item.line_total, invoice.currency)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {/* Totals */}
-            <div className="flex justify-end mb-8">
-              <div className="w-64 space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-600 dark:text-gray-400">Subtotal:</span>
-                  <span className="font-medium text-gray-900 dark:text-white">
-                    {formatCurrency(invoice.subtotal, invoice.currency)}
-                  </span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-600 dark:text-gray-400">Tax:</span>
-                  <span className="font-medium text-gray-900 dark:text-white">
-                    {formatCurrency(invoice.tax_amount, invoice.currency)}
-                  </span>
-                </div>
-                {invoice.discount_amount > 0 && (
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600 dark:text-gray-400">Discount:</span>
-                    <span className="font-medium text-gray-900 dark:text-white">
-                      -{formatCurrency(invoice.discount_amount, invoice.currency)}
-                    </span>
-                  </div>
-                )}
-                <div className="flex justify-between text-lg font-bold pt-2 border-t border-gray-200 dark:border-gray-700">
-                  <span className="text-gray-900 dark:text-white">Total:</span>
-                  <span className="text-gray-900 dark:text-white">
-                    {formatCurrency(invoice.total_amount, invoice.currency)}
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* Notes and Terms */}
-            {(invoice.notes || invoice.terms) && (
-              <div className="pt-8 border-t border-gray-200 dark:border-gray-700">
-                {invoice.notes && (
-                  <div className="mb-4">
-                    <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Notes:</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line">{invoice.notes}</p>
-                  </div>
-                )}
-                {invoice.terms && (
-                  <div>
-                    <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">Terms & Conditions:</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line">{invoice.terms}</p>
-                  </div>
-                )}
-              </div>
-            )}
+          <div id="invoice-preview" className="p-8 print:p-0">
+            <InvoiceTemplateRenderer
+              template={invoice.template || 'professional'}
+              invoice={invoice}
+              items={items}
+              customer={customer}
+              company={profile}
+            />
           </div>
         </Card>
       </div>
