@@ -9,9 +9,9 @@ import { formatDate } from '@/lib/utils'
 import { getCurrencyByCountry } from '@/lib/currency'
 import Image from 'next/image'
 
-// Dynamically import client component
-const EditProfileForm = dynamic(
-  () => import('@/components/profile/EditProfileForm'),
+// Dynamically import client component wrapper
+const ProfileFormWrapper = dynamic(
+  () => import('@/components/profile/ProfileFormWrapper').then((mod) => ({ default: mod.ProfileFormWrapper })),
   { 
     ssr: false,
     loading: () => <div className="text-center py-8 text-gray-500 dark:text-gray-400">Loading form...</div>
@@ -199,7 +199,7 @@ export default async function ProfilePage() {
 
         {/* Shop Settings */}
         <Card title="Shop Settings">
-          <EditProfileForm profile={profile || {}} />
+          <ProfileFormWrapper profile={profile || {}} />
         </Card>
       </div>
     </div>
