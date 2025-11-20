@@ -283,6 +283,28 @@ export default function SubscriptionPage() {
           ))}
         </div>
 
+        {/* Payment Configuration Notice */}
+        {!razorpayLoaded && (
+          <Card className="mb-8 border-yellow-200 dark:border-yellow-800 bg-yellow-50 dark:bg-yellow-900/20">
+            <div className="flex items-start gap-3">
+              <div className="flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center">
+                  <span className="text-yellow-600 dark:text-yellow-400 text-sm">ℹ️</span>
+                </div>
+              </div>
+              <div className="flex-1">
+                <h4 className="font-medium text-yellow-800 dark:text-yellow-200 mb-1">
+                  Payment Gateway Setup
+                </h4>
+                <p className="text-sm text-yellow-700 dark:text-yellow-300">
+                  Payment processing is being configured. Once your Razorpay API keys are added to the environment variables, 
+                  you'll be able to upgrade your subscription. For now, you can use the free plan features.
+                </p>
+              </div>
+            </div>
+          </Card>
+        )}
+
         {/* Personalized Plan */}
         <Card>
           <div className="text-center">
