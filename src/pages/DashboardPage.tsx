@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
 import Navbar from '@/components/layout/Navbar'
+import AdSense from '@/components/layout/AdSense'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
-import { FileText, Users, Package, DollarSign, Plus, ArrowRight } from 'lucide-react'
+import { FileText, Users, Package, DollarSign, Plus, ArrowRight, TrendingUp } from 'lucide-react'
 import { formatCurrency } from '@/lib/currency'
 import { formatDate } from '@/lib/utils'
 
@@ -74,6 +75,8 @@ export default function DashboardPage() {
     )
   }
 
+  const { isPro, isMax } = useAuth()
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navbar />
@@ -84,6 +87,26 @@ export default function DashboardPage() {
           </h1>
           <p className="text-gray-600 dark:text-gray-400">Here's an overview of your business</p>
         </div>
+
+        {/* Upgrade Prompt for Free Users */}
+        {!isPro && !isMax && (
+          <Card className="mb-6 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 border-primary-200 dark:border-primary-700">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Upgrade to Pro</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  Unlock all features, remove ads, and get access to all invoice templates.
+                </p>
+              </div>
+              <Link to="/subscription">
+                <Button>Upgrade Now</Button>
+              </Link>
+            </div>
+          </Card>
+        )}
+
+        {/* AdSense for Free Users */}
+        {!isPro && !isMax && <AdSense />}
 
         {/* Stats Cards */}
         <div className="grid md:grid-cols-4 gap-6 mb-8">
@@ -129,6 +152,10 @@ export default function DashboardPage() {
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Total Revenue</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-white">
                   {formatCurrency(stats.revenue, profile?.currency || 'INR')}
+                </p>
+                <p className="text-xs text-green-600 dark:text-green-400 mt-1 flex items-center gap-1">
+                  <TrendingUp size={12} />
+                  All time
                 </p>
               </div>
               <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
