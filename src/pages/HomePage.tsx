@@ -2,8 +2,9 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
+import AdSense from '@/components/layout/AdSense'
 import Button from '@/components/ui/Button'
-import { Check, FileText, Users, Package, Zap, Shield, Download } from 'lucide-react'
+import { Check, FileText, Users, Package, Zap, Shield, Download, Clock, Globe, CreditCard } from 'lucide-react'
 
 export default function HomePage() {
   const { user } = useAuth()
@@ -42,13 +43,16 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* AdSense for non-authenticated users */}
+      {!user && <AdSense />}
+
       {/* Features Section */}
       <section className="py-20 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
             Everything You Need to Manage Invoices
           </h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
             <div className="text-center">
               <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <FileText className="text-primary-600 dark:text-primary-400" size={32} />
