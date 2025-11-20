@@ -52,13 +52,19 @@ export default function CreateInvoicePage() {
   // Handle product selection from URL
   useEffect(() => {
     const productId = searchParams.get('product')
-    if (productId && products.length > 0) {
+    if (productId && products.length > 0 && items.length === 0) {
       const product = products.find((p) => p.id === productId)
-      if (product && items.length === 0) {
-        addItem()
-        setTimeout(() => {
-          updateItem(items[items.length - 1]?.id || '', 'product_id', productId)
-        }, 100)
+      if (product) {
+        const newItem: InvoiceItem = {
+          id: Date.now().toString(),
+          product_id: productId,
+          description: product.name,
+          quantity: 1,
+          unit_price: product.price,
+          tax_rate: product.tax_rate || 0,
+          line_total: product.price * (1 + (product.tax_rate || 0) / 100),
+        }
+        setItems([newItem])
       }
     }
   }, [searchParams, products])

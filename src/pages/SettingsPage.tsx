@@ -59,6 +59,7 @@ export default function SettingsPage() {
                 Color Theme
               </label>
               <Select
+                label="Color Theme"
                 options={themeOptions}
                 value={theme}
                 onChange={(e) => setTheme(e.target.value as any)}
