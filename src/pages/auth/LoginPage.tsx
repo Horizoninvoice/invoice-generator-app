@@ -24,7 +24,15 @@ export default function LoginPage() {
       await signIn(email, password)
       navigate('/dashboard')
     } catch (error: any) {
-      toast.error(error.message || 'Failed to login')
+      const errorMessage = error.message || 'Failed to login'
+      toast.error(errorMessage)
+      
+      // Redirect to confirmation page if email not confirmed
+      if (errorMessage.includes('confirm')) {
+        setTimeout(() => {
+          navigate('/auth/confirm-email', { state: { email } })
+        }, 2000)
+      }
     } finally {
       setIsLoading(false)
     }

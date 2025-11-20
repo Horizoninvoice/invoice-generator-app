@@ -8,6 +8,7 @@ interface ProtectedRouteProps {
 
 export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { user, loading } = useAuth()
+  const location = useLocation()
 
   if (loading) {
     return (
@@ -21,8 +22,12 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
     return <Navigate to="/auth/login" replace />
   }
 
-  // Check if email is confirmed
-  if (user && !user.email_confirmed_at) {
+  // Allow access to confirmation pages even if email not confirmed
+  const currentPath = location.pathname
+  const isConfirmationPage = currentPath.includes('/auth/confirm-email') || currentPath.includes('/auth/resend-confirmation')
+  
+  // Check if email is confirmed (except for confirmation pages)
+  if (user && !user.email_confirmed_at && !isConfirmationPage) {
     return <Navigate to="/auth/confirm-email" replace />
   }
 
