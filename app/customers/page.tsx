@@ -4,6 +4,7 @@ import { Navbar } from '@/components/layout/Navbar'
 import { AdSense } from '@/components/layout/AdSense'
 import { Card } from '@/components/ui/Card'
 import { Button } from '@/components/ui/Button'
+import { BackButton } from '@/components/ui/BackButton'
 import Link from 'next/link'
 import { FiPlus, FiEdit, FiTrash2 } from '@/lib/icons'
 import { formatDate } from '@/lib/utils'
@@ -35,11 +36,14 @@ export default async function CustomersPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Customers</h1>
+        <div className="flex items-center gap-4 mb-6">
+          <BackButton href="/dashboard" />
+          <div className="flex-1">
+            <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Customers</h1>
             <p className="text-gray-600 dark:text-gray-400 mt-2">Manage your customer database</p>
           </div>
+        </div>
+        <div className="flex items-center justify-end mb-8">
           <Link href="/customers/new">
             <Button>
               <FiPlus size={18} className="mr-2" />
