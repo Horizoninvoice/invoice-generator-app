@@ -6,7 +6,7 @@ import Navbar from '@/components/layout/Navbar'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import Modal from '@/components/ui/Modal'
-import { ArrowLeft, Edit, Trash2, Package, DollarSign, FileText, Plus } from 'lucide-react'
+import { ArrowLeft, Edit, Trash2, FileText, Plus } from 'lucide-react'
 import { formatCurrency } from '@/lib/currency'
 import toast from 'react-hot-toast'
 

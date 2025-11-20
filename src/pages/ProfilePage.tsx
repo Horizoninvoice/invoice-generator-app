@@ -8,7 +8,7 @@ import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 import Textarea from '@/components/ui/Textarea'
 import Select from '@/components/ui/Select'
-import { User, Mail, Award, Calendar, MapPin, Building, Globe, Upload, X, Image as ImageIcon } from 'lucide-react'
+import { User, Mail, Award, Calendar, Upload, X, Image as ImageIcon } from 'lucide-react'
 import { formatDate } from '@/lib/utils'
 import toast from 'react-hot-toast'
 

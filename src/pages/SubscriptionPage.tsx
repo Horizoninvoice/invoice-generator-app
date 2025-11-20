@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import Navbar from '@/components/layout/Navbar'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
-import { Check, Zap, Shield, Download, FileText, Mail, Award, Crown } from 'lucide-react'
+import { Check, Mail, Crown } from 'lucide-react'
 import { formatCurrency } from '@/lib/currency'
 import toast from 'react-hot-toast'
 
@@ -17,7 +17,7 @@ declare global {
 export default function SubscriptionPage() {
   const { user, profile, refreshProfile } = useAuth()
   const navigate = useNavigate()
-  const [selectedPlan, setSelectedPlan] = useState<'pro' | 'max'>('pro')
+  const [selectedPlan] = useState<'pro' | 'max'>('pro')
   const [isProcessing, setIsProcessing] = useState(false)
   const [razorpayLoaded, setRazorpayLoaded] = useState(false)
 

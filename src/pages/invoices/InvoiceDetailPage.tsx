@@ -120,7 +120,7 @@ export default function InvoiceDetailPage() {
 
   const handleExportPDF = async () => {
     // TODO: Implement PDF export with react-pdf
-    toast.info('PDF export coming soon')
+    toast('PDF export coming soon', { icon: 'ℹ️' })
   }
 
   const getStatusColor = (status: string) => {

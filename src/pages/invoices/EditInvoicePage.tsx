@@ -25,7 +25,7 @@ interface InvoiceItem {
 export default function EditInvoicePage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { user, profile, isPro, isMax } = useAuth()
+  const { user, isPro, isMax } = useAuth()
   const [customers, setCustomers] = useState<any[]>([])
   const [products, setProducts] = useState<any[]>([])
   const [items, setItems] = useState<InvoiceItem[]>([])

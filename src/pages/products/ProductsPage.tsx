@@ -7,14 +7,13 @@ import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 import Modal from '@/components/ui/Modal'
-import { Plus, Search, Edit, Trash2, Eye, Download, Package, DollarSign } from 'lucide-react'
+import { Plus, Search, Edit, Trash2, Eye, Download, Package } from 'lucide-react'
 import { formatCurrency } from '@/lib/currency'
 import toast from 'react-hot-toast'
 import * as XLSX from 'xlsx'
 
 export default function ProductsPage() {
   const { user, profile } = useAuth()
-  const navigate = useNavigate()
   const [products, setProducts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')

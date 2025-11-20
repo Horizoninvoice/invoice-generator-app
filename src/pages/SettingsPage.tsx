@@ -7,7 +7,7 @@ import Button from '@/components/ui/Button'
 import Select from '@/components/ui/Select'
 import Input from '@/components/ui/Input'
 import Textarea from '@/components/ui/Textarea'
-import { Moon, Sun, Palette, Globe, FileText, Bell, Download } from 'lucide-react'
+import { Moon, Sun, Download } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 export default function SettingsPage() {
@@ -35,7 +35,7 @@ export default function SettingsPage() {
 
   const handleExportData = async () => {
     // TODO: Implement data export
-    toast.info('Data export feature coming soon')
+    toast('Data export feature coming soon', { icon: 'ℹ️' })
   }
 
   const themeOptions = [

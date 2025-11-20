@@ -13,7 +13,6 @@ import * as XLSX from 'xlsx'
 
 export default function CustomersPage() {
   const { user } = useAuth()
-  const navigate = useNavigate()
   const [customers, setCustomers] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')

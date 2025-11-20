@@ -4,7 +4,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import AdSense from '@/components/layout/AdSense'
 import Button from '@/components/ui/Button'
-import { Check, FileText, Users, Package, Zap, Shield, Download, Clock, Globe, CreditCard } from 'lucide-react'
+import { Check, FileText, Users, Package } from 'lucide-react'
 
 export default function HomePage() {
   const { user } = useAuth()

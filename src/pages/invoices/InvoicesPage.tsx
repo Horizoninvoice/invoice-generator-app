@@ -7,7 +7,7 @@ import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
-import { Plus, Search, Filter, Download, Trash2, Edit, Eye, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Plus, Search, Download, Trash2, Edit, Eye, ChevronLeft, ChevronRight } from 'lucide-react'
 import { formatCurrency } from '@/lib/currency'
 import { formatDate } from '@/lib/utils'
 import toast from 'react-hot-toast'
@@ -15,7 +15,6 @@ import * as XLSX from 'xlsx'
 
 export default function InvoicesPage() {
   const { user, profile } = useAuth()
-  const navigate = useNavigate()
   const [invoices, setInvoices] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
