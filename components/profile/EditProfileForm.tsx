@@ -24,7 +24,7 @@ interface EditProfileFormProps {
   onUpdate?: () => void
 }
 
-export function EditProfileForm({ profile, onUpdate }: EditProfileFormProps) {
+function EditProfileForm({ profile, onUpdate }: EditProfileFormProps) {
   const router = useRouter()
   const supabase = createClient()
   const [isLoading, setIsLoading] = useState(false)
@@ -259,4 +259,6 @@ export function EditProfileForm({ profile, onUpdate }: EditProfileFormProps) {
     </form>
   )
 }
+
+export default EditProfileForm
 
