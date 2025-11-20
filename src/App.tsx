@@ -1,32 +1,39 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
+import { lazy, Suspense } from 'react'
 import { ThemeProvider } from './contexts/ThemeContext'
 import { AuthProvider } from './contexts/AuthContext'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 
-// Pages
-import HomePage from './pages/HomePage'
-import LoginPage from './pages/auth/LoginPage'
-import SignupPage from './pages/auth/SignupPage'
-import DashboardPage from './pages/DashboardPage'
-import InvoicesPage from './pages/invoices/InvoicesPage'
-import CreateInvoicePage from './pages/invoices/CreateInvoicePage'
-import InvoiceDetailPage from './pages/invoices/InvoiceDetailPage'
-import EditInvoicePage from './pages/invoices/EditInvoicePage'
-import CustomersPage from './pages/customers/CustomersPage'
-import CreateCustomerPage from './pages/customers/CreateCustomerPage'
-import CustomerDetailPage from './pages/customers/CustomerDetailPage'
-import EditCustomerPage from './pages/customers/EditCustomerPage'
-import ProductsPage from './pages/products/ProductsPage'
-import CreateProductPage from './pages/products/CreateProductPage'
-import ProductDetailPage from './pages/products/ProductDetailPage'
-import EditProductPage from './pages/products/EditProductPage'
-import ProfilePage from './pages/ProfilePage'
-import SettingsPage from './pages/SettingsPage'
-import SubscriptionPage from './pages/SubscriptionPage'
-import ReportsPage from './pages/reports/ReportsPage'
-import PaymentSuccessPage from './pages/payment/PaymentSuccessPage'
-import PaymentCancelPage from './pages/payment/PaymentCancelPage'
+// Lazy load pages for code splitting
+const HomePage = lazy(() => import('./pages/HomePage'))
+const LoginPage = lazy(() => import('./pages/auth/LoginPage'))
+const SignupPage = lazy(() => import('./pages/auth/SignupPage'))
+const DashboardPage = lazy(() => import('./pages/DashboardPage'))
+const InvoicesPage = lazy(() => import('./pages/invoices/InvoicesPage'))
+const CreateInvoicePage = lazy(() => import('./pages/invoices/CreateInvoicePage'))
+const InvoiceDetailPage = lazy(() => import('./pages/invoices/InvoiceDetailPage'))
+const EditInvoicePage = lazy(() => import('./pages/invoices/EditInvoicePage'))
+const CustomersPage = lazy(() => import('./pages/customers/CustomersPage'))
+const CreateCustomerPage = lazy(() => import('./pages/customers/CreateCustomerPage'))
+const CustomerDetailPage = lazy(() => import('./pages/customers/CustomerDetailPage'))
+const EditCustomerPage = lazy(() => import('./pages/customers/EditCustomerPage'))
+const ProductsPage = lazy(() => import('./pages/products/ProductsPage'))
+const CreateProductPage = lazy(() => import('./pages/products/CreateProductPage'))
+const ProductDetailPage = lazy(() => import('./pages/products/ProductDetailPage'))
+const EditProductPage = lazy(() => import('./pages/products/EditProductPage'))
+const ProfilePage = lazy(() => import('./pages/ProfilePage'))
+const SettingsPage = lazy(() => import('./pages/SettingsPage'))
+const SubscriptionPage = lazy(() => import('./pages/SubscriptionPage'))
+const ReportsPage = lazy(() => import('./pages/reports/ReportsPage'))
+const PaymentSuccessPage = lazy(() => import('./pages/payment/PaymentSuccessPage'))
+const PaymentCancelPage = lazy(() => import('./pages/payment/PaymentCancelPage'))
+
+const LoadingFallback = () => (
+  <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+  </div>
+)
 
 function App() {
   return (
