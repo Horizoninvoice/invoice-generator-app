@@ -33,7 +33,10 @@ const PaymentCancelPage = lazy(() => import('./pages/payment/PaymentCancelPage')
 
 const LoadingFallback = () => (
   <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
-    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+    <div className="text-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
+      <p className="text-gray-600 dark:text-gray-400 text-sm">Loading...</p>
+    </div>
   </div>
 )
 
@@ -41,9 +44,8 @@ function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <Suspense fallback={<LoadingFallback />}>
-          <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-            <Routes>
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+          <Routes>
             {/* Public Routes */}
             <Route path="/" element={<HomePage />} />
             <Route path="/auth/login" element={<LoginPage />} />
@@ -210,7 +212,6 @@ function App() {
           </Routes>
           <Toaster position="top-right" />
         </div>
-        </Suspense>
       </AuthProvider>
     </ThemeProvider>
   )

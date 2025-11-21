@@ -24,6 +24,9 @@ export default function DashboardPage() {
   useEffect(() => {
     if (user) {
       fetchDashboardData()
+    } else {
+      // If no user, don't show loading
+      setLoading(false)
     }
   }, [user])
 
@@ -64,18 +67,30 @@ export default function DashboardPage() {
     }
   }
 
+  const { isPro, isMax } = useAuth()
+
+  // Show skeleton instead of full loading screen
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <Navbar />
-        <div className="flex items-center justify-center min-h-[calc(100vh-4rem)]">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="mb-8">
+            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-64 mb-2 animate-pulse"></div>
+            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-48 animate-pulse"></div>
+          </div>
+          <div className="grid md:grid-cols-4 gap-6 mb-8">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="bg-white dark:bg-gray-800 rounded-lg p-6 animate-pulse">
+                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-24 mb-4"></div>
+                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     )
   }
-
-  const { isPro, isMax } = useAuth()
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
