@@ -467,11 +467,13 @@ export default function CreateInvoicePage() {
                       <Eye size={18} />
                       Live Preview
                     </h3>
-                    <span className="text-xs text-gray-500 dark:text-gray-400 capitalize">{formData.template}</span>
+                    <span className="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded capitalize">
+                      {formData.template}
+                    </span>
                   </div>
-                  <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white">
-                    <div className="max-h-[600px] overflow-y-auto p-2">
-                      <div className="scale-75 origin-top-left" style={{ width: '133.33%' }}>
+                  <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-800">
+                    <div className="max-h-[700px] overflow-y-auto p-4 bg-white dark:bg-gray-900">
+                      <div className="transform scale-[0.65] origin-top-left" style={{ width: '153.85%', minHeight: '400px' }}>
                         <InvoiceTemplateRenderer
                           template={formData.template}
                           invoice={{
@@ -487,19 +489,32 @@ export default function CreateInvoicePage() {
                             notes: formData.notes,
                             terms: formData.terms,
                           }}
-                          items={items.map((item) => ({
-                            description: item.description,
-                            quantity: item.quantity,
-                            unit_price: item.unit_price,
-                            tax_rate: item.tax_rate,
-                            line_total: item.line_total,
-                          }))}
+                          items={items.length > 0 ? items.map((item) => ({
+                            description: item.description || 'Item description',
+                            quantity: item.quantity || 1,
+                            unit_price: item.unit_price || 0,
+                            tax_rate: item.tax_rate || 0,
+                            line_total: item.line_total || 0,
+                          })) : [
+                            {
+                              description: 'Sample item',
+                              quantity: 1,
+                              unit_price: 0,
+                              tax_rate: 0,
+                              line_total: 0,
+                            }
+                          ]}
                           customer={customers.find((c) => c.id === formData.customer_id) || null}
                           company={profile}
                         />
                       </div>
                     </div>
                   </div>
+                  {items.length === 0 && (
+                    <p className="mt-2 text-xs text-center text-gray-500 dark:text-gray-400">
+                      Add items to see preview
+                    </p>
+                  )}
                 </Card>
               </div>
             </div>
