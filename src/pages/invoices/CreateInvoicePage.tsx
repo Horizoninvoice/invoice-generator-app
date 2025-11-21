@@ -529,10 +529,11 @@ export default function CreateInvoicePage() {
                               tax_amount: taxAmount,
                               discount_amount: 0,
                               total_amount: total,
-                              notes: formData.notes,
-                              terms: formData.terms,
-                            }}
-                            items={items.map((item) => ({
+                                notes: formData.notes,
+                                terms: formData.terms,
+                                footer_message: formData.footer_message,
+                              }}
+                              items={items.map((item) => ({
                               description: item.description || 'Item description',
                               quantity: item.quantity || 1,
                               unit_price: item.unit_price || 0,
