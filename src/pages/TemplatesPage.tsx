@@ -1,10 +1,14 @@
+import { useState } from 'react'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Card from '@/components/ui/Card'
+import Modal from '@/components/ui/Modal'
 import TemplatePreview from '@/components/templates/TemplatePreview'
+import TemplateFullView from '@/components/templates/TemplateFullView'
 import { FileText, Palette, Sparkles, Eye } from 'lucide-react'
 
 export default function TemplatesPage() {
+  const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null)
   const templates = [
     {
       name: 'Professional',
@@ -86,7 +90,11 @@ export default function TemplatesPage() {
                     <Eye size={16} className="text-gray-500 dark:text-gray-400" />
                     <span className="text-xs font-medium text-gray-600 dark:text-gray-400">Preview</span>
                   </div>
-                  <TemplatePreview template={template.name.toLowerCase()} name={template.name} />
+                  <TemplatePreview 
+                    template={template.name.toLowerCase()} 
+                    name={template.name}
+                    onClick={() => setSelectedTemplate(template.name.toLowerCase())}
+                  />
                 </div>
 
                 <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
@@ -118,6 +126,16 @@ export default function TemplatesPage() {
         </div>
       </main>
       <Footer />
+
+      {/* Template Preview Modal */}
+      <Modal
+        isOpen={selectedTemplate !== null}
+        onClose={() => setSelectedTemplate(null)}
+        title={selectedTemplate ? templates.find(t => t.name.toLowerCase() === selectedTemplate)?.name + ' Template Preview' : ''}
+        size="xl"
+      >
+        {selectedTemplate && <TemplateFullView template={selectedTemplate} />}
+      </Modal>
     </div>
   )
 }
