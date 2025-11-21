@@ -15,15 +15,24 @@
 
 3. **Environment Variables**
    Add these in Netlify Dashboard → Site settings → Environment variables:
+   
+   **Required:**
    ```
    VITE_SUPABASE_URL=your_supabase_url
    VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
    ```
    
-   Optional (for Razorpay):
+   **For Payment Functions (if using Razorpay):**
    ```
-   VITE_RAZORPAY_KEY_ID=your_razorpay_key_id
+   SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+   RAZORPAY_KEY_ID=your_razorpay_key_id
+   RAZORPAY_KEY_SECRET=your_razorpay_key_secret
    ```
+   
+   ⚠️ **Important:** 
+   - `SUPABASE_SERVICE_ROLE_KEY`, `RAZORPAY_KEY_ID`, and `RAZORPAY_KEY_SECRET` should be marked as "Secret" in Netlify
+   - These are used by Netlify Functions (server-side only)
+   - Do NOT prefix them with `VITE_` (that's only for client-side variables)
 
 4. **Deploy**
    - Netlify will automatically build and deploy

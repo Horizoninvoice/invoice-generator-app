@@ -50,9 +50,9 @@ export default function SubscriptionPage() {
 
     setIsProcessing(true)
     try {
-      // Get API base URL (works for both local and Vercel)
+      // Get API base URL - use Netlify Functions path
       const apiBaseUrl = import.meta.env.VITE_API_URL || window.location.origin
-      const response = await fetch(`${apiBaseUrl}/api/payment/create`, {
+      const response = await fetch(`${apiBaseUrl}/.netlify/functions/payment/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ plan, user_id: user.id }),
@@ -88,15 +88,16 @@ export default function SubscriptionPage() {
         handler: async function (response: any) {
           if (response.razorpay_payment_id) {
             try {
-              // Verify payment with backend
+              // Verify payment with backend - use Netlify Functions path
               const apiBaseUrl = import.meta.env.VITE_API_URL || window.location.origin
-              const verifyResponse = await fetch(`${apiBaseUrl}/api/payment/verify`, {
+              const verifyResponse = await fetch(`${apiBaseUrl}/.netlify/functions/payment/verify`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                   razorpay_order_id: response.razorpay_order_id,
                   razorpay_payment_id: response.razorpay_payment_id,
                   razorpay_signature: response.razorpay_signature,
+                  user_id: user.id,
                   user_id: user.id,
                 }),
               })
