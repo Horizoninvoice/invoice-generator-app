@@ -57,7 +57,17 @@ export default function Footer() {
               </li>
               <li>
                 <Link to="/terms" className="hover:text-white">
-                  Terms of Service
+                  Terms & Conditions
+                </Link>
+              </li>
+              <li>
+                <Link to="/refund" className="hover:text-white">
+                  Refund & Cancellation
+                </Link>
+              </li>
+              <li>
+                <Link to="/shipping" className="hover:text-white">
+                  Shipping Policy
                 </Link>
               </li>
             </ul>

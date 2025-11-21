@@ -5,7 +5,7 @@ import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 import Textarea from '@/components/ui/Textarea'
-import { Mail, MapPin, Send } from 'lucide-react'
+import { Mail, MapPin, Send, Clock } from 'lucide-react'
 import toast from 'react-hot-toast'
 
 export default function ContactPage() {
@@ -36,10 +36,10 @@ export default function ContactPage() {
         <div className="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Get in Touch
+              Contact Us
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Have a question or need help? We're here to assist you. Reach out to us and we'll respond as soon as possible.
+              Horizon Invoice Generator Support
             </p>
           </div>
         </div>
@@ -56,9 +56,18 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Email</h3>
-                      <a href="mailto:horizoninvoicegen@gmail.com" className="text-primary-600 dark:text-primary-400 hover:underline">
-                        horizoninvoicegen@gmail.com
+                      <a href="mailto:support@horizoninvoice.com" className="text-primary-600 dark:text-primary-400 hover:underline">
+                        support@horizoninvoice.com
                       </a>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Clock className="text-primary-600 dark:text-primary-400" size={20} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Business Hours</h3>
+                      <p className="text-gray-600 dark:text-gray-400">Monday–Saturday: 10 AM – 6 PM IST</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
@@ -66,8 +75,8 @@ export default function ContactPage() {
                       <MapPin className="text-primary-600 dark:text-primary-400" size={20} />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Location</h3>
-                      <p className="text-gray-600 dark:text-gray-400">Available Worldwide</p>
+                      <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Address</h3>
+                      <p className="text-gray-600 dark:text-gray-400">Chennai, Tamil Nadu, India</p>
                     </div>
                   </div>
                 </div>
@@ -120,4 +129,3 @@ export default function ContactPage() {
     </div>
   )
 }
-

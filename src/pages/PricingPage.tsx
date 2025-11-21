@@ -11,55 +11,44 @@ export default function PricingPage() {
 
   const plans = [
     {
-      name: 'Free',
+      name: 'Free Plan',
       price: '₹0',
-      period: 'Forever',
+      period: 'month',
       description: 'Perfect for getting started',
       features: [
-        '2 Invoice Templates',
-        'Basic Features',
-        'Unlimited Invoices',
-        'Customer Management',
-        'Product Catalog',
-        'PDF Export',
-        'Email Support',
-        'Ads Displayed',
+        '2 invoice templates',
+        'Customer & product management',
+        '15 invoices/month',
+        'Ads supported',
       ],
       cta: user ? 'Current Plan' : 'Get Started',
       highlight: false,
     },
     {
-      name: 'Pro',
-      price: '₹149',
-      period: 'per month',
+      name: 'Pro Plan',
+      price: '₹249',
+      period: 'month',
       description: 'For growing businesses',
       features: [
-        '5 Invoice Templates',
-        'All Features',
-        'Unlimited Invoices',
-        'Advanced Reports',
-        'Priority Support',
-        'No Ads',
-        'Custom Branding',
-        'Email Integration',
+        'Ad-free experience',
+        'Unlimited invoices',
+        'All 5 invoice templates',
+        'Excel export',
+        'Priority support',
       ],
       cta: 'Upgrade to Pro',
       highlight: true,
     },
     {
-      name: 'Max',
+      name: 'Max Plan (Lifetime)',
       price: '₹1,499',
       period: 'one-time',
       description: 'Best value for lifetime access',
       features: [
-        '5 Invoice Templates',
-        'All Features',
-        'Lifetime Access',
-        'Advanced Reports',
-        'Priority Support',
-        'No Ads',
-        'Custom Branding',
-        'Email Integration',
+        'Everything in Pro',
+        'Lifetime access',
+        'No recurring charges',
+        'Future premium features included',
       ],
       cta: 'Get Max',
       highlight: false,
@@ -73,10 +62,10 @@ export default function PricingPage() {
         <div className="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Simple, Transparent Pricing
+              Horizon Invoice Generator – Pricing (INR)
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-              Choose the plan that works best for your business. All plans include core features with no hidden fees.
+              Choose the plan that works best for your business. All plans include core features with transparent pricing in Indian Rupees.
             </p>
           </div>
         </div>
@@ -104,6 +93,9 @@ export default function PricingPage() {
                     )}
                   </div>
                   <p className="text-gray-600 dark:text-gray-400 text-sm">{plan.description}</p>
+                </div>
+                <div className="mb-6">
+                  <p className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Includes:</p>
                 </div>
                 <ul className="space-y-3 mb-8">
                   {plan.features.map((feature, featureIndex) => (
@@ -133,10 +125,10 @@ export default function PricingPage() {
           <div className="mt-16 text-center">
             <Card className="p-8 bg-primary-50 dark:bg-primary-900/20">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                Need a Custom Plan?
+                Need a Personalized Plan?
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-6">
-                Contact us for personalized enterprise plans and custom features tailored to your business needs.
+                Contact us at <a href="mailto:horizoninvoicegen@gmail.com" className="text-primary-600 dark:text-primary-400 hover:underline">horizoninvoicegen@gmail.com</a> for custom enterprise plans and personalized features.
               </p>
               <Link to="/contact">
                 <Button>Contact Us</Button>
@@ -149,4 +141,3 @@ export default function PricingPage() {
     </div>
   )
 }
-
