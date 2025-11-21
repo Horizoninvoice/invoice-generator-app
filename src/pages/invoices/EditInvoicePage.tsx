@@ -427,20 +427,65 @@ export default function EditInvoicePage() {
               {/* Additional Information */}
               <Card title="Additional Information">
                 <div className="space-y-4">
-                  <Textarea
-                    label="Notes"
-                    rows={3}
-                    value={formData.notes}
-                    onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                    placeholder="Additional notes for the customer"
-                  />
-                  <Textarea
-                    label="Terms & Conditions"
-                    rows={3}
-                    value={formData.terms}
-                    onChange={(e) => setFormData({ ...formData, terms: e.target.value })}
-                    placeholder="Payment terms and conditions"
-                  />
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Notes
+                      <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">
+                        ({formData.notes.length}/30)
+                      </span>
+                    </label>
+                    <Textarea
+                      rows={3}
+                      value={formData.notes}
+                      onChange={(e) => {
+                        if (e.target.value.length <= 30) {
+                          setFormData({ ...formData, notes: e.target.value })
+                        }
+                      }}
+                      placeholder="Additional notes for the customer"
+                      maxLength={30}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Terms & Conditions
+                      <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">
+                        ({formData.terms.length}/30)
+                      </span>
+                    </label>
+                    <Textarea
+                      rows={3}
+                      value={formData.terms}
+                      onChange={(e) => {
+                        if (e.target.value.length <= 30) {
+                          setFormData({ ...formData, terms: e.target.value })
+                        }
+                      }}
+                      placeholder="Payment terms and conditions"
+                      maxLength={30}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                      Footer Message
+                      <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">
+                        ({formData.footer_message.length}/30)
+                      </span>
+                    </label>
+                    <Input
+                      value={formData.footer_message}
+                      onChange={(e) => {
+                        if (e.target.value.length <= 30) {
+                          setFormData({ ...formData, footer_message: e.target.value })
+                        }
+                      }}
+                      placeholder="Enter footer message (e.g., Thank you for your business!)"
+                      maxLength={30}
+                    />
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                      This message will appear at the bottom of the invoice (max 30 characters)
+                    </p>
+                  </div>
                 </div>
               </Card>
             </div>
