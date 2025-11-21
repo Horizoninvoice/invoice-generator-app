@@ -106,10 +106,10 @@ body {
   background: #94a3b8;
 }
 
-/* Preview Scrollbar - Always Visible */
+/* Preview Scrollbar - Always Visible, Theme Aware */
 .preview-scrollbar {
   scrollbar-width: auto;
-  scrollbar-color: #6366f1 rgba(0, 0, 0, 0.2);
+  scrollbar-color: var(--primary-500) rgba(0, 0, 0, 0.2);
   overflow-y: scroll !important;
 }
 
@@ -120,44 +120,44 @@ body {
 }
 
 .preview-scrollbar::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  border: 2px solid rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(0, 0, 0, 0.05);
 }
 
 .dark .preview-scrollbar::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.05);
 }
 
 .preview-scrollbar::-webkit-scrollbar-thumb {
-  background: #6366f1;
+  background: var(--primary-500);
   border-radius: 8px;
-  border: 3px solid rgba(255, 255, 255, 0.4);
+  border: 3px solid rgba(255, 255, 255, 0.3);
   min-height: 40px;
 }
 
 .preview-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #4f46e5;
-  border-color: rgba(255, 255, 255, 0.6);
+  background: var(--primary-600);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .preview-scrollbar::-webkit-scrollbar-thumb:active {
-  background: #4338ca;
+  background: var(--primary-700);
 }
 
 .dark .preview-scrollbar::-webkit-scrollbar-thumb {
-  background: #818cf8;
-  border: 3px solid rgba(0, 0, 0, 0.4);
+  background: var(--primary-400);
+  border: 3px solid rgba(0, 0, 0, 0.3);
 }
 
 .dark .preview-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #6366f1;
-  border-color: rgba(0, 0, 0, 0.6);
+  background: var(--primary-500);
+  border-color: rgba(0, 0, 0, 0.5);
 }
 
 .dark .preview-scrollbar::-webkit-scrollbar-thumb:active {
-  background: #4f46e5;
+  background: var(--primary-600);
 }
 
 .preview-scrollbar::-webkit-scrollbar-corner {
