@@ -5,11 +5,18 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  # Allow VITE_* variables in build output (these are intentionally public for client-side use)
+  SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_URL,VITE_SUPABASE_ANON_KEY"
 
 # Configure secrets scanning to allow public VITE_* keys in build output
 # These are intentionally bundled into client-side code and are safe to expose
 [build.processing]
   skip_processing = false
+
+[dev]
+  command = "npm run dev"
+  port = 8888
+  publish = "dist"
 
 [functions]
   directory = "netlify/functions"

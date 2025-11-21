@@ -59,7 +59,14 @@ export default function SubscriptionPage() {
       })
 
       if (!response.ok) {
-        const error = await response.json()
+        let error
+        try {
+          error = await response.json()
+        } catch (e) {
+          // If response is not JSON, get text
+          const text = await response.text()
+          throw new Error(text || `HTTP ${response.status}: ${response.statusText}`)
+        }
         if (response.status === 503) {
           toast.error('Payment gateway is not configured yet. Please contact support or try again later.')
         } else {
@@ -101,11 +108,18 @@ export default function SubscriptionPage() {
                 }),
               })
 
-              const verifyData = await verifyResponse.json()
-
               if (!verifyResponse.ok) {
-                throw new Error(verifyData.error || 'Payment verification failed')
+                let error
+                try {
+                  error = await verifyResponse.json()
+                } catch (e) {
+                  const text = await verifyResponse.text()
+                  throw new Error(text || `HTTP ${verifyResponse.status}: ${verifyResponse.statusText}`)
+                }
+                throw new Error(error.error || 'Payment verification failed')
               }
+
+              const verifyData = await verifyResponse.json()
 
               toast.success(verifyData.message || 'Payment successful! Your account has been upgraded.')
               refreshProfile()
