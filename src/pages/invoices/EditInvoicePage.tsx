@@ -478,6 +478,7 @@ export default function EditInvoicePage() {
                                 total_amount: total,
                                 notes: formData.notes,
                                 terms: formData.terms,
+                                footer_message: formData.footer_message,
                               }}
                               items={items.map((item) => ({
                                 description: item.description || 'Item description',
