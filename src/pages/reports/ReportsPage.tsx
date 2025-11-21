@@ -138,6 +138,23 @@ export default function ReportsPage() {
     }
   }
 
+  const handleCustomDateChange = (field: 'from' | 'to', value: string) => {
+    const newRange = { ...customDateRange, [field]: value }
+    setCustomDateRange(newRange)
+    
+    // Auto-apply when both dates are selected
+    if (newRange.from && newRange.to) {
+      if (new Date(newRange.from) > new Date(newRange.to)) {
+        toast.error('From date cannot be after To date')
+        return
+      }
+      // Small delay to ensure state is updated
+      setTimeout(() => {
+        fetchReports()
+      }, 100)
+    }
+  }
+
   const handleCustomDateApply = () => {
     if (!customDateRange.from || !customDateRange.to) {
       toast.error('Please select both from and to dates')
@@ -148,13 +165,6 @@ export default function ReportsPage() {
       return
     }
     fetchReports()
-  }
-
-  const handleTodayClick = () => {
-    const today = new Date().toISOString().split('T')[0]
-    setDateRange('today')
-    setCustomDateRange({ from: today, to: today })
-    setShowCustomRange(false)
   }
 
   const handleExportReport = () => {
@@ -248,7 +258,7 @@ export default function ReportsPage() {
                 <Input
                   type="date"
                   value={customDateRange.from}
-                  onChange={(e) => setCustomDateRange({ ...customDateRange, from: e.target.value })}
+                  onChange={(e) => handleCustomDateChange('from', e.target.value)}
                   className="w-36"
                   placeholder="From"
                 />
@@ -256,9 +266,10 @@ export default function ReportsPage() {
                 <Input
                   type="date"
                   value={customDateRange.to}
-                  onChange={(e) => setCustomDateRange({ ...customDateRange, to: e.target.value })}
+                  onChange={(e) => handleCustomDateChange('to', e.target.value)}
                   className="w-36"
                   placeholder="To"
+                  min={customDateRange.from}
                 />
                 <Button size="sm" onClick={handleCustomDateApply}>
                   Apply
