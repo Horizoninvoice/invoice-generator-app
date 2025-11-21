@@ -19,7 +19,7 @@ export default function HomePage() {
           <h1 className="text-5xl font-bold text-black dark:text-black mb-4 drop-shadow-sm">
             Create Professional Invoices in Minutes
           </h1>
-          <p className="text-xl text-gray-800 dark:text-gray-300 mb-8 max-w-2xl mx-auto font-medium">
+          <p className="text-xl text-black dark:text-black mb-8 max-w-2xl mx-auto font-medium">
             Streamline your invoicing process with Horizon. Generate beautiful, professional invoices, manage customers and products, all in one place.
           </p>
           <div className="flex gap-4 justify-center">

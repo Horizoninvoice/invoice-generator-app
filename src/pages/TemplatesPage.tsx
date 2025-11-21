@@ -1,7 +1,8 @@
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import Card from '@/components/ui/Card'
-import { FileText, Palette, Sparkles } from 'lucide-react'
+import TemplatePreview from '@/components/templates/TemplatePreview'
+import { FileText, Palette, Sparkles, Eye } from 'lucide-react'
 
 export default function TemplatesPage() {
   const templates = [
@@ -78,6 +79,16 @@ export default function TemplatesPage() {
                 <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
                   {template.description}
                 </p>
+                
+                {/* Template Preview */}
+                <div className="mb-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Eye size={16} className="text-gray-500 dark:text-gray-400" />
+                    <span className="text-xs font-medium text-gray-600 dark:text-gray-400">Preview</span>
+                  </div>
+                  <TemplatePreview template={template.name.toLowerCase()} name={template.name} />
+                </div>
+
                 <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
                   <Palette size={16} />
                   <span>Fully Customizable</span>
