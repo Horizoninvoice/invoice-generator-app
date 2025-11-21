@@ -335,7 +335,7 @@ export default function CreateInvoicePage() {
                 }
               >
                 {items.length > 0 ? (
-                  <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
+                  <div className="space-y-4 max-h-[65vh] overflow-y-auto pr-2 custom-scrollbar pb-2">
                     {items.map((item, index) => (
                       <div 
                         key={item.id} 
