@@ -256,9 +256,9 @@ export default function CreateInvoicePage() {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="grid lg:grid-cols-3 gap-6">
+          <div className="grid lg:grid-cols-3 gap-6 min-h-[calc(100vh-12rem)]">
             {/* Main Form */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="lg:col-span-2 space-y-6 overflow-y-auto max-h-[calc(100vh-8rem)] pr-2">
               {/* Invoice Details */}
               <Card title="Invoice Details">
                 <div className="grid md:grid-cols-2 gap-4">
@@ -335,7 +335,7 @@ export default function CreateInvoicePage() {
                 }
               >
                 {items.length > 0 ? (
-                  <div className="space-y-4">
+                  <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
                     {items.map((item, index) => (
                       <div 
                         key={item.id} 
