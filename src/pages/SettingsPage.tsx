@@ -51,6 +51,27 @@ export default function SettingsPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-3xl font-bold text-black dark:text-white mb-8">Settings</h1>
 
+        {/* Logo & Branding - First Row */}
+        <Card title="Branding" className="mb-6">
+          <div className="flex items-center gap-6">
+            <div className="flex-shrink-0">
+              <div className="w-20 h-20 bg-gradient-to-br from-primary-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden">
+                <img 
+                  src="/letter-h.ico" 
+                  alt="Horizon Logo" 
+                  className="w-12 h-12 object-contain"
+                />
+              </div>
+            </div>
+            <div className="flex-1">
+              <h3 className="text-xl font-bold text-black dark:text-gray-100 mb-1">Horizon Invoice Generator</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Professional invoice generation made simple
+              </p>
+            </div>
+          </div>
+        </Card>
+
         {/* Theme Customization */}
         <Card title="Theme Customization" className="mb-6">
           <div className="space-y-6">
