@@ -80,7 +80,7 @@ export default function SubscriptionPage() {
       if (!response.ok) {
         let errorMessage = `HTTP ${response.status}: ${response.statusText}`
         
-        // Try to get error message from response
+        // Try to get error message from response 
         try {
           const contentType = response.headers.get('content-type')
           if (contentType && contentType.includes('application/json')) {
