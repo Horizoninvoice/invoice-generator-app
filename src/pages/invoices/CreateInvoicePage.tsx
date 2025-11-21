@@ -402,11 +402,19 @@ export default function CreateInvoicePage() {
                         />
                         <div className="md:col-span-5 flex items-end">
                           <p className="text-sm text-gray-600 dark:text-gray-400">
-                            Line Total: <span className="font-semibold">{formatCurrency(item.line_total, formData.currency)}</span>
+                            Line Total: <span className="font-semibold text-gray-900 dark:text-white">
+                              {formatCurrency(item.line_total || 0, formData.currency)}
+                            </span>
                           </p>
                         </div>
-                        <div className="flex items-end">
-                          <Button type="button" variant="danger" size="sm" onClick={() => removeItem(item.id)}>
+                        <div className="flex items-end justify-end">
+                          <Button 
+                            type="button" 
+                            variant="danger" 
+                            size="sm" 
+                            onClick={() => removeItem(item.id)}
+                            title="Remove item"
+                          >
                             <Trash2 size={16} />
                           </Button>
                         </div>
