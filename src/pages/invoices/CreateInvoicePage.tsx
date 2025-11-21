@@ -8,9 +8,10 @@ import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
 import Textarea from '@/components/ui/Textarea'
-import { ArrowLeft, Plus, Trash2, Save } from 'lucide-react'
+import { ArrowLeft, Plus, Trash2, Save, Eye } from 'lucide-react'
 import { formatCurrency } from '@/lib/currency'
 import toast from 'react-hot-toast'
+import InvoiceTemplateRenderer from '@/components/invoices/InvoiceTemplateRenderer'
 
 interface InvoiceItem {
   id: string
@@ -421,54 +422,86 @@ export default function CreateInvoicePage() {
               </Card>
             </div>
 
-            {/* Sidebar - Summary */}
+            {/* Sidebar - Live Preview */}
             <div className="lg:col-span-1">
-              <Card title="Summary" className="sticky top-20">
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Invoice Number</p>
-                    <p className="font-medium text-gray-900 dark:text-white">
-                      {formData.invoice_number || 'Auto-generated'}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Customer</p>
-                    <p className="font-medium text-gray-900 dark:text-white">
-                      {customers.find((c) => c.id === formData.customer_id)?.name || 'Not selected'}
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Status</p>
-                    <p className="font-medium text-gray-900 dark:text-white capitalize">{formData.status}</p>
-                  </div>
-                  <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-                    <div className="flex justify-between mb-2">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Subtotal</span>
-                      <span className="text-sm font-medium text-gray-900 dark:text-white">
-                        {formatCurrency(subtotal, formData.currency)}
-                      </span>
+              <div className="sticky top-20 space-y-4">
+                {/* Quick Summary */}
+                <Card>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <h3 className="font-semibold text-gray-900 dark:text-white">Quick Summary</h3>
                     </div>
-                    <div className="flex justify-between mb-2">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Tax</span>
-                      <span className="text-sm font-medium text-gray-900 dark:text-white">
-                        {formatCurrency(taxAmount, formData.currency)}
-                      </span>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">Subtotal</span>
+                        <span className="font-medium text-gray-900 dark:text-white">
+                          {formatCurrency(subtotal, formData.currency)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">Tax</span>
+                        <span className="font-medium text-gray-900 dark:text-white">
+                          {formatCurrency(taxAmount, formData.currency)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between pt-2 border-t border-gray-200 dark:border-gray-700">
+                        <span className="font-semibold text-gray-900 dark:text-white">Total</span>
+                        <span className="font-bold text-lg text-gray-900 dark:text-white">
+                          {formatCurrency(total, formData.currency)}
+                        </span>
+                      </div>
                     </div>
-                    <div className="flex justify-between pt-2 border-t border-gray-200 dark:border-gray-700">
-                      <span className="font-semibold text-gray-900 dark:text-white">Total</span>
-                      <span className="font-bold text-lg text-gray-900 dark:text-white">
-                        {formatCurrency(total, formData.currency)}
-                      </span>
+                    <div className="pt-2">
+                      <Button type="submit" className="w-full" isLoading={isLoading} disabled={items.length === 0}>
+                        <Save size={18} className="mr-2" />
+                        {formData.status === 'draft' ? 'Save Draft' : 'Create Invoice'}
+                      </Button>
                     </div>
                   </div>
-                  <div className="flex gap-2 pt-4">
-                    <Button type="submit" className="flex-1" isLoading={isLoading} disabled={items.length === 0}>
-                      <Save size={18} className="mr-2" />
-                      {formData.status === 'draft' ? 'Save Draft' : 'Create Invoice'}
-                    </Button>
+                </Card>
+
+                {/* Live Preview */}
+                <Card>
+                  <div className="flex items-center justify-between mb-4">
+                    <h3 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                      <Eye size={18} />
+                      Live Preview
+                    </h3>
+                    <span className="text-xs text-gray-500 dark:text-gray-400 capitalize">{formData.template}</span>
                   </div>
-                </div>
-              </Card>
+                  <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white">
+                    <div className="max-h-[600px] overflow-y-auto p-2">
+                      <div className="scale-75 origin-top-left" style={{ width: '133.33%' }}>
+                        <InvoiceTemplateRenderer
+                          template={formData.template}
+                          invoice={{
+                            invoice_number: formData.invoice_number || 'INV-001',
+                            issue_date: formData.issue_date,
+                            due_date: formData.due_date,
+                            status: formData.status,
+                            currency: formData.currency,
+                            subtotal: subtotal,
+                            tax_amount: taxAmount,
+                            discount_amount: 0,
+                            total_amount: total,
+                            notes: formData.notes,
+                            terms: formData.terms,
+                          }}
+                          items={items.map((item) => ({
+                            description: item.description,
+                            quantity: item.quantity,
+                            unit_price: item.unit_price,
+                            tax_rate: item.tax_rate,
+                            line_total: item.line_total,
+                          }))}
+                          customer={customers.find((c) => c.id === formData.customer_id) || null}
+                          company={profile}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </div>
             </div>
           </div>
         </form>
