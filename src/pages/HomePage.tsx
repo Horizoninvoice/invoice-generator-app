@@ -16,10 +16,10 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4 drop-shadow-sm">
+          <h1 className="text-5xl font-bold text-black dark:text-white mb-4 drop-shadow-sm">
             Create Professional Invoices in Minutes
           </h1>
-          <p className="text-xl text-gray-700 dark:text-gray-300 mb-8 max-w-2xl mx-auto font-medium">
+          <p className="text-xl text-gray-800 dark:text-gray-300 mb-8 max-w-2xl mx-auto font-medium">
             Streamline your invoicing process with Horizon. Generate beautiful, professional invoices, manage customers and products, all in one place.
           </p>
           <div className="flex gap-4 justify-center">
