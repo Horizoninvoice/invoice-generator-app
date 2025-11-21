@@ -478,7 +478,7 @@ export default function CreateInvoicePage() {
 
             {/* Sidebar - Live Preview */}
             <div className="lg:col-span-1">
-              <div className="sticky top-20 flex flex-col h-[calc(100vh-5rem)] space-y-4">
+              <div className="sticky top-20 flex flex-col h-[calc(100vh-5rem)] space-y-4 overflow-hidden">
                 {/* Quick Summary */}
                 <Card className="flex-shrink-0">
                   <div className="space-y-3">
