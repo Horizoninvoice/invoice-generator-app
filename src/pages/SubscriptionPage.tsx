@@ -86,14 +86,23 @@ export default function SubscriptionPage() {
           if (contentType && contentType.includes('application/json')) {
             const error = await response.json()
             errorMessage = error.error || error.message || errorMessage
+            console.error('Payment API error:', error)
           } else {
             const text = await response.text()
             errorMessage = text || errorMessage
+            console.error('Payment API error (text):', text)
           }
         } catch (e) {
           // If we can't parse the response, use the status
           console.error('Error parsing error response:', e)
         }
+        
+        console.error('Payment creation failed:', {
+          status: response.status,
+          statusText: response.statusText,
+          errorMessage,
+          url: `${apiBaseUrl}/.netlify/functions/payment-create`
+        })
         
         if (response.status === 404) {
           toast.error('Payment service not available. Please use "npm run dev:netlify" for local development or deploy to Netlify.')
@@ -108,9 +117,11 @@ export default function SubscriptionPage() {
       }
 
       const data = await response.json()
+      console.log('Payment order response:', data)
       const { orderId, amount, currency, keyId } = data
 
       if (!orderId || !keyId) {
+        console.error('Missing order data:', { orderId, keyId, data })
         throw new Error('Failed to create payment order. Missing order ID or key.')
       }
 

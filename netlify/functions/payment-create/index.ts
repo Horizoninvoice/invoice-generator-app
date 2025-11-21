@@ -50,8 +50,17 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
   }
 
   try {
+    console.log('Payment create function called')
+    console.log('Request body:', event.body)
+    console.log('Environment check:', {
+      hasRazorpayKeyId: !!process.env.RAZORPAY_KEY_ID,
+      hasRazorpayKeySecret: !!process.env.RAZORPAY_KEY_SECRET,
+    })
+    
     const body = JSON.parse(event.body || '{}')
     const { plan, user_id } = body
+    
+    console.log('Parsed body:', { plan, user_id })
 
     if (!plan || (plan !== 'pro' && plan !== 'max')) {
       return {
@@ -95,7 +104,19 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
       },
     }
 
+    console.log('Creating Razorpay order with options:', {
+      amount,
+      currency,
+      receipt: options.receipt,
+    })
+    
     const order = await razorpay.orders.create(options)
+    
+    console.log('Razorpay order created successfully:', {
+      orderId: order.id,
+      amount: order.amount,
+      currency: order.currency,
+    })
 
     return {
       statusCode: 200,
@@ -112,13 +133,22 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
     }
   } catch (error: any) {
     console.error('Razorpay order creation error:', error)
+    console.error('Error details:', {
+      message: error.message,
+      stack: error.stack,
+      name: error.name,
+      response: error.response?.data || error.response,
+    })
     return {
       statusCode: 500,
       headers: {
         'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ error: error.message || 'Failed to create payment order' }),
+      body: JSON.stringify({ 
+        error: error.message || 'Failed to create payment order',
+        details: error.response?.data || error.response || 'Unknown error',
+      }),
     }
   }
 }
