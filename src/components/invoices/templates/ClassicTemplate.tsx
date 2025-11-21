@@ -103,6 +103,29 @@ export default function ClassicTemplate({ invoice, items, customer, company }: C
           </div>
         </div>
       </div>
+
+      {/* Notes and Terms */}
+      {(invoice.notes || invoice.terms) && (
+        <div className="border-t-2 border-gray-300 pt-6 mt-6">
+          {invoice.notes && (
+            <div className="mb-4">
+              <h4 className="font-serif font-semibold text-black mb-2">Notes:</h4>
+              <p className="text-gray-700 whitespace-pre-line">{invoice.notes}</p>
+            </div>
+          )}
+          {invoice.terms && (
+            <div>
+              <h4 className="font-serif font-semibold text-black mb-2">Terms & Conditions:</h4>
+              <p className="text-gray-700 whitespace-pre-line text-sm">{invoice.terms}</p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Footer */}
+      <div className="mt-8 pt-6 border-t-2 border-gray-300 text-center text-gray-500 text-sm font-serif">
+        <p>Thank you for your business!</p>
+      </div>
     </div>
   )
 }

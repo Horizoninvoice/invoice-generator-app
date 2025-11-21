@@ -92,8 +92,32 @@ export default function MinimalTemplate({ invoice, items, customer, company }: M
                 {formatCurrency(invoice.total_amount || 0, invoice.currency || 'INR')}
               </span>
             </div>
+            
           </div>
         </div>
+      </div>
+
+      {/* Notes and Terms */}
+      {(invoice.notes || invoice.terms) && (
+        <div className="border-t border-gray-200 pt-8 mt-8">
+          {invoice.notes && (
+            <div className="mb-6">
+              <h4 className="text-xs text-gray-400 mb-2 uppercase tracking-wide">Notes:</h4>
+              <p className="text-gray-600 whitespace-pre-line text-sm">{invoice.notes}</p>
+            </div>
+          )}
+          {invoice.terms && (
+            <div>
+              <h4 className="text-xs text-gray-400 mb-2 uppercase tracking-wide">Terms & Conditions:</h4>
+              <p className="text-gray-600 whitespace-pre-line text-xs">{invoice.terms}</p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Footer */}
+      <div className="mt-12 pt-8 border-t border-gray-200 text-center text-gray-400 text-xs">
+        <p>Thank you for your business!</p>
       </div>
     </div>
   )

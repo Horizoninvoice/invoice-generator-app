@@ -560,9 +560,7 @@ export default function CreateInvoicePage() {
                 {/* Quick Summary - Below Preview */}
                 <Card className="flex-shrink-0 mt-auto">
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="font-semibold text-black dark:text-gray-100">Quick Summary</h3>
-                    </div>
+                    
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className="text-gray-600 dark:text-gray-400">Subtotal</span>

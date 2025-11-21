@@ -19,8 +19,8 @@ export default function TemplatePreview({ template, onClick }: TemplatePreviewPr
     tax_amount: 500,
     discount_amount: 0,
     total_amount: 5500,
-    notes: '',
-    terms: '',
+    notes: 'Thank you for your business!',
+    terms: 'Payment due within 30 days.',
   }
 
   const sampleItems = [
@@ -115,6 +115,22 @@ export default function TemplatePreview({ template, onClick }: TemplatePreviewPr
                 </div>
               </div>
             </div>
+            {(sampleInvoice.notes || sampleInvoice.terms) && (
+              <div className="border-t border-gray-200 pt-2 mt-2 text-xs">
+                {sampleInvoice.notes && (
+                  <div className="mb-1">
+                    <span className="font-semibold">Notes: </span>
+                    <span className="text-gray-600">{sampleInvoice.notes}</span>
+                  </div>
+                )}
+                {sampleInvoice.terms && (
+                  <div>
+                    <span className="font-semibold">Terms: </span>
+                    <span className="text-gray-600">{sampleInvoice.terms}</span>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         )
 
@@ -174,6 +190,22 @@ export default function TemplatePreview({ template, onClick }: TemplatePreviewPr
                 </div>
               </div>
             </div>
+            {(sampleInvoice.notes || sampleInvoice.terms) && (
+              <div className="border-t border-gray-200 pt-2 mt-2 text-xs">
+                {sampleInvoice.notes && (
+                  <div className="mb-1">
+                    <span className="font-semibold">Notes: </span>
+                    <span className="text-gray-600">{sampleInvoice.notes}</span>
+                  </div>
+                )}
+                {sampleInvoice.terms && (
+                  <div>
+                    <span className="font-semibold">Terms: </span>
+                    <span className="text-gray-600">{sampleInvoice.terms}</span>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         )
 
@@ -232,6 +264,22 @@ export default function TemplatePreview({ template, onClick }: TemplatePreviewPr
                   </div>
                 </div>
               </div>
+              {(sampleInvoice.notes || sampleInvoice.terms) && (
+                <div className="border-t border-gray-200 pt-2 mt-2 text-xs">
+                  {sampleInvoice.notes && (
+                    <div className="mb-1">
+                      <span className="font-semibold">Notes: </span>
+                      <span className="text-gray-600">{sampleInvoice.notes}</span>
+                    </div>
+                  )}
+                  {sampleInvoice.terms && (
+                    <div>
+                      <span className="font-semibold">Terms: </span>
+                      <span className="text-gray-600">{sampleInvoice.terms}</span>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         )
@@ -287,6 +335,22 @@ export default function TemplatePreview({ template, onClick }: TemplatePreviewPr
                 </div>
               </div>
             </div>
+            {(sampleInvoice.notes || sampleInvoice.terms) && (
+              <div className="border-t-2 border-gray-300 pt-2 mt-2 text-xs">
+                {sampleInvoice.notes && (
+                  <div className="mb-1">
+                    <span className="font-semibold">Notes: </span>
+                    <span className="text-gray-700">{sampleInvoice.notes}</span>
+                  </div>
+                )}
+                {sampleInvoice.terms && (
+                  <div>
+                    <span className="font-semibold">Terms: </span>
+                    <span className="text-gray-700">{sampleInvoice.terms}</span>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         )
 
@@ -330,6 +394,22 @@ export default function TemplatePreview({ template, onClick }: TemplatePreviewPr
                 </div>
               </div>
             </div>
+            {(sampleInvoice.notes || sampleInvoice.terms) && (
+              <div className="border-t border-gray-200 pt-2 mt-2 text-xs">
+                {sampleInvoice.notes && (
+                  <div className="mb-1">
+                    <span className="text-gray-400 uppercase tracking-wide text-[10px]">Notes: </span>
+                    <span className="text-gray-600">{sampleInvoice.notes}</span>
+                  </div>
+                )}
+                {sampleInvoice.terms && (
+                  <div>
+                    <span className="text-gray-400 uppercase tracking-wide text-[10px]">Terms: </span>
+                    <span className="text-gray-600">{sampleInvoice.terms}</span>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         )
 
