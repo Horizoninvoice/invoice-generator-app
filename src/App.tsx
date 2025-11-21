@@ -29,6 +29,13 @@ import SubscriptionPage from './pages/SubscriptionPage'
 import ReportsPage from './pages/reports/ReportsPage'
 import PaymentSuccessPage from './pages/payment/PaymentSuccessPage'
 import PaymentCancelPage from './pages/payment/PaymentCancelPage'
+import FeaturesPage from './pages/FeaturesPage'
+import PricingPage from './pages/PricingPage'
+import TemplatesPage from './pages/TemplatesPage'
+import AboutPage from './pages/AboutPage'
+import ContactPage from './pages/ContactPage'
+import PrivacyPage from './pages/PrivacyPage'
+import TermsPage from './pages/TermsPage'
 
 function App() {
   return (
@@ -38,6 +45,13 @@ function App() {
           <Routes>
             {/* Public Routes */}
             <Route path="/" element={<HomePage />} />
+            <Route path="/features" element={<FeaturesPage />} />
+            <Route path="/pricing" element={<PricingPage />} />
+            <Route path="/templates" element={<TemplatesPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/terms" element={<TermsPage />} />
             <Route path="/auth/login" element={<LoginPage />} />
             <Route path="/auth/signup" element={<SignupPage />} />
             <Route path="/auth/confirm-email" element={<ConfirmEmailPage />} />
