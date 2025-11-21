@@ -43,7 +43,7 @@ export default class ErrorBoundary extends Component<Props, State> {
                   Missing Environment Variables
                 </p>
                 <p className="text-xs text-yellow-700 dark:text-yellow-300">
-                  Please ensure VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are set in your Vercel environment variables.
+                  Please contact support at horizoninvoicegen@gmail.com.
                 </p>
               </div>
             )}
