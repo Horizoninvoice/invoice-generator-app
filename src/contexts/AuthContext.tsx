@@ -72,13 +72,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     initAuth()
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (mounted) {
         startTransition(() => {
           setUser(session?.user ?? null)
           if (session?.user) {
-            // Fetch profile in background, don't block
-            fetchProfile(session.user.id).catch(console.error)
+            // Handle Google OAuth sign-in - create profile if needed
+            if (event === 'SIGNED_IN' && session.user.app_metadata?.provider === 'google') {
+              handleGoogleSignIn(session.user).catch(console.error)
+            } else {
+              // Fetch profile in background, don't block
+              fetchProfile(session.user.id).catch(console.error)
+            }
           } else {
             setProfile(null)
           }
@@ -111,6 +116,46 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     } catch (error) {
       console.error('Error fetching profile:', error)
       // Don't set loading to false here - it's already set
+    }
+  }
+
+  const handleGoogleSignIn = async (user: User) => {
+    try {
+      // Check if profile exists
+      const { data: existingProfile, error: fetchError } = await supabase
+        .from('user_profiles')
+        .select('*')
+        .eq('user_id', user.id)
+        .single()
+
+      // If profile doesn't exist, create one with default values
+      if (fetchError && fetchError.code === 'PGRST116') {
+        // Default to India if country not available
+        const defaultCountry = 'IN'
+        const currency = getCurrencyByCountry(defaultCountry)
+        
+        const { error: insertError } = await supabase
+          .from('user_profiles')
+          .insert({
+            user_id: user.id,
+            role: 'free',
+            subscription_type: 'free',
+            country: defaultCountry,
+            currency: currency.code,
+          })
+
+        if (insertError) {
+          console.error('Error creating profile:', insertError)
+        } else {
+          // Fetch the newly created profile
+          await fetchProfile(user.id)
+        }
+      } else if (existingProfile) {
+        // Profile exists, just fetch it
+        await fetchProfile(user.id)
+      }
+    } catch (error) {
+      console.error('Error handling Google sign-in:', error)
     }
   }
 
