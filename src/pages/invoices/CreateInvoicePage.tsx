@@ -71,8 +71,28 @@ export default function CreateInvoicePage() {
   }, [searchParams, products])
 
   const fetchCustomers = async () => {
-    const { data } = await supabase.from('customers').select('*').eq('user_id', user!.id).order('name')
-    setCustomers(data || [])
+    try {
+      const { data, error } = await supabase
+        .from('customers')
+        .select('id, name, email, phone, address, city, state, zip_code, country, tax_id, user_id, created_at, updated_at')
+        .eq('user_id', user!.id)
+        .order('name')
+      
+      if (error) {
+        // Fallback to select all if explicit columns fail
+        const { data: fallbackData } = await supabase
+          .from('customers')
+          .select('*')
+          .eq('user_id', user!.id)
+          .order('name')
+        setCustomers(fallbackData || [])
+        return
+      }
+      setCustomers(data || [])
+    } catch (err) {
+      console.error('Error fetching customers:', err)
+      setCustomers([])
+    }
   }
 
   const fetchProducts = async () => {

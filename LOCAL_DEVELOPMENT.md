@@ -1,5 +1,25 @@
 # Local Development Guide
 
+## ⚠️ IMPORTANT: Fix Common Errors First
+
+### Error: Supabase 400 - Missing `notes` Column
+
+If you see `Failed to load resource: the server responded with a status of 400` errors:
+
+**Run this SQL in Supabase SQL Editor:**
+```sql
+ALTER TABLE customers
+ADD COLUMN IF NOT EXISTS notes TEXT;
+```
+
+### Error: Netlify Functions 404
+
+If you see `/.netlify/functions/payment/create:1 Failed to load resource: the server responded with a status of 404`:
+
+**You must use `npm run dev:netlify` instead of `npm run dev`**
+
+---
+
 ## Running the Application Locally
 
 ### Option 1: Using Netlify CLI (Recommended for Payment Testing)

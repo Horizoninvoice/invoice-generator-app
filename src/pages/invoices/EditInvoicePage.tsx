@@ -96,7 +96,11 @@ export default function EditInvoicePage() {
 
       // Fetch customers and products
       const [customersResult, productsResult] = await Promise.all([
-        supabase.from('customers').select('*').eq('user_id', user!.id).order('name'),
+        supabase
+          .from('customers')
+          .select('id, name, email, phone, address, city, state, zip_code, country, tax_id, user_id, created_at, updated_at')
+          .eq('user_id', user!.id)
+          .order('name'),
         supabase.from('products').select('*').eq('user_id', user!.id).order('name'),
       ])
 

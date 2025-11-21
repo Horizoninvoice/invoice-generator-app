@@ -28,15 +28,32 @@ export default function CustomersPage() {
   const fetchCustomers = async () => {
     try {
       setLoading(true)
+      // Explicitly select columns to avoid issues with missing 'notes' column
       const { data, error } = await supabase
         .from('customers')
-        .select('*')
+        .select('id, name, email, phone, address, city, state, zip_code, country, tax_id, user_id, created_at, updated_at')
         .eq('user_id', user!.id)
         .order('name')
 
-      if (error) throw error
+      if (error) {
+        // If error is about missing column, try with notes included
+        if (error.message?.includes('notes') || error.code === 'PGRST116') {
+          console.warn('Notes column not found, fetching without it')
+          const { data: fallbackData, error: fallbackError } = await supabase
+            .from('customers')
+            .select('*')
+            .eq('user_id', user!.id)
+            .order('name')
+          
+          if (fallbackError) throw fallbackError
+          setCustomers(fallbackData || [])
+          return
+        }
+        throw error
+      }
       setCustomers(data || [])
     } catch (error: any) {
+      console.error('Error fetching customers:', error)
       toast.error(error.message || 'Failed to fetch customers')
     } finally {
       setLoading(false)
