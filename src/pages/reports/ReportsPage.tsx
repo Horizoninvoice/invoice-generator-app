@@ -5,7 +5,8 @@ import Navbar from '@/components/layout/Navbar'
 import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import Select from '@/components/ui/Select'
-import { BarChart3, TrendingUp, DollarSign, FileText, Download } from 'lucide-react'
+import Input from '@/components/ui/Input'
+import { BarChart3, TrendingUp, DollarSign, FileText, Download, Calendar } from 'lucide-react'
 import { formatCurrency } from '@/lib/currency'
 import toast from 'react-hot-toast'
 import * as XLSX from 'xlsx'
@@ -13,6 +14,8 @@ import * as XLSX from 'xlsx'
 export default function ReportsPage() {
   const { user, profile, isPro, isMax } = useAuth()
   const [dateRange, setDateRange] = useState('30')
+  const [customDateRange, setCustomDateRange] = useState({ from: '', to: '' })
+  const [showCustomRange, setShowCustomRange] = useState(false)
   const [reports, setReports] = useState({
     totalRevenue: 0,
     totalInvoices: 0,
@@ -29,23 +32,47 @@ export default function ReportsPage() {
     if (user && (isPro || isMax)) {
       fetchReports()
     }
-  }, [user, isPro, isMax, dateRange])
+  }, [user, isPro, isMax, dateRange, customDateRange.from, customDateRange.to])
 
   const fetchReports = async () => {
     try {
       setLoading(true)
-      const days = parseInt(dateRange)
-      const startDate = new Date()
-      startDate.setDate(startDate.getDate() - days)
-      const startDateStr = startDate.toISOString().split('T')[0]
+      
+      let startDateStr: string
+      let endDateStr: string | undefined
+      
+      if (dateRange === 'custom' && customDateRange.from && customDateRange.to) {
+        // Custom date range
+        startDateStr = customDateRange.from
+        endDateStr = customDateRange.to
+      } else if (dateRange === 'today') {
+        // Today only
+        const today = new Date()
+        startDateStr = today.toISOString().split('T')[0]
+        endDateStr = today.toISOString().split('T')[0]
+      } else {
+        // Last N days
+        const days = parseInt(dateRange)
+        const startDate = new Date()
+        startDate.setDate(startDate.getDate() - days)
+        startDateStr = startDate.toISOString().split('T')[0]
+        endDateStr = undefined // No end date limit for "last N days"
+      }
 
-      // Fetch invoices
-      const { data: invoices, error } = await supabase
+      // Build query
+      let query = supabase
         .from('invoices')
         .select('*, customers(name)')
         .eq('user_id', user!.id)
         .gte('issue_date', startDateStr)
         .order('issue_date', { ascending: false })
+      
+      // Add end date filter if custom range or today
+      if (endDateStr) {
+        query = query.lte('issue_date', endDateStr)
+      }
+
+      const { data: invoices, error } = await query
 
       if (error) throw error
 
@@ -101,9 +128,47 @@ export default function ReportsPage() {
     }
   }
 
+  const handleDateRangeChange = (value: string) => {
+    setDateRange(value)
+    if (value !== 'custom') {
+      setShowCustomRange(false)
+      setCustomDateRange({ from: '', to: '' })
+    } else {
+      setShowCustomRange(true)
+    }
+  }
+
+  const handleCustomDateApply = () => {
+    if (!customDateRange.from || !customDateRange.to) {
+      toast.error('Please select both from and to dates')
+      return
+    }
+    if (new Date(customDateRange.from) > new Date(customDateRange.to)) {
+      toast.error('From date cannot be after To date')
+      return
+    }
+    fetchReports()
+  }
+
+  const handleTodayClick = () => {
+    const today = new Date().toISOString().split('T')[0]
+    setDateRange('today')
+    setCustomDateRange({ from: today, to: today })
+    setShowCustomRange(false)
+  }
+
   const handleExportReport = () => {
+    let periodLabel = ''
+    if (dateRange === 'today') {
+      periodLabel = 'Today'
+    } else if (dateRange === 'custom') {
+      periodLabel = `${customDateRange.from} to ${customDateRange.to}`
+    } else {
+      periodLabel = `Last ${dateRange} days`
+    }
+    
     const data = [
-      ['Report Period', `${dateRange} days`],
+      ['Report Period', periodLabel],
       ['Total Revenue', formatCurrency(reports.totalRevenue, profile?.currency || 'INR')],
       ['Total Invoices', reports.totalInvoices],
       ['Paid Invoices', reports.paidInvoices],
@@ -161,18 +226,57 @@ export default function ReportsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Reports & Analytics</h1>
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
             <Select
               options={[
+                { value: 'today', label: 'Today' },
                 { value: '7', label: 'Last 7 days' },
                 { value: '30', label: 'Last 30 days' },
                 { value: '90', label: 'Last 90 days' },
                 { value: '365', label: 'Last year' },
+                { value: 'custom', label: 'Custom Range' },
               ]}
               value={dateRange}
-              onChange={(e) => setDateRange(e.target.value)}
+              onChange={(e) => handleDateRangeChange(e.target.value)}
               className="w-40"
             />
+            
+            {/* Custom Date Range Picker */}
+            {showCustomRange && (
+              <div className="flex gap-2 items-center bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-2">
+                <Calendar className="text-gray-400" size={18} />
+                <Input
+                  type="date"
+                  value={customDateRange.from}
+                  onChange={(e) => setCustomDateRange({ ...customDateRange, from: e.target.value })}
+                  className="w-36"
+                  placeholder="From"
+                />
+                <span className="text-gray-400">to</span>
+                <Input
+                  type="date"
+                  value={customDateRange.to}
+                  onChange={(e) => setCustomDateRange({ ...customDateRange, to: e.target.value })}
+                  className="w-36"
+                  placeholder="To"
+                />
+                <Button size="sm" onClick={handleCustomDateApply}>
+                  Apply
+                </Button>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={() => {
+                    setShowCustomRange(false)
+                    setDateRange('30')
+                    setCustomDateRange({ from: '', to: '' })
+                  }}
+                >
+                  Cancel
+                </Button>
+              </div>
+            )}
+            
             <Button variant="outline" onClick={handleExportReport}>
               <Download size={18} className="mr-2" />
               Export
