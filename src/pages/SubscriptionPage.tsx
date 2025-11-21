@@ -368,11 +368,34 @@ export default function SubscriptionPage() {
               </div>
               <div className="flex-1">
                 <h4 className="font-medium text-yellow-800 dark:text-yellow-200 mb-1">
-                  Payment Gateway Setup
+                  Payment Gateway Loading
                 </h4>
                 <p className="text-sm text-yellow-700 dark:text-yellow-300">
-                  Payment processing is being configured. Once your Razorpay API keys are added to the environment variables, 
-                  you'll be able to upgrade your subscription. For now, you can use the free plan features.
+                  Loading payment gateway. Please wait...
+                </p>
+              </div>
+            </div>
+          </Card>
+        )}
+
+        {/* Netlify Functions Notice for Local Development */}
+        {window.location.hostname === 'localhost' && (
+          <Card className="mb-8 border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20">
+            <div className="flex items-start gap-3">
+              <div className="flex-shrink-0">
+                <div className="w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+                  <span className="text-blue-600 dark:text-blue-400 text-sm">💡</span>
+                </div>
+              </div>
+              <div className="flex-1">
+                <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-1">
+                  Local Development Mode
+                </h4>
+                <p className="text-sm text-blue-700 dark:text-blue-300 mb-2">
+                  To test payments locally, you need to run <code className="bg-blue-100 dark:bg-blue-900/50 px-1 rounded text-xs">npm run dev:netlify</code> instead of <code className="bg-blue-100 dark:bg-blue-900/50 px-1 rounded text-xs">npm run dev</code>
+                </p>
+                <p className="text-xs text-blue-600 dark:text-blue-400">
+                  This will start both the frontend and Netlify Functions. Access the app at <code className="bg-blue-100 dark:bg-blue-900/50 px-1 rounded">http://localhost:8888</code>
                 </p>
               </div>
             </div>
