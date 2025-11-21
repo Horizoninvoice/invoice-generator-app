@@ -81,17 +81,23 @@ export default function CreateInvoicePage() {
   }
 
   const addItem = () => {
-    setItems([
-      ...items,
-      {
-        id: Date.now().toString(),
-        description: '',
-        quantity: 1,
-        unit_price: 0,
-        tax_rate: 0,
-        line_total: 0,
-      },
-    ])
+    const newItem: InvoiceItem = {
+      id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      description: '',
+      quantity: 1,
+      unit_price: 0,
+      tax_rate: 0,
+      line_total: 0,
+    }
+    setItems([...items, newItem])
+    
+    // Scroll to the new item after a short delay
+    setTimeout(() => {
+      const element = document.getElementById(`item-${newItem.id}`)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+      }
+    }, 100)
   }
 
   const removeItem = (id: string) => {
