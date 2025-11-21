@@ -2,11 +2,11 @@
 
 ## Test Mode Setup
 
-### 1. Environment Variables in Netlify
+### 1. Environment Variables in Vercel
 
-Add these environment variables in your Netlify Dashboard:
+Add these environment variables in your Vercel Dashboard:
 
-1. Go to **Site settings** → **Environment variables**
+1. Go to **Project settings** → **Environment variables**
 2. Add the following variables:
 
 ```
@@ -17,7 +17,7 @@ RAZORPAY_KEY_SECRET=xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 **Important:**
 - Use your **Test Mode** keys from Razorpay Dashboard
 - Test keys start with `rzp_test_`
-- Mark these as **Secret** in Netlify
+- Mark these as **Secret** in Vercel
 
 ### 2. Test Cards for Razorpay
 
@@ -65,19 +65,19 @@ Use these test card numbers in Razorpay Test Mode:
 ### 6. Troubleshooting
 
 **Issue: "Payment gateway not configured"**
-- ✅ Check if `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` are set in Netlify
+- ✅ Check if `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` are set in Vercel
 - ✅ Redeploy after adding environment variables
-- ✅ Check Netlify Function logs
+- ✅ Check Vercel Function logs
 
 **Issue: "Payment verification failed"**
 - ✅ Check if `RAZORPAY_KEY_SECRET` matches the key used to create the order
 - ✅ Verify Supabase connection in verify function
-- ✅ Check Netlify Function logs for errors
+- ✅ Check Vercel Function logs for errors
 
 **Issue: Payment succeeds but profile not updated**
 - ✅ Check Supabase `user_profiles` table
 - ✅ Verify `SUPABASE_SERVICE_ROLE_KEY` is set correctly
-- ✅ Check Netlify Function logs
+- ✅ Check Vercel Function logs
 
 ### 7. Checking Payment Status
 
@@ -86,12 +86,13 @@ After payment, check:
 2. **Supabase** → `user_profiles` table → `role` should be `pro` or `max`
 3. **Supabase** → `payments` table (if exists) → Should have payment record
 
-### 8. Netlify Function Logs
+### 8. Vercel Function Logs
 
-To debug issues, check Netlify Function logs:
-1. Go to **Netlify Dashboard** → **Functions**
-2. Click on `payment/create` or `payment/verify`
-3. View logs for errors
+To debug issues, check Vercel Function logs:
+1. Go to **Vercel Dashboard** → **Deployments**
+2. Click on your latest deployment
+3. Go to **Functions** tab
+4. View logs for `api/payment/create` or `api/payment/verify`
 
 ### 9. Test Mode vs Live Mode
 
@@ -120,9 +121,8 @@ Once test payments work:
 ## Support
 
 If you encounter issues:
-1. Check Netlify Function logs
+1. Check Vercel Function logs
 2. Check browser console for errors
 3. Verify all environment variables are set
 4. Test with different test cards
 5. Contact Razorpay support if payment gateway issues persist
-

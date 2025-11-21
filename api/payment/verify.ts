@@ -13,19 +13,31 @@ if (process.env.RAZORPAY_KEY_ID && process.env.RAZORPAY_KEY_SECRET) {
 }
 
 const supabase = createClient(
-  process.env.VITE_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+  process.env.VITE_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '',
   process.env.SUPABASE_SERVICE_ROLE_KEY || ''
 )
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
+  // Handle CORS
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')
+    return res.status(200).end()
+  }
+
   if (req.method !== 'POST') {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Content-Type', 'application/json')
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
   // Check if Razorpay is configured
   if (!razorpay) {
-    return res.status(503).json({ 
-      error: 'Payment gateway not configured. Please add RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET environment variables.' 
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Content-Type', 'application/json')
+    return res.status(503).json({
+      error: 'Payment gateway not configured. Please add RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET environment variables.',
     })
   }
 
@@ -33,6 +45,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature, user_id } = req.body
 
     if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+      res.setHeader('Access-Control-Allow-Origin', '*')
+      res.setHeader('Content-Type', 'application/json')
       return res.status(400).json({ error: 'Missing payment verification data' })
     }
 
@@ -44,6 +58,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       .digest('hex')
 
     if (generatedSignature !== razorpay_signature) {
+      res.setHeader('Access-Control-Allow-Origin', '*')
+      res.setHeader('Content-Type', 'application/json')
       return res.status(400).json({ error: 'Invalid payment signature' })
     }
 
@@ -51,6 +67,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const payment = await razorpay.payments.fetch(razorpay_payment_id)
 
     if (payment.status !== 'captured' && payment.status !== 'authorized') {
+      res.setHeader('Access-Control-Allow-Origin', '*')
+      res.setHeader('Content-Type', 'application/json')
       return res.status(400).json({ error: 'Payment not successful' })
     }
 
@@ -60,8 +78,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     let subscriptionType = 'free'
     let role = 'user'
 
-    if (amount === 14900) {
-      // Pro monthly - ₹149
+    if (amount === 24900) {
+      // Pro monthly - ₹249
       plan = 'pro'
       subscriptionType = 'pro_monthly'
       role = 'pro'
@@ -111,7 +129,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
     }
 
-    res.status(200).json({
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Content-Type', 'application/json')
+    return res.status(200).json({
       success: true,
       message: 'Payment verified and account upgraded successfully',
       payment_id: razorpay_payment_id,
@@ -119,7 +139,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     })
   } catch (error: any) {
     console.error('Payment verification error:', error)
-    res.status(500).json({ error: error.message || 'Failed to verify payment' })
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Content-Type', 'application/json')
+    return res.status(500).json({ error: error.message || 'Failed to verify payment' })
   }
 }
-

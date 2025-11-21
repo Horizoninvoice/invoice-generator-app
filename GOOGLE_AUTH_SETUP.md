@@ -17,7 +17,7 @@ This guide will help you set up Google authentication for your Horizon Invoice G
 5. If prompted, configure the OAuth consent screen:
    - Choose **External** (unless you have a Google Workspace)
    - Fill in the required information:
-     - App name: "Horizon Invoice Generator"
+     - App name: "      "
      - User support email: your email
      - Developer contact: your email
    - Click **Save and Continue**
@@ -32,7 +32,7 @@ This guide will help you set up Google authentication for your Horizon Invoice G
      - `http://localhost:8888` (for Netlify dev)
      - `https://your-domain.netlify.app` (your production URL)
    - Authorized redirect URIs:
-     - `https://YOUR_SUPABASE_PROJECT_REF.supabase.co/auth/v1/callback`
+     - `https://jfquyrmyyaqspauuszeo.supabase.co/auth/v1/callback`
      - Replace `YOUR_SUPABASE_PROJECT_REF` with your actual Supabase project reference
    - Click **Create**
 7. Copy the **Client ID** and **Client Secret**

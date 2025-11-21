@@ -23,6 +23,7 @@ A modern, cloud-based invoice generation platform built with React, Vite, and Su
 - Supabase account
 - Razorpay account (for payments)
 - Google AdSense account (optional)
+- Vercel account (for deployment)
 
 ### Installation
 
@@ -41,7 +42,9 @@ npm install
 ```env
 VITE_SUPABASE_URL=your_supabase_url
 VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-VITE_RAZORPAY_KEY_ID=your_razorpay_key_id
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+RAZORPAY_KEY_ID=your_razorpay_key_id
+RAZORPAY_KEY_SECRET=your_razorpay_secret_key
 VITE_GOOGLE_ADSENSE_ID=your_adsense_id
 ```
 
@@ -50,10 +53,19 @@ VITE_GOOGLE_ADSENSE_ID=your_adsense_id
 npm run dev
 ```
 
+For local development with API routes:
+```bash
+vercel dev
+```
+
 5. Build for production
 ```bash
 npm run build
 ```
+
+## Deployment
+
+This application is configured for deployment on Vercel. See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) for detailed deployment instructions.
 
 ## Features
 

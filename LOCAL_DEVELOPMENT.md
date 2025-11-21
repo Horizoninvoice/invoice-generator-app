@@ -12,23 +12,23 @@ ALTER TABLE customers
 ADD COLUMN IF NOT EXISTS notes TEXT;
 ```
 
-### Error: Netlify Functions 404
+### Error: Vercel API Routes 404
 
-If you see `/.netlify/functions/payment/create:1 Failed to load resource: the server responded with a status of 404`:
+If you see `/api/payment/create:1 Failed to load resource: the server responded with a status of 404`:
 
-**You must use `npm run dev:netlify` instead of `npm run dev`**
+**You must use `vercel dev` for local development with API routes**
 
 ---
 
 ## Running the Application Locally
 
-### Option 1: Using Netlify CLI (Recommended for Payment Testing)
+### Option 1: Using Vercel CLI (Recommended for Payment Testing)
 
-This runs both the frontend and Netlify Functions locally.
+This runs both the frontend and Vercel API routes locally.
 
-1. **Install Netlify CLI** (if not already installed):
+1. **Install Vercel CLI** (if not already installed):
 ```bash
-npm install -g netlify-cli
+npm install -g vercel
 ```
 
 Or use the local version:
@@ -45,15 +45,20 @@ RAZORPAY_KEY_SECRET=your_test_secret_key
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 ```
 
-3. **Run with Netlify Dev**:
+3. **Run with Vercel Dev**:
 ```bash
-npm run dev:netlify
+npm run dev:vercel
+```
+
+Or directly:
+```bash
+npx vercel dev --yes
 ```
 
 This will:
-- Start Vite dev server on `http://localhost:8888`
-- Run Netlify Functions locally
-- Make payment endpoints available at `http://localhost:8888/.netlify/functions/payment/create`
+- Start Vite dev server on `http://localhost:3000`
+- Run Vercel API routes locally
+- Make payment endpoints available at `http://localhost:3000/api/payment/create`
 
 ### Option 2: Using Vite Only (Frontend Only)
 
@@ -63,7 +68,7 @@ If you just want to test the frontend without payments:
 npm run dev
 ```
 
-This runs on `http://localhost:3000` but payment functions won't work.
+This runs on `http://localhost:3000` but payment API routes won't work.
 
 ## Environment Variables for Local Development
 
@@ -87,12 +92,12 @@ RAZORPAY_KEY_SECRET=your_test_secret_key
 
 ## Testing Payments Locally
 
-1. **Start Netlify Dev**:
+1. **Start Vercel Dev**:
 ```bash
-npm run dev:netlify
+vercel dev
 ```
 
-2. **Open the app**: `http://localhost:8888`
+2. **Open the app**: `http://localhost:3000`
 
 3. **Navigate to Subscription page**: `/subscription`
 
@@ -107,11 +112,11 @@ npm run dev:netlify
 
 ### Error: "Failed to execute 'json' on 'Response': Unexpected end of JSON input"
 
-**Cause**: Netlify Functions aren't running locally.
+**Cause**: Vercel API routes aren't running locally.
 
 **Solution**: 
-- Use `npm run dev:netlify` instead of `npm run dev`
-- Or deploy to Netlify and test there
+- Use `vercel dev` instead of `npm run dev`
+- Or deploy to Vercel and test there
 
 ### Error: "Payment gateway not configured"
 
@@ -121,7 +126,7 @@ npm run dev:netlify
 - Create `.env` file with `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET`
 - Restart the dev server
 
-### Error: "Cannot find module '@netlify/functions'"
+### Error: "Cannot find module '@vercel/node'"
 
 **Cause**: Dependencies not installed.
 
@@ -130,32 +135,31 @@ npm run dev:netlify
 npm install
 ```
 
-### Functions not loading
+### API Routes not loading
 
-**Cause**: Netlify CLI not installed or wrong command.
+**Cause**: Vercel CLI not installed or wrong command.
 
 **Solution**:
 ```bash
-npm install -g netlify-cli
+npm install -g vercel
 # Or use local version
 npm install
-npm run dev:netlify
+vercel dev
 ```
 
 ## Port Configuration
 
 - **Vite only**: `http://localhost:3000` (default)
-- **Netlify Dev**: `http://localhost:8888` (default)
+- **Vercel Dev**: `http://localhost:3000` (default)
 
 You can change ports in:
 - `vite.config.ts` for Vite port
-- `netlify.toml` for Netlify Dev port
+- Vercel will use the same port as Vite
 
 ## Next Steps
 
 1. ✅ Set up `.env` file with test keys
-2. ✅ Run `npm run dev:netlify`
+2. ✅ Run `vercel dev`
 3. ✅ Test payment flow
 4. ✅ Verify profile updates in Supabase
-5. ✅ Deploy to Netlify for production testing
-
+5. ✅ Deploy to Vercel for production testing

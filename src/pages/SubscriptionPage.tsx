@@ -74,9 +74,9 @@ export default function SubscriptionPage() {
     
     try {
       console.log('Initiating payment for plan:', plan)
-      // Get API base URL - use Netlify Functions path
+      // Get API base URL - use Vercel API routes
       const apiBaseUrl = import.meta.env.VITE_API_URL || window.location.origin
-      const response = await fetch(`${apiBaseUrl}/.netlify/functions/payment-create`, {
+      const response = await fetch(`${apiBaseUrl}/api/payment/create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ plan, user_id: user.id }),
@@ -106,11 +106,11 @@ export default function SubscriptionPage() {
           status: response.status,
           statusText: response.statusText,
           errorMessage,
-          url: `${apiBaseUrl}/.netlify/functions/payment-create`
+          url: `${apiBaseUrl}/api/payment/create`
         })
         
         if (response.status === 404) {
-          toast.error('Payment service not available. Please use "npm run dev:netlify" for local development or deploy to Netlify.')
+          toast.error('Payment service not available. Please use "npm run dev" for local development or deploy to Vercel.')
         } else if (response.status === 503) {
           toast.error('Payment gateway is not configured yet. Please add RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET to your environment variables.')
         } else {
@@ -146,9 +146,9 @@ export default function SubscriptionPage() {
           console.log('Payment response:', response)
           if (response.razorpay_payment_id) {
             try {
-              // Verify payment with backend - use Netlify Functions path
+              // Verify payment with backend - use Vercel API routes
               const apiBaseUrl = import.meta.env.VITE_API_URL || window.location.origin
-              const verifyResponse = await fetch(`${apiBaseUrl}/.netlify/functions/payment-verify`, {
+              const verifyResponse = await fetch(`${apiBaseUrl}/api/payment/verify`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

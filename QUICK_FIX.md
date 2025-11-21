@@ -21,24 +21,24 @@ This will add the `notes` column and fix the 400 errors.
 
 ---
 
-## Error 2: Netlify Functions 404 Error
+## Error 2: Vercel API Routes 404 Error
 
-The error `/.netlify/functions/payment/create:1 Failed to load resource: the server responded with a status of 404` means Netlify Functions aren't running.
+The error `/api/payment/create:1 Failed to load resource: the server responded with a status of 404` means Vercel API routes aren't running.
 
-### Solution: Use Netlify CLI for local development
+### Solution: Use Vercel CLI for local development
 
 **Stop your current dev server** (if running) and use:
 
 ```bash
-npm run dev:netlify
+vercel dev
 ```
 
 This will:
 - Start Vite dev server
-- Run Netlify Functions locally
+- Run Vercel API routes locally
 - Make payment endpoints available
 
-**Access the app at:** `http://localhost:8888` (not `localhost:3000`)
+**Access the app at:** `http://localhost:3000`
 
 ---
 
@@ -46,8 +46,8 @@ This will:
 
 - [ ] Run the SQL migration to add `notes` column
 - [ ] Stop `npm run dev` if running
-- [ ] Run `npm run dev:netlify` instead
-- [ ] Access app at `http://localhost:8888`
+- [ ] Run `vercel dev` instead
+- [ ] Access app at `http://localhost:3000`
 - [ ] Test payment flow
 
 ---
@@ -63,4 +63,3 @@ If you can't access Supabase SQL Editor, you can also add the column via Table E
 5. Type: `text`
 6. Default: `NULL`
 7. Click **Save**
-
