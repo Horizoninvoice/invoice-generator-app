@@ -104,7 +104,6 @@ export default function SubscriptionPage() {
 
       console.log('Payment order created:', { orderId, amount, currency })
 
-      const planName = plan === 'pro' ? 'Pro Monthly' : 'Max Lifetime'
       const planDesc = plan === 'pro' ? 'Pro monthly subscription for Horizon Invoice Generator' : 'Max lifetime subscription for Horizon Invoice Generator'
 
       const options = {
