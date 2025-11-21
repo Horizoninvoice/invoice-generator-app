@@ -8,9 +8,10 @@ import Button from '@/components/ui/Button'
 import Input from '@/components/ui/Input'
 import Select from '@/components/ui/Select'
 import Textarea from '@/components/ui/Textarea'
-import { ArrowLeft, Plus, Trash2, Save, X } from 'lucide-react'
+import { ArrowLeft, Plus, Trash2, Save, X, Eye } from 'lucide-react'
 import { formatCurrency } from '@/lib/currency'
 import toast from 'react-hot-toast'
+import InvoiceTemplateRenderer from '@/components/invoices/InvoiceTemplateRenderer'
 
 interface InvoiceItem {
   id: string
@@ -25,7 +26,7 @@ interface InvoiceItem {
 export default function EditInvoicePage() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { user, isPro, isMax } = useAuth()
+  const { user, profile, isPro, isMax } = useAuth()
   const [customers, setCustomers] = useState<any[]>([])
   const [products, setProducts] = useState<any[]>([])
   const [items, setItems] = useState<InvoiceItem[]>([])
@@ -324,7 +325,7 @@ export default function EditInvoicePage() {
                 }
               >
                 {items.length > 0 ? (
-                  <div className="space-y-4">
+                  <div className="space-y-4 max-h-[65vh] overflow-y-auto pr-2 custom-scrollbar pb-2">
                     {items.map((item) => (
                       <div key={item.id} className="grid md:grid-cols-6 gap-4 p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
                         <div className="md:col-span-2">
@@ -437,58 +438,106 @@ export default function EditInvoicePage() {
               </Card>
             </div>
 
-            {/* Sidebar - Summary */}
+            {/* Sidebar - Live Preview */}
             <div className="lg:col-span-1">
-              <Card title="Summary" className="sticky top-20">
-                <div className="space-y-4">
-                  <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Invoice Number</p>
-                    <p className="font-medium text-gray-900 dark:text-white">{formData.invoice_number}</p>
+              <div className="sticky top-20 flex flex-col" style={{ maxHeight: 'calc(100vh - 5rem)' }}>
+                {/* Live Preview - Fill remaining height */}
+                <Card className="flex-shrink-0 flex flex-col overflow-hidden mb-4" style={{ maxHeight: '60vh', minHeight: '400px' }}>
+                  <div className="flex items-center justify-between mb-4 flex-shrink-0">
+                    <h3 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                      <Eye size={18} />
+                      Live Preview
+                    </h3>
+                    <span className="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded capitalize">
+                      {formData.template}
+                    </span>
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Customer</p>
-                    <p className="font-medium text-gray-900 dark:text-white">
-                      {customers.find((c) => c.id === formData.customer_id)?.name || 'Not selected'}
-                    </p>
+                  <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-800 flex-1 flex flex-col" style={{ maxHeight: 'calc(60vh - 5rem)', height: 'calc(60vh - 5rem)' }}>
+                    {items.length > 0 ? (
+                      <div className="overflow-y-scroll overflow-x-hidden p-4 bg-white dark:bg-gray-900 preview-scrollbar" style={{ height: '100%', maxHeight: 'calc(60vh - 5rem)' }}>
+                        <div className="transform scale-[0.65] origin-top-left" style={{ width: '153.85%', minHeight: '400px', paddingBottom: '2rem' }}>
+                          <InvoiceTemplateRenderer
+                            template={formData.template}
+                            invoice={{
+                              invoice_number: formData.invoice_number || 'INV-001',
+                              issue_date: formData.issue_date,
+                              due_date: formData.due_date,
+                              status: formData.status,
+                              currency: formData.currency,
+                              subtotal: subtotal,
+                              tax_amount: taxAmount,
+                              discount_amount: 0,
+                              total_amount: total,
+                              notes: formData.notes,
+                              terms: formData.terms,
+                            }}
+                            items={items.map((item) => ({
+                              description: item.description || 'Item description',
+                              quantity: item.quantity || 1,
+                              unit_price: item.unit_price || 0,
+                              tax_rate: item.tax_rate || 0,
+                              line_total: item.line_total || 0,
+                            }))}
+                            customer={customers.find((c) => c.id === formData.customer_id) || null}
+                            company={profile}
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex-1 flex items-center justify-center p-8">
+                        <div className="text-center">
+                          <Eye size={48} className="mx-auto text-gray-400 dark:text-gray-500 mb-4" />
+                          <p className="text-gray-600 dark:text-gray-400 font-medium mb-2">No items added yet</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-500">
+                            Add invoice items to see the live preview
+                          </p>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  <div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Status</p>
-                    <p className="font-medium text-gray-900 dark:text-white capitalize">{formData.status}</p>
-                  </div>
-                  <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
-                    <div className="flex justify-between mb-2">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Subtotal</span>
-                      <span className="text-sm font-medium text-gray-900 dark:text-white">
-                        {formatCurrency(subtotal, formData.currency)}
-                      </span>
+                </Card>
+
+                {/* Quick Summary - Below Preview */}
+                <Card className="flex-shrink-0">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <h3 className="font-semibold text-gray-900 dark:text-white">Quick Summary</h3>
                     </div>
-                    <div className="flex justify-between mb-2">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Tax</span>
-                      <span className="text-sm font-medium text-gray-900 dark:text-white">
-                        {formatCurrency(taxAmount, formData.currency)}
-                      </span>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">Subtotal</span>
+                        <span className="font-medium text-gray-900 dark:text-white">
+                          {formatCurrency(subtotal, formData.currency)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">Tax</span>
+                        <span className="font-medium text-gray-900 dark:text-white">
+                          {formatCurrency(taxAmount, formData.currency)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between pt-2 border-t border-gray-200 dark:border-gray-700">
+                        <span className="font-semibold text-gray-900 dark:text-white">Total</span>
+                        <span className="font-bold text-lg text-gray-900 dark:text-white">
+                          {formatCurrency(total, formData.currency)}
+                        </span>
+                      </div>
                     </div>
-                    <div className="flex justify-between pt-2 border-t border-gray-200 dark:border-gray-700">
-                      <span className="font-semibold text-gray-900 dark:text-white">Total</span>
-                      <span className="font-bold text-lg text-gray-900 dark:text-white">
-                        {formatCurrency(total, formData.currency)}
-                      </span>
+                    <div className="pt-2 space-y-2">
+                      <Button type="submit" className="w-full" isLoading={isLoading} disabled={items.length === 0}>
+                        <Save size={18} className="mr-2" />
+                        Update Invoice
+                      </Button>
+                      <Link to={`/invoices/${id}`}>
+                        <Button variant="outline" className="w-full">
+                          <X size={18} className="mr-2" />
+                          Cancel
+                        </Button>
+                      </Link>
                     </div>
                   </div>
-                  <div className="flex gap-2 pt-4">
-                    <Button type="submit" className="flex-1" isLoading={isLoading} disabled={items.length === 0}>
-                      <Save size={18} className="mr-2" />
-                      Update Invoice
-                    </Button>
-                  </div>
-                  <Link to={`/invoices/${id}`}>
-                    <Button variant="outline" className="w-full">
-                      <X size={18} className="mr-2" />
-                      Cancel
-                    </Button>
-                  </Link>
-                </div>
-              </Card>
+                </Card>
+              </div>
             </div>
           </div>
         </form>
