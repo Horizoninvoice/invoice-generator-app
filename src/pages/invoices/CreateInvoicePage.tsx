@@ -424,9 +424,9 @@ export default function CreateInvoicePage() {
 
             {/* Sidebar - Live Preview */}
             <div className="lg:col-span-1">
-              <div className="sticky top-20 space-y-4">
+              <div className="sticky top-20 flex flex-col h-[calc(100vh-5rem)] space-y-4">
                 {/* Quick Summary */}
-                <Card>
+                <Card className="flex-shrink-0">
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
                       <h3 className="font-semibold text-gray-900 dark:text-white">Quick Summary</h3>
@@ -460,9 +460,9 @@ export default function CreateInvoicePage() {
                   </div>
                 </Card>
 
-                {/* Live Preview */}
-                <Card>
-                  <div className="flex items-center justify-between mb-4">
+                {/* Live Preview - Fill remaining height */}
+                <Card className="flex-1 flex flex-col min-h-0">
+                  <div className="flex items-center justify-between mb-4 flex-shrink-0">
                     <h3 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                       <Eye size={18} />
                       Live Preview
@@ -471,8 +471,8 @@ export default function CreateInvoicePage() {
                       {formData.template}
                     </span>
                   </div>
-                  <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-800">
-                    <div className="max-h-[700px] overflow-y-auto p-4 bg-white dark:bg-gray-900">
+                  <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-800 flex-1 flex flex-col min-h-0">
+                    <div className="flex-1 overflow-y-auto p-4 bg-white dark:bg-gray-900">
                       <div className="transform scale-[0.65] origin-top-left" style={{ width: '153.85%', minHeight: '400px' }}>
                         <InvoiceTemplateRenderer
                           template={formData.template}
@@ -511,7 +511,7 @@ export default function CreateInvoicePage() {
                     </div>
                   </div>
                   {items.length === 0 && (
-                    <p className="mt-2 text-xs text-center text-gray-500 dark:text-gray-400">
+                    <p className="mt-2 text-xs text-center text-gray-500 dark:text-gray-400 flex-shrink-0">
                       Add items to see preview
                     </p>
                   )}
