@@ -13,7 +13,7 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-4">Product</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <Link to="/" className="hover:text-white">
+                <Link to="/features" className="hover:text-white">
                   Features
                 </Link>
               </li>
@@ -38,9 +38,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="mailto:horizoninvoicegen@gmail.com" className="hover:text-white">
+                <Link to="/contact" className="hover:text-white">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
