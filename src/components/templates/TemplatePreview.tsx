@@ -178,8 +178,8 @@ export default function TemplatePreview({ template, name }: TemplatePreviewProps
 
       case 'modern':
         return (
-          <div className="bg-white p-6 max-w-md mx-auto shadow-lg transform scale-75 origin-top">
-            <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white p-4 rounded-t-lg mb-4">
+          <div className="bg-white p-4 max-w-sm mx-auto shadow-lg transform scale-[0.6] origin-top">
+            <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white p-3 rounded-t-lg mb-3">
               <div className="flex justify-between items-center">
                 <div>
                   {sampleCompany.logo_url && (
@@ -237,7 +237,7 @@ export default function TemplatePreview({ template, name }: TemplatePreviewProps
 
       case 'classic':
         return (
-          <div className="bg-white p-6 max-w-md mx-auto shadow-lg border-2 border-gray-300 transform scale-75 origin-top">
+          <div className="bg-white p-4 max-w-sm mx-auto shadow-lg border-2 border-gray-300 transform scale-[0.6] origin-top">
             <div className="border-b-2 border-gray-800 pb-3 mb-3">
               <div className="flex justify-between items-start">
                 <div>
@@ -291,8 +291,8 @@ export default function TemplatePreview({ template, name }: TemplatePreviewProps
 
       case 'minimal':
         return (
-          <div className="bg-white p-6 max-w-md mx-auto shadow-lg transform scale-75 origin-top">
-            <div className="mb-4">
+          <div className="bg-white p-4 max-w-sm mx-auto shadow-lg transform scale-[0.6] origin-top">
+            <div className="mb-3">
               <div className="flex justify-between items-baseline border-b border-gray-200 pb-2">
                 <div>
                   {sampleCompany.logo_url && (
@@ -338,8 +338,8 @@ export default function TemplatePreview({ template, name }: TemplatePreviewProps
   }
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
-      <div className="h-64 overflow-y-auto preview-scrollbar">
+    <div className="bg-gray-50 dark:bg-gray-800 p-3 rounded-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div className="h-72 overflow-y-auto preview-scrollbar flex items-center justify-center">
         {renderTemplate()}
       </div>
     </div>
