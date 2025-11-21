@@ -479,41 +479,6 @@ export default function CreateInvoicePage() {
             {/* Sidebar - Live Preview */}
             <div className="lg:col-span-1">
               <div className="sticky top-20 flex flex-col h-[calc(100vh-5rem)] space-y-4 overflow-hidden">
-                {/* Quick Summary */}
-                <Card className="flex-shrink-0">
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <h3 className="font-semibold text-gray-900 dark:text-white">Quick Summary</h3>
-                    </div>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex justify-between">
-                        <span className="text-gray-600 dark:text-gray-400">Subtotal</span>
-                        <span className="font-medium text-gray-900 dark:text-white">
-                          {formatCurrency(subtotal, formData.currency)}
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-gray-600 dark:text-gray-400">Tax</span>
-                        <span className="font-medium text-gray-900 dark:text-white">
-                          {formatCurrency(taxAmount, formData.currency)}
-                        </span>
-                      </div>
-                      <div className="flex justify-between pt-2 border-t border-gray-200 dark:border-gray-700">
-                        <span className="font-semibold text-gray-900 dark:text-white">Total</span>
-                        <span className="font-bold text-lg text-gray-900 dark:text-white">
-                          {formatCurrency(total, formData.currency)}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="pt-2">
-                      <Button type="submit" className="w-full" isLoading={isLoading} disabled={items.length === 0}>
-                        <Save size={18} className="mr-2" />
-                        {formData.status === 'draft' ? 'Save Draft' : 'Create Invoice'}
-                      </Button>
-                    </div>
-                  </div>
-                </Card>
-
                 {/* Live Preview - Fill remaining height */}
                 <Card className="flex-1 flex flex-col min-h-0">
                   <div className="flex items-center justify-between mb-4 flex-shrink-0">
@@ -527,7 +492,7 @@ export default function CreateInvoicePage() {
                   </div>
                   <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-800 flex-1 flex flex-col min-h-0">
                     {items.length > 0 ? (
-                      <div className="flex-1 overflow-y-auto p-4 bg-white dark:bg-gray-900">
+                      <div className="flex-1 overflow-y-auto p-4 bg-white dark:bg-gray-900 custom-scrollbar">
                         <div className="transform scale-[0.65] origin-top-left" style={{ width: '153.85%', minHeight: '400px' }}>
                           <InvoiceTemplateRenderer
                             template={formData.template}
@@ -567,6 +532,41 @@ export default function CreateInvoicePage() {
                         </div>
                       </div>
                     )}
+                  </div>
+                </Card>
+
+                {/* Quick Summary - Below Preview */}
+                <Card className="flex-shrink-0">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <h3 className="font-semibold text-gray-900 dark:text-white">Quick Summary</h3>
+                    </div>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">Subtotal</span>
+                        <span className="font-medium text-gray-900 dark:text-white">
+                          {formatCurrency(subtotal, formData.currency)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-gray-600 dark:text-gray-400">Tax</span>
+                        <span className="font-medium text-gray-900 dark:text-white">
+                          {formatCurrency(taxAmount, formData.currency)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between pt-2 border-t border-gray-200 dark:border-gray-700">
+                        <span className="font-semibold text-gray-900 dark:text-white">Total</span>
+                        <span className="font-bold text-lg text-gray-900 dark:text-white">
+                          {formatCurrency(total, formData.currency)}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="pt-2">
+                      <Button type="submit" className="w-full" isLoading={isLoading} disabled={items.length === 0}>
+                        <Save size={18} className="mr-2" />
+                        {formData.status === 'draft' ? 'Save Draft' : 'Create Invoice'}
+                      </Button>
+                    </div>
                   </div>
                 </Card>
               </div>
