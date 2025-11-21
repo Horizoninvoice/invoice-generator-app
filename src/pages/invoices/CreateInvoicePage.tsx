@@ -480,7 +480,8 @@ export default function CreateInvoicePage() {
             <div className="lg:col-span-1">
               <div className="sticky top-20 flex flex-col" style={{ maxHeight: 'calc(100vh - 5rem)' }}>
                 {/* Live Preview - Fill remaining height */}
-                <Card className="flex-shrink-0 flex flex-col overflow-hidden mb-4" style={{ maxHeight: '60vh', minHeight: '400px' }}>
+                <div className="flex-shrink-0 flex flex-col overflow-hidden mb-4" style={{ maxHeight: '60vh', minHeight: '400px' }}>
+                  <Card className="flex flex-col overflow-hidden h-full">
                   <div className="flex items-center justify-between mb-4 flex-shrink-0">
                     <h3 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                       <Eye size={18} />
@@ -533,7 +534,8 @@ export default function CreateInvoicePage() {
                       </div>
                     )}
                   </div>
-                </Card>
+                  </Card>
+                </div>
 
                 {/* Quick Summary - Below Preview */}
                 <Card className="flex-shrink-0 mt-auto">

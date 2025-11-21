@@ -98,7 +98,6 @@ export default function SubscriptionPage() {
                   razorpay_payment_id: response.razorpay_payment_id,
                   razorpay_signature: response.razorpay_signature,
                   user_id: user.id,
-                  user_id: user.id,
                 }),
               })
 

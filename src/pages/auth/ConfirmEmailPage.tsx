@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useNavigate, useSearchParams, Link, useLocation } from 'react-router-dom'
+import { useNavigate, useSearchParams, Link } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
 import Navbar from '@/components/layout/Navbar'
@@ -70,10 +70,17 @@ export default function ConfirmEmailPage() {
           setTimeout(() => navigate('/dashboard'), 2000)
         }
       } else if (token) {
-        // Alternative method with token
+        // Alternative method with token - need email from user or search params
+        const email = searchParams.get('email') || user?.email
+        if (!email) {
+          setStatus('error')
+          setMessage('Email address is required for verification.')
+          return
+        }
         const { data, error } = await supabase.auth.verifyOtp({
           token: token,
           type: 'email',
+          email: email,
         })
 
         if (error) {
@@ -107,7 +114,7 @@ export default function ConfirmEmailPage() {
 
   const handleResendConfirmation = async () => {
     try {
-      const email = searchParams.get('email') || emailFromState || user?.email
+      const email = searchParams.get('email') || user?.email
       if (!email) {
         toast.error('Email address not found')
         return

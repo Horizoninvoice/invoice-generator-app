@@ -442,60 +442,62 @@ export default function EditInvoicePage() {
             <div className="lg:col-span-1">
               <div className="sticky top-20 flex flex-col" style={{ maxHeight: 'calc(100vh - 5rem)' }}>
                 {/* Live Preview - Fill remaining height */}
-                <Card className="flex-shrink-0 flex flex-col overflow-hidden mb-4" style={{ maxHeight: '60vh', minHeight: '400px' }}>
-                  <div className="flex items-center justify-between mb-4 flex-shrink-0">
-                    <h3 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
-                      <Eye size={18} />
-                      Live Preview
-                    </h3>
-                    <span className="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded capitalize">
-                      {formData.template}
-                    </span>
-                  </div>
-                  <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-800 flex-1 flex flex-col" style={{ maxHeight: 'calc(60vh - 5rem)', height: 'calc(60vh - 5rem)' }}>
-                    {items.length > 0 ? (
-                      <div className="overflow-y-scroll overflow-x-hidden p-4 bg-white dark:bg-gray-900 preview-scrollbar" style={{ height: '100%', maxHeight: 'calc(60vh - 5rem)' }}>
-                        <div className="transform scale-[0.65] origin-top-left" style={{ width: '153.85%', minHeight: '400px', paddingBottom: '2rem' }}>
-                          <InvoiceTemplateRenderer
-                            template={formData.template}
-                            invoice={{
-                              invoice_number: formData.invoice_number || 'INV-001',
-                              issue_date: formData.issue_date,
-                              due_date: formData.due_date,
-                              status: formData.status,
-                              currency: formData.currency,
-                              subtotal: subtotal,
-                              tax_amount: taxAmount,
-                              discount_amount: 0,
-                              total_amount: total,
-                              notes: formData.notes,
-                              terms: formData.terms,
-                            }}
-                            items={items.map((item) => ({
-                              description: item.description || 'Item description',
-                              quantity: item.quantity || 1,
-                              unit_price: item.unit_price || 0,
-                              tax_rate: item.tax_rate || 0,
-                              line_total: item.line_total || 0,
-                            }))}
-                            customer={customers.find((c) => c.id === formData.customer_id) || null}
-                            company={profile}
-                          />
+                <div className="flex-shrink-0 flex flex-col overflow-hidden mb-4" style={{ maxHeight: '60vh', minHeight: '400px' }}>
+                  <Card className="flex flex-col overflow-hidden h-full">
+                    <div className="flex items-center justify-between mb-4 flex-shrink-0">
+                      <h3 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                        <Eye size={18} />
+                        Live Preview
+                      </h3>
+                      <span className="text-xs px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded capitalize">
+                        {formData.template}
+                      </span>
+                    </div>
+                    <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-800 flex-1 flex flex-col" style={{ maxHeight: 'calc(60vh - 5rem)', height: 'calc(60vh - 5rem)' }}>
+                      {items.length > 0 ? (
+                        <div className="overflow-y-scroll overflow-x-hidden p-4 bg-white dark:bg-gray-900 preview-scrollbar" style={{ height: '100%', maxHeight: 'calc(60vh - 5rem)' }}>
+                          <div className="transform scale-[0.65] origin-top-left" style={{ width: '153.85%', minHeight: '400px', paddingBottom: '2rem' }}>
+                            <InvoiceTemplateRenderer
+                              template={formData.template}
+                              invoice={{
+                                invoice_number: formData.invoice_number || 'INV-001',
+                                issue_date: formData.issue_date,
+                                due_date: formData.due_date,
+                                status: formData.status,
+                                currency: formData.currency,
+                                subtotal: subtotal,
+                                tax_amount: taxAmount,
+                                discount_amount: 0,
+                                total_amount: total,
+                                notes: formData.notes,
+                                terms: formData.terms,
+                              }}
+                              items={items.map((item) => ({
+                                description: item.description || 'Item description',
+                                quantity: item.quantity || 1,
+                                unit_price: item.unit_price || 0,
+                                tax_rate: item.tax_rate || 0,
+                                line_total: item.line_total || 0,
+                              }))}
+                              customer={customers.find((c) => c.id === formData.customer_id) || null}
+                              company={profile}
+                            />
+                          </div>
                         </div>
-                      </div>
-                    ) : (
-                      <div className="flex-1 flex items-center justify-center p-8">
-                        <div className="text-center">
-                          <Eye size={48} className="mx-auto text-gray-400 dark:text-gray-500 mb-4" />
-                          <p className="text-gray-600 dark:text-gray-400 font-medium mb-2">No items added yet</p>
-                          <p className="text-sm text-gray-500 dark:text-gray-500">
-                            Add invoice items to see the live preview
-                          </p>
+                      ) : (
+                        <div className="flex-1 flex items-center justify-center p-8">
+                          <div className="text-center">
+                            <Eye size={48} className="mx-auto text-gray-400 dark:text-gray-500 mb-4" />
+                            <p className="text-gray-600 dark:text-gray-400 font-medium mb-2">No items added yet</p>
+                            <p className="text-sm text-gray-500 dark:text-gray-500">
+                              Add invoice items to see the live preview
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
-                </Card>
+                      )}
+                    </div>
+                  </Card>
+                </div>
 
                 {/* Quick Summary - Below Preview */}
                 <Card className="flex-shrink-0">

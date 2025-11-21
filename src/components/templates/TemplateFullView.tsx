@@ -1,5 +1,3 @@
-import { formatCurrency } from '@/lib/currency'
-import { formatDate } from '@/lib/utils'
 import InvoiceTemplateRenderer from '@/components/invoices/InvoiceTemplateRenderer'
 
 interface TemplateFullViewProps {

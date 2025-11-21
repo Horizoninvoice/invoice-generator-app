@@ -115,13 +115,13 @@ export default function PricingPage() {
                 </ul>
                 {user ? (
                   <Link to="/subscription">
-                    <Button className="w-full" variant={plan.highlight ? 'default' : 'outline'}>
+                    <Button className="w-full" variant={plan.highlight ? 'primary' : 'outline'}>
                       {plan.cta}
                     </Button>
                   </Link>
                 ) : (
                   <Link to="/auth/signup">
-                    <Button className="w-full" variant={plan.highlight ? 'default' : 'outline'}>
+                    <Button className="w-full" variant={plan.highlight ? 'primary' : 'outline'}>
                       {plan.cta}
                     </Button>
                   </Link>

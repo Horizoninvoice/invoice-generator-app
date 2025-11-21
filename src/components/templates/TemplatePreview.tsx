@@ -7,7 +7,7 @@ interface TemplatePreviewProps {
   onClick?: () => void
 }
 
-export default function TemplatePreview({ template, name, onClick }: TemplatePreviewProps) {
+export default function TemplatePreview({ template, onClick }: TemplatePreviewProps) {
   // Sample data for preview
   const sampleInvoice = {
     invoice_number: 'INV-001',

@@ -7,8 +7,6 @@ import Card from '@/components/ui/Card'
 import Button from '@/components/ui/Button'
 import Select from '@/components/ui/Select'
 import { ArrowLeft, Edit, Copy, Download, Printer, Trash2, Share2, Mail } from 'lucide-react'
-import { formatCurrency } from '@/lib/currency'
-import { formatDate } from '@/lib/utils'
 import toast from 'react-hot-toast'
 import InvoiceTemplateRenderer from '@/components/invoices/InvoiceTemplateRenderer'
 import { sendInvoiceEmail } from '@/lib/email'
@@ -125,7 +123,7 @@ export default function InvoiceDetailPage() {
       const { default: html2canvas } = await import('html2canvas')
       const { default: jsPDF } = await import('jspdf')
       
-      toast('Generating PDF...', { icon: '⏳' })
+      toast.loading('Generating PDF...', { id: 'pdf-toast' })
       
       const element = document.getElementById('invoice-preview')
       if (!element) {
@@ -136,10 +134,10 @@ export default function InvoiceDetailPage() {
       // Wait for all images (including logos) to load before capturing
       const images = element.querySelectorAll('img')
       const imagePromises = Array.from(images).map((img: HTMLImageElement) => {
-        if (img.complete) return Promise.resolve()
-        return new Promise((resolve, reject) => {
-          img.onload = resolve
-          img.onerror = reject
+        if (img.complete) return Promise.resolve(void 0)
+        return new Promise<void>((resolve, reject) => {
+          img.onload = () => resolve()
+          img.onerror = () => reject(new Error('Image failed to load'))
           // Timeout after 5 seconds
           setTimeout(() => resolve(), 5000)
         })
@@ -280,7 +278,7 @@ export default function InvoiceDetailPage() {
                   toast.error('Customer email not found')
                   return
                 }
-                toast('Opening email client...', { icon: '📧' })
+                toast.loading('Opening email client...', { id: 'email-toast' })
                 const success = await sendInvoiceEmail(id!, customer.email, invoice.invoice_number)
                 if (success) {
                   toast.success('Email opened successfully')
