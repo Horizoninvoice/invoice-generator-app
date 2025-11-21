@@ -478,9 +478,9 @@ export default function CreateInvoicePage() {
 
             {/* Sidebar - Live Preview */}
             <div className="lg:col-span-1">
-              <div className="sticky top-20 flex flex-col h-[calc(100vh-5rem)] space-y-4">
+              <div className="sticky top-20 flex flex-col h-[calc(100vh-5rem)]">
                 {/* Live Preview - Fill remaining height */}
-                <Card className="flex-1 flex flex-col min-h-0 overflow-hidden">
+                <Card className="flex-1 flex flex-col min-h-0 overflow-hidden mb-4" style={{ maxHeight: 'calc(100vh - 22rem)' }}>
                   <div className="flex items-center justify-between mb-4 flex-shrink-0">
                     <h3 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                       <Eye size={18} />
@@ -492,7 +492,7 @@ export default function CreateInvoicePage() {
                   </div>
                   <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-800 flex-1 flex flex-col min-h-0">
                     {items.length > 0 ? (
-                      <div className="flex-1 overflow-y-auto overflow-x-hidden p-4 bg-white dark:bg-gray-900 custom-scrollbar">
+                      <div className="flex-1 overflow-y-auto overflow-x-hidden p-4 bg-white dark:bg-gray-900 preview-scrollbar" style={{ maxHeight: '100%' }}>
                         <div className="transform scale-[0.65] origin-top-left" style={{ width: '153.85%', minHeight: '400px' }}>
                           <InvoiceTemplateRenderer
                             template={formData.template}
