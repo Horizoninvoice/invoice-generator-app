@@ -272,6 +272,7 @@ export default function SettingsPage() {
                 options={themeOptions}
                 value={theme}
                 onChange={(e) => setTheme(e.target.value as any)}
+                aria-label="Select color theme"
               />
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                 Choose your preferred color theme for the application
