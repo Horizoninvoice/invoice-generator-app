@@ -33,12 +33,17 @@ export default function SubscriptionPage() {
     script.src = 'https://checkout.razorpay.com/v1/checkout.js'
     script.async = true
     script.onload = () => {
-      setRazorpayLoaded(true)
-      console.log('Razorpay script loaded successfully')
+      if (window.Razorpay) {
+        setRazorpayLoaded(true)
+        console.log('Razorpay script loaded successfully')
+      } else {
+        console.error('Razorpay script loaded but window.Razorpay is not available')
+        toast.error('Payment gateway failed to initialize. Please refresh the page.')
+      }
     }
     script.onerror = () => {
       console.error('Failed to load Razorpay script')
-      toast.error('Failed to load payment gateway. Please refresh the page.')
+      toast.error('Failed to load payment gateway. Please check your internet connection and refresh the page.')
     }
     document.body.appendChild(script)
 
