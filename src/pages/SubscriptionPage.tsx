@@ -203,17 +203,33 @@ export default function SubscriptionPage() {
         },
       }
 
-      console.log('Opening Razorpay checkout...')
+      console.log('Opening Razorpay checkout with options:', {
+        key: keyId,
+        amount,
+        currency,
+        order_id: orderId,
+        name: options.name,
+      })
+      
+      // Verify Razorpay is available
+      if (!window.Razorpay) {
+        throw new Error('Razorpay is not loaded. Please refresh the page.')
+      }
+      
       const razorpay = new window.Razorpay(options)
       
       razorpay.on('payment.failed', function (response: any) {
         console.error('Payment failed:', response)
-        toast.error(`Payment failed: ${response.error.description || 'Please try again'}`)
+        toast.error(`Payment failed: ${response.error?.description || response.error?.reason || 'Please try again'}`)
         setIsProcessing(false)
         setProcessingPlan(null)
       })
 
+      // Open the checkout
       razorpay.open()
+      
+      // Reset processing state after opening (payment will continue in background)
+      // Don't reset here - let it reset on success/failure
     } catch (error: any) {
       console.error('Payment initiation error:', error)
       toast.error(error.message || 'Failed to initiate payment. Please try again.')

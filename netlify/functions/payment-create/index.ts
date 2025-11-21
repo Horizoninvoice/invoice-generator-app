@@ -108,15 +108,32 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
       amount,
       currency,
       receipt: options.receipt,
+      key_id: process.env.RAZORPAY_KEY_ID?.substring(0, 10) + '...', // Log partial key for debugging
     })
     
-    const order = await razorpay.orders.create(options)
-    
-    console.log('Razorpay order created successfully:', {
-      orderId: order.id,
-      amount: order.amount,
-      currency: order.currency,
-    })
+    let order
+    try {
+      order = await razorpay.orders.create(options)
+      console.log('Razorpay order created successfully:', {
+        orderId: order.id,
+        amount: order.amount,
+        currency: order.currency,
+        status: order.status,
+      })
+    } catch (razorpayError: any) {
+      console.error('Razorpay API error:', razorpayError)
+      console.error('Razorpay error details:', {
+        message: razorpayError.message,
+        description: razorpayError.description,
+        field: razorpayError.field,
+        source: razorpayError.source,
+        step: razorpayError.step,
+        reason: razorpayError.reason,
+        metadata: razorpayError.metadata,
+        error: razorpayError.error,
+      })
+      throw new Error(razorpayError.description || razorpayError.message || 'Razorpay API error')
+    }
 
     return {
       statusCode: 200,
