@@ -336,8 +336,15 @@ export default function CreateInvoicePage() {
               >
                 {items.length > 0 ? (
                   <div className="space-y-4">
-                    {items.map((item) => (
-                      <div key={item.id} className="grid md:grid-cols-6 gap-4 p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+                    {items.map((item, index) => (
+                      <div 
+                        key={item.id} 
+                        id={`item-${item.id}`}
+                        className="grid md:grid-cols-6 gap-4 p-4 border border-gray-200 dark:border-gray-700 rounded-lg bg-gray-50 dark:bg-gray-800/50 transition-all hover:border-primary-300 dark:hover:border-primary-600"
+                      >
+                        <div className="md:col-span-6 flex items-center justify-between mb-2">
+                          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">Item #{index + 1}</span>
+                        </div>
                         <div className="md:col-span-2">
                           <Select
                             label="Product"
