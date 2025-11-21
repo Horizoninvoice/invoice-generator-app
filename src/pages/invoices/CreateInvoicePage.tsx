@@ -493,7 +493,7 @@ export default function CreateInvoicePage() {
                   <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-800 flex-1 flex flex-col min-h-0">
                     {items.length > 0 ? (
                       <div className="flex-1 overflow-y-auto overflow-x-hidden p-4 bg-white dark:bg-gray-900 preview-scrollbar" style={{ maxHeight: '100%' }}>
-                        <div className="transform scale-[0.65] origin-top-left" style={{ width: '153.85%', minHeight: '400px' }}>
+                        <div className="transform scale-[0.65] origin-top-left" style={{ width: '153.85%', minHeight: '400px', paddingBottom: '2rem' }}>
                           <InvoiceTemplateRenderer
                             template={formData.template}
                             invoice={{
