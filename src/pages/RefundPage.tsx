@@ -48,7 +48,7 @@ export default function RefundPage() {
             <section className="mb-8">
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">3. How to Request a Refund</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Email us at <a href="mailto:support@horizoninvoice.com" className="text-primary-600 dark:text-primary-400 hover:underline">support@horizoninvoice.com</a> with:
+                Email us at <a href="mailto:horizoninvoicegen@gmail.com" className="text-primary-600 dark:text-primary-400 hover:underline">horizoninvoicegen@gmail.com</a> with:
               </p>
               <ul className="list-disc pl-6 text-gray-600 dark:text-gray-400 space-y-2">
                 <li>Payment ID</li>

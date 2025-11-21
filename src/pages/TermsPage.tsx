@@ -87,8 +87,8 @@ export default function TermsPage() {
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">10. Contact</h2>
               <p className="text-gray-600 dark:text-gray-400">
                 For support or queries, contact us at:{' '}
-                <a href="mailto:support@horizoninvoice.com" className="text-primary-600 dark:text-primary-400 hover:underline">
-                  support@horizoninvoice.com
+                <a href="mailto:horizoninvoicegen@gmail.com" className="text-primary-600 dark:text-primary-400 hover:underline">
+                  horizoninvoicegen@gmail.com
                 </a>
               </p>
             </section>

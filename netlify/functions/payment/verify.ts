@@ -109,8 +109,8 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
     let subscriptionType = 'free'
     let role = 'user'
 
-    if (amount === 14900) {
-      // Pro monthly - ₹149
+    if (amount === 24900) {
+      // Pro monthly - ₹249
       plan = 'pro'
       subscriptionType = 'pro_monthly'
       role = 'pro'

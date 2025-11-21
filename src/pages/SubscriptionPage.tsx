@@ -156,7 +156,7 @@ export default function SubscriptionPage() {
     {
       id: 'pro',
       name: 'Pro',
-      price: 149,
+      price: 249,
       period: '/month',
       features: [
         '5 Invoice Templates',

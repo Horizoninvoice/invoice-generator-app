@@ -77,7 +77,7 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
 
     // Plan pricing in paise (smallest currency unit)
     const planAmounts = {
-      pro: 14900, // ₹149.00 in paise
+      pro: 24900, // ₹249.00 in paise
       max: 149900, // ₹1,499.00 in paise
     }
 
