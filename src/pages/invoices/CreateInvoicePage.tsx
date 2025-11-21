@@ -103,18 +103,29 @@ export default function CreateInvoicePage() {
       items.map((item) => {
         if (item.id === id) {
           const updated = { ...item, [field]: value }
+          
+          // Handle product selection
           if (field === 'product_id' && value) {
             const product = products.find((p) => p.id === value)
             if (product) {
               updated.description = product.name
-              updated.unit_price = product.price
+              updated.unit_price = product.price || 0
               updated.tax_rate = product.tax_rate || 0
             }
           }
-          // Recalculate line total
-          const subtotal = updated.quantity * updated.unit_price
-          const tax = subtotal * (updated.tax_rate / 100)
-          updated.line_total = subtotal + tax
+          
+          // Ensure numeric values are numbers, not strings
+          const quantity = typeof updated.quantity === 'number' ? updated.quantity : parseFloat(updated.quantity) || 0
+          const unitPrice = typeof updated.unit_price === 'number' ? updated.unit_price : parseFloat(updated.unit_price) || 0
+          const taxRate = typeof updated.tax_rate === 'number' ? updated.tax_rate : parseFloat(updated.tax_rate) || 0
+          
+          // Recalculate line total whenever quantity, unit_price, or tax_rate changes
+          if (['quantity', 'unit_price', 'tax_rate', 'product_id'].includes(field)) {
+            const subtotal = quantity * unitPrice
+            const tax = subtotal * (taxRate / 100)
+            updated.line_total = subtotal + tax
+          }
+          
           return updated
         }
         return item
@@ -123,11 +134,20 @@ export default function CreateInvoicePage() {
   }
 
   const calculateTotals = () => {
-    const subtotal = items.reduce((sum, item) => sum + item.quantity * item.unit_price, 0)
-    const taxAmount = items.reduce((sum, item) => {
-      const itemSubtotal = item.quantity * item.unit_price
-      return sum + itemSubtotal * (item.tax_rate / 100)
+    const subtotal = items.reduce((sum, item) => {
+      const qty = typeof item.quantity === 'number' ? item.quantity : parseFloat(String(item.quantity)) || 0
+      const price = typeof item.unit_price === 'number' ? item.unit_price : parseFloat(String(item.unit_price)) || 0
+      return sum + (qty * price)
     }, 0)
+    
+    const taxAmount = items.reduce((sum, item) => {
+      const qty = typeof item.quantity === 'number' ? item.quantity : parseFloat(String(item.quantity)) || 0
+      const price = typeof item.unit_price === 'number' ? item.unit_price : parseFloat(String(item.unit_price)) || 0
+      const taxRate = typeof item.tax_rate === 'number' ? item.tax_rate : parseFloat(String(item.tax_rate)) || 0
+      const itemSubtotal = qty * price
+      return sum + (itemSubtotal * (taxRate / 100))
+    }, 0)
+    
     const total = subtotal + taxAmount
     return { subtotal, taxAmount, total }
   }
@@ -335,24 +355,37 @@ export default function CreateInvoicePage() {
                           label="Quantity"
                           type="number"
                           step="0.01"
+                          min="0"
                           required
-                          value={item.quantity}
-                          onChange={(e) => updateItem(item.id, 'quantity', parseFloat(e.target.value) || 0)}
+                          value={item.quantity || ''}
+                          onChange={(e) => {
+                            const val = e.target.value === '' ? 0 : parseFloat(e.target.value) || 0
+                            updateItem(item.id, 'quantity', val)
+                          }}
                         />
                         <Input
                           label="Unit Price"
                           type="number"
                           step="0.01"
+                          min="0"
                           required
-                          value={item.unit_price}
-                          onChange={(e) => updateItem(item.id, 'unit_price', parseFloat(e.target.value) || 0)}
+                          value={item.unit_price || ''}
+                          onChange={(e) => {
+                            const val = e.target.value === '' ? 0 : parseFloat(e.target.value) || 0
+                            updateItem(item.id, 'unit_price', val)
+                          }}
                         />
                         <Input
                           label="Tax Rate (%)"
                           type="number"
                           step="0.01"
-                          value={item.tax_rate}
-                          onChange={(e) => updateItem(item.id, 'tax_rate', parseFloat(e.target.value) || 0)}
+                          min="0"
+                          max="100"
+                          value={item.tax_rate || ''}
+                          onChange={(e) => {
+                            const val = e.target.value === '' ? 0 : parseFloat(e.target.value) || 0
+                            updateItem(item.id, 'tax_rate', val)
+                          }}
                         />
                         <div className="md:col-span-5 flex items-end">
                           <p className="text-sm text-gray-600 dark:text-gray-400">
