@@ -17,20 +17,36 @@ declare global {
 export default function SubscriptionPage() {
   const { user, profile, refreshProfile } = useAuth()
   const navigate = useNavigate()
-  const [selectedPlan] = useState<'pro' | 'max'>('pro')
   const [isProcessing, setIsProcessing] = useState(false)
+  const [processingPlan, setProcessingPlan] = useState<'pro' | 'max' | null>(null)
   const [razorpayLoaded, setRazorpayLoaded] = useState(false)
 
   useEffect(() => {
+    // Check if Razorpay is already loaded
+    if (window.Razorpay) {
+      setRazorpayLoaded(true)
+      return
+    }
+
     // Load Razorpay script
     const script = document.createElement('script')
     script.src = 'https://checkout.razorpay.com/v1/checkout.js'
     script.async = true
-    script.onload = () => setRazorpayLoaded(true)
+    script.onload = () => {
+      setRazorpayLoaded(true)
+      console.log('Razorpay script loaded successfully')
+    }
+    script.onerror = () => {
+      console.error('Failed to load Razorpay script')
+      toast.error('Failed to load payment gateway. Please refresh the page.')
+    }
     document.body.appendChild(script)
 
     return () => {
-      document.body.removeChild(script)
+      // Only remove if we added it
+      if (script.parentNode) {
+        document.body.removeChild(script)
+      }
     }
   }, [])
 
@@ -44,12 +60,15 @@ export default function SubscriptionPage() {
     }
 
     if (!razorpayLoaded || !window.Razorpay) {
-      toast.error('Payment gateway not loaded. Please refresh the page.')
+      toast.error('Payment gateway not loaded. Please wait a moment and try again.')
       return
     }
 
     setIsProcessing(true)
+    setProcessingPlan(plan)
+    
     try {
+      console.log('Initiating payment for plan:', plan)
       // Get API base URL - use Netlify Functions path
       const apiBaseUrl = import.meta.env.VITE_API_URL || window.location.origin
       const response = await fetch(`${apiBaseUrl}/.netlify/functions/payment/create`, {
@@ -76,23 +95,28 @@ export default function SubscriptionPage() {
         return
       }
 
-      const { orderId, amount, currency, keyId } = await response.json()
+      const data = await response.json()
+      const { orderId, amount, currency, keyId } = data
 
-      if (!orderId) {
-        throw new Error('Failed to create payment order')
+      if (!orderId || !keyId) {
+        throw new Error('Failed to create payment order. Missing order ID or key.')
       }
 
+      console.log('Payment order created:', { orderId, amount, currency })
+
       const planName = plan === 'pro' ? 'Pro Monthly' : 'Max Lifetime'
-      const planDesc = plan === 'pro' ? 'Pro monthly subscription for Horizon' : 'Max lifetime subscription for Horizon'
+      const planDesc = plan === 'pro' ? 'Pro monthly subscription for Horizon Invoice Generator' : 'Max lifetime subscription for Horizon Invoice Generator'
 
       const options = {
         key: keyId,
         amount: amount,
         currency: currency,
-        name: `Horizon ${planName}`,
+        name: 'Horizon Invoice Generator',
         description: planDesc,
         order_id: orderId,
+        image: '/letter-h.ico', // Add your logo
         handler: async function (response: any) {
+          console.log('Payment response:', response)
           if (response.razorpay_payment_id) {
             try {
               // Verify payment with backend - use Netlify Functions path
@@ -138,16 +162,33 @@ export default function SubscriptionPage() {
         },
         modal: {
           ondismiss: function () {
+            console.log('Payment modal dismissed')
             setIsProcessing(false)
+            setProcessingPlan(null)
           },
+        },
+        notes: {
+          plan: plan,
+          user_id: user.id,
         },
       }
 
+      console.log('Opening Razorpay checkout...')
       const razorpay = new window.Razorpay(options)
+      
+      razorpay.on('payment.failed', function (response: any) {
+        console.error('Payment failed:', response)
+        toast.error(`Payment failed: ${response.error.description || 'Please try again'}`)
+        setIsProcessing(false)
+        setProcessingPlan(null)
+      })
+
       razorpay.open()
     } catch (error: any) {
-      toast.error(error.message || 'Failed to initiate payment')
+      console.error('Payment initiation error:', error)
+      toast.error(error.message || 'Failed to initiate payment. Please try again.')
       setIsProcessing(false)
+      setProcessingPlan(null)
     }
   }
 
@@ -286,8 +327,8 @@ export default function SubscriptionPage() {
                 <Button
                   className="w-full"
                   onClick={() => handleUpgrade(plan.id as 'pro' | 'max')}
-                  isLoading={isProcessing && selectedPlan === plan.id}
-                  disabled={isProcessing}
+                  isLoading={isProcessing && processingPlan === plan.id}
+                  disabled={isProcessing || !razorpayLoaded}
                   title={!razorpayLoaded ? 'Payment gateway loading...' : undefined}
                 >
                   {plan.id === 'max' ? 'Get Lifetime Access' : 'Upgrade to Pro'}
