@@ -77,8 +77,12 @@ export default function SignupPage() {
             {/* Header with animation */}
             <div className="text-center mb-8">
               <div className="inline-block mb-4">
-                <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg transform transition-transform duration-300 hover:scale-110 hover:rotate-3">
-                  <span className="text-3xl font-bold text-white">H</span>
+                <div className="w-16 h-16 bg-gradient-to-br from-primary-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg transform transition-transform duration-300 hover:scale-110 hover:rotate-3 overflow-hidden">
+                  <img 
+                    src="/letter-h.ico" 
+                    alt="Horizon Logo" 
+                    className="w-10 h-10 object-contain"
+                  />
                 </div>
               </div>
               <h1 className="text-4xl font-bold text-black dark:text-gray-100 mb-2 bg-gradient-to-r from-primary-600 to-purple-600 bg-clip-text text-transparent">
