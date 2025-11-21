@@ -21,6 +21,7 @@ export default function TemplatePreview({ template, onClick }: TemplatePreviewPr
     total_amount: 5500,
     notes: 'Thank you for your business!',
     terms: 'Payment due within 30 days.',
+    footer_message: 'Thank you for your business!',
   }
 
   const sampleItems = [

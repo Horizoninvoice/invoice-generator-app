@@ -330,6 +330,19 @@ export default function SettingsPage() {
                 placeholder="Enter default notes that will be pre-filled in new invoices"
               />
             </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Footer Message
+              </label>
+              <Input
+                value={formData.defaultFooterMessage}
+                onChange={(e) => setFormData({ ...formData, defaultFooterMessage: e.target.value })}
+                placeholder="Enter footer message (e.g., Thank you for your business!)"
+              />
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                This message will appear at the bottom of all invoices
+              </p>
+            </div>
             <Button onClick={handleSaveDefaults} variant="outline">
               Save Invoice Defaults
             </Button>
