@@ -71,7 +71,7 @@ export default function SubscriptionPage() {
       console.log('Initiating payment for plan:', plan)
       // Get API base URL - use Netlify Functions path
       const apiBaseUrl = import.meta.env.VITE_API_URL || window.location.origin
-      const response = await fetch(`${apiBaseUrl}/.netlify/functions/payment/create`, {
+      const response = await fetch(`${apiBaseUrl}/.netlify/functions/payment-create`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ plan, user_id: user.id }),
@@ -132,7 +132,7 @@ export default function SubscriptionPage() {
             try {
               // Verify payment with backend - use Netlify Functions path
               const apiBaseUrl = import.meta.env.VITE_API_URL || window.location.origin
-              const verifyResponse = await fetch(`${apiBaseUrl}/.netlify/functions/payment/verify`, {
+              const verifyResponse = await fetch(`${apiBaseUrl}/.netlify/functions/payment-verify`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
