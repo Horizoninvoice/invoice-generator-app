@@ -182,5 +182,11 @@ body {
   .no-print {
     display: none !important;
   }
+  /* Ensure images (logos) are loaded and visible in print */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    page-break-inside: avoid !important;
+  }
 }
 

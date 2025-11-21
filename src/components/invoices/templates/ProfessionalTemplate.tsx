@@ -14,11 +14,20 @@ export default function ProfessionalTemplate({ invoice, items, customer, company
       {/* Header */}
       <div className="border-b-4 border-primary-600 pb-6 mb-8">
         <div className="flex justify-between items-start">
-          <div>
-            {company?.logo_url && (
-              <img src={company.logo_url} alt="Company Logo" className="h-16 mb-4" />
-            )}
-            <h1 className="text-3xl font-bold text-gray-900">{company?.shop_name || 'Your Company'}</h1>
+              <div>
+                {company?.logo_url && (
+                  <img 
+                    src={company.logo_url} 
+                    alt="Company Logo" 
+                    className="h-16 mb-4"
+                    crossOrigin="anonymous"
+                    onError={(e) => {
+                      // Hide image if it fails to load
+                      e.currentTarget.style.display = 'none'
+                    }}
+                  />
+                )}
+                <h1 className="text-3xl font-bold text-gray-900">{company?.shop_name || 'Your Company'}</h1>
             {company?.shop_address && (
               <p className="text-gray-600 mt-2">{company.shop_address}</p>
             )}
