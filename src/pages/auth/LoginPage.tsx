@@ -22,7 +22,8 @@ export default function LoginPage() {
 
     try {
       await signIn(email, password)
-      navigate('/dashboard')
+      toast.success('Login successful!')
+      navigate('/')
     } catch (error: any) {
       const errorMessage = error.message || 'Failed to login'
       toast.error(errorMessage)
