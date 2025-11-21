@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, startTransition } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '@/contexts/AuthContext'
 import { supabase } from '@/lib/supabase'
@@ -44,13 +44,6 @@ export default function DashboardPage() {
       const productCount = productsResult.count || 0
       const revenue = paymentsResult.data?.reduce((sum, p) => sum + (p.amount || 0), 0) || 0
 
-      setStats({
-        invoices: invoiceCount,
-        customers: customerCount,
-        products: productCount,
-        revenue,
-      })
-
       // Fetch recent invoices
       const { data: invoices } = await supabase
         .from('invoices')
@@ -59,11 +52,21 @@ export default function DashboardPage() {
         .order('created_at', { ascending: false })
         .limit(5)
 
-      setRecentInvoices(invoices || [])
+      startTransition(() => {
+        setStats({
+          invoices: invoiceCount,
+          customers: customerCount,
+          products: productCount,
+          revenue,
+        })
+        setRecentInvoices(invoices || [])
+        setLoading(false)
+      })
     } catch (error) {
       console.error('Error fetching dashboard data:', error)
-    } finally {
-      setLoading(false)
+      startTransition(() => {
+        setLoading(false)
+      })
     }
   }
 

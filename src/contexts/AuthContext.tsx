@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
+import { createContext, useContext, useEffect, useState, ReactNode, startTransition } from 'react'
 import { User } from '@supabase/supabase-js'
 import { supabase } from '@/lib/supabase'
 import { getCurrencyByCountry } from '@/lib/currency'
@@ -48,16 +48,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try {
         const { data: { session } } = await supabase.auth.getSession()
         if (mounted) {
-          setUser(session?.user ?? null)
-          if (session?.user) {
-            // Don't wait for profile - fetch in background
-            fetchProfile(session.user.id).catch(console.error)
-          }
-          setLoading(false)
+          startTransition(() => {
+            setUser(session?.user ?? null)
+            if (session?.user) {
+              // Don't wait for profile - fetch in background
+              fetchProfile(session.user.id).catch(console.error)
+            }
+            setLoading(false)
+          })
         }
       } catch (error) {
         console.error('Auth init error:', error)
-        if (mounted) setLoading(false)
+        if (mounted) {
+          startTransition(() => {
+            setLoading(false)
+          })
+        }
       }
     }
 
@@ -66,14 +72,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
       if (mounted) {
-        setUser(session?.user ?? null)
-        if (session?.user) {
-          // Fetch profile in background, don't block
-          fetchProfile(session.user.id).catch(console.error)
-        } else {
-          setProfile(null)
-        }
-        setLoading(false)
+        startTransition(() => {
+          setUser(session?.user ?? null)
+          if (session?.user) {
+            // Fetch profile in background, don't block
+            fetchProfile(session.user.id).catch(console.error)
+          } else {
+            setProfile(null)
+          }
+          setLoading(false)
+        })
       }
     })
 
@@ -95,7 +103,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         throw error
       }
 
-      setProfile(data)
+      startTransition(() => {
+        setProfile(data)
+      })
     } catch (error) {
       console.error('Error fetching profile:', error)
       // Don't set loading to false here - it's already set
