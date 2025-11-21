@@ -18,6 +18,12 @@
   port = 8888
   targetPort = 3000
   publish = "dist"
+  framework = "vite"
+  
+# Proxy Vite dev server
+[[dev.proxy]]
+  from = "/"
+  to = "http://localhost:3000"
 
 [functions]
   directory = "netlify/functions"
