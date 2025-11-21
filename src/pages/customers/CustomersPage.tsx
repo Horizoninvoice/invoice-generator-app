@@ -118,7 +118,7 @@ export default function CustomersPage() {
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Customers</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Customers</h1>
           <div className="flex gap-2">
             <Button variant="outline" onClick={handleExport}>
               <Download size={18} className="mr-2" />
@@ -153,7 +153,7 @@ export default function CustomersPage() {
               <Card key={customer.id} className="hover:shadow-lg transition-shadow">
                 <div className="flex items-start justify-between mb-4">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">{customer.name}</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">{customer.name}</h3>
                     {customer.tax_id && (
                       <p className="text-xs text-gray-500 dark:text-gray-400">Tax ID: {customer.tax_id}</p>
                     )}

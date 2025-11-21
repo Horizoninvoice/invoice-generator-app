@@ -43,7 +43,7 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md', s
       >
         {(title || showCloseButton) && (
           <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
-            {title && <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h3>}
+            {title && <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{title}</h3>}
             {showCloseButton && (
               <button
                 onClick={onClose}
