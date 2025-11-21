@@ -116,9 +116,11 @@ export default function MinimalTemplate({ invoice, items, customer, company }: M
       )}
 
       {/* Footer */}
-      <div className="mt-12 pt-8 border-t border-gray-200 text-center text-gray-400 text-xs">
-        <p>Thank you for your business!</p>
-      </div>
+      {invoice.footer_message && (
+        <div className="mt-12 pt-8 border-t border-gray-200 text-center text-gray-400 text-xs">
+          <p>{invoice.footer_message}</p>
+        </div>
+      )}
     </div>
   )
 }

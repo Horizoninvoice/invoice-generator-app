@@ -19,6 +19,7 @@ export default function TemplateFullView({ template }: TemplateFullViewProps) {
     tax_rate: 10,
     notes: 'Thank you for your business!',
     terms: 'Payment due within 30 days.',
+    footer_message: 'Thank you for your business!',
   }
 
   const sampleItems = [

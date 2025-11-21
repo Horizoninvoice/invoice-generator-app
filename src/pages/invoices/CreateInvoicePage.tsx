@@ -40,6 +40,7 @@ export default function CreateInvoicePage() {
     currency: profile?.currency || 'INR',
     notes: localStorage.getItem('invoice_default_notes') || '',
     terms: localStorage.getItem('invoice_default_terms') || '',
+    footer_message: localStorage.getItem('invoice_default_footer_message') || 'Thank you for your business!',
     template: 'professional',
   })
 
@@ -220,6 +221,7 @@ export default function CreateInvoicePage() {
           currency: formData.currency,
           notes: formData.notes,
           terms: formData.terms,
+          footer_message: formData.footer_message,
           template: formData.template,
           subtotal,
           tax_amount: taxAmount,
@@ -560,7 +562,6 @@ export default function CreateInvoicePage() {
                 {/* Quick Summary - Below Preview */}
                 <Card className="flex-shrink-0 mt-auto">
                   <div className="space-y-3">
-                    
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className="text-gray-600 dark:text-gray-400">Subtotal</span>

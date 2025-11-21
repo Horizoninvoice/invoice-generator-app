@@ -40,6 +40,7 @@ export default function EditInvoicePage() {
     currency: 'INR',
     notes: '',
     terms: '',
+    footer_message: '',
     template: 'professional',
   })
 
@@ -70,6 +71,7 @@ export default function EditInvoicePage() {
         currency: invoice.currency,
         notes: invoice.notes || '',
         terms: invoice.terms || '',
+        footer_message: invoice.footer_message || localStorage.getItem('invoice_default_footer_message') || 'Thank you for your business!',
         template: invoice.template || 'professional',
       })
 
@@ -195,6 +197,7 @@ export default function EditInvoicePage() {
           currency: formData.currency,
           notes: formData.notes,
           terms: formData.terms,
+          footer_message: formData.footer_message,
           template: formData.template,
           subtotal,
           tax_amount: taxAmount,

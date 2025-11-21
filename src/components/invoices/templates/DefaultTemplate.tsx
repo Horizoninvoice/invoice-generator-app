@@ -122,9 +122,11 @@ export default function DefaultTemplate({ invoice, items, customer, company }: D
       )}
 
       {/* Footer */}
-      <div className="mt-8 pt-6 border-t border-gray-200 text-center text-gray-500 text-sm">
-        <p>Thank you for your business!</p>
-      </div>
+      {invoice.footer_message && (
+        <div className="mt-8 pt-6 border-t border-gray-200 text-center text-gray-500 text-sm">
+          <p>{invoice.footer_message}</p>
+        </div>
+      )}
     </div>
   )
 }

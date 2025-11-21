@@ -123,9 +123,11 @@ export default function ClassicTemplate({ invoice, items, customer, company }: C
       )}
 
       {/* Footer */}
-      <div className="mt-8 pt-6 border-t-2 border-gray-300 text-center text-gray-500 text-sm font-serif">
-        <p>Thank you for your business!</p>
-      </div>
+      {invoice.footer_message && (
+        <div className="mt-8 pt-6 border-t-2 border-gray-300 text-center text-gray-500 text-sm font-serif">
+          <p>{invoice.footer_message}</p>
+        </div>
+      )}
     </div>
   )
 }

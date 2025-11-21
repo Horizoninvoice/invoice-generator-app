@@ -20,6 +20,7 @@ export default function SettingsPage() {
     defaultCurrency: profile?.currency || 'INR',
     defaultTerms: '',
     defaultNotes: '',
+    defaultFooterMessage: '',
     shop_name: '',
     shop_address: '',
     shop_email: '',
@@ -30,8 +31,10 @@ export default function SettingsPage() {
     // Load saved invoice defaults if available
     const savedTerms = localStorage.getItem('invoice_default_terms')
     const savedNotes = localStorage.getItem('invoice_default_notes')
+    const savedFooterMessage = localStorage.getItem('invoice_default_footer_message')
     if (savedTerms) setFormData((prev) => ({ ...prev, defaultTerms: savedTerms }))
     if (savedNotes) setFormData((prev) => ({ ...prev, defaultNotes: savedNotes }))
+    if (savedFooterMessage) setFormData((prev) => ({ ...prev, defaultFooterMessage: savedFooterMessage }))
     
     // Load shop settings from profile
     if (profile) {
@@ -142,6 +145,7 @@ export default function SettingsPage() {
   const handleSaveDefaults = () => {
     localStorage.setItem('invoice_default_terms', formData.defaultTerms)
     localStorage.setItem('invoice_default_notes', formData.defaultNotes)
+    localStorage.setItem('invoice_default_footer_message', formData.defaultFooterMessage)
     toast.success('Invoice defaults saved successfully!')
   }
 
