@@ -232,14 +232,16 @@ export default function SignupPage() {
                 )}
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                <label htmlFor="country-select" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Country <span className="text-red-500">*</span>
                 </label>
                 <select
+                  id="country-select"
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-300 hover:border-primary-400 dark:hover:border-primary-500"
                   required
+                  aria-label="Select your country"
                 >
                   {countries.map((c) => (
                     <option key={c.code} value={c.code}>
