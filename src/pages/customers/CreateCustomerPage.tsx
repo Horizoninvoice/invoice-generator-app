@@ -35,7 +35,16 @@ export default function CreateCustomerPage() {
 
     try {
       const { error } = await supabase.from('customers').insert({
-        ...formData,
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        address: formData.address,
+        city: formData.city,
+        state: formData.state,
+        zip_code: formData.zip_code,
+        country: formData.country,
+        tax_id: formData.tax_id,
+        notes: formData.notes || null,
         user_id: user!.id,
       })
 

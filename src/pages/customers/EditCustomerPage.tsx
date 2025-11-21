@@ -56,7 +56,7 @@ export default function EditCustomerPage() {
         zip_code: data.zip_code || '',
         country: data.country || 'IN',
         tax_id: data.tax_id || '',
-        notes: data.notes || '',
+        notes: (data as any).notes || '',
       })
     } catch (error: any) {
       toast.error(error.message || 'Failed to fetch customer')
@@ -71,7 +71,18 @@ export default function EditCustomerPage() {
     try {
       const { error } = await supabase
         .from('customers')
-        .update(formData)
+        .update({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          zip_code: formData.zip_code,
+          country: formData.country,
+          tax_id: formData.tax_id,
+          notes: formData.notes || null,
+        })
         .eq('id', id)
         .eq('user_id', user!.id)
 
