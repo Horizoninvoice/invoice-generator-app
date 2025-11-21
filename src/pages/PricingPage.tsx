@@ -61,7 +61,7 @@ export default function PricingPage() {
       <main className="flex-1">
         <div className="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h1 className="text-4xl font-bold text-black dark:text-white mb-4">
               Horizon Invoice Generator – Pricing (INR)
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
@@ -85,9 +85,9 @@ export default function PricingPage() {
                   </div>
                 )}
                 <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{plan.name}</h3>
+                  <h3 className="text-2xl font-bold text-black dark:text-white mb-2">{plan.name}</h3>
                   <div className="mb-2">
-                    <span className="text-4xl font-bold text-gray-900 dark:text-white">{plan.price}</span>
+                    <span className="text-4xl font-bold text-black dark:text-white">{plan.price}</span>
                     {plan.period && (
                       <span className="text-gray-600 dark:text-gray-400 ml-2">/{plan.period}</span>
                     )}
@@ -124,7 +124,7 @@ export default function PricingPage() {
 
           <div className="mt-16 text-center">
             <Card className="p-8 bg-primary-50 dark:bg-primary-900/20">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              <h3 className="text-2xl font-bold text-black dark:text-white mb-4">
                 Need a Personalized Plan?
               </h3>
               <p className="text-gray-600 dark:text-gray-400 mb-6">

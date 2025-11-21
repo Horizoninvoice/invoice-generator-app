@@ -67,7 +67,7 @@ export default function TemplatePreview({ template, onClick }: TemplatePreviewPr
                   {sampleCompany.logo_url && (
                     <img src={sampleCompany.logo_url} alt="Logo" className="h-12 mb-2" />
                   )}
-                  <h1 className="text-2xl font-bold text-gray-900">{sampleCompany.shop_name}</h1>
+                  <h1 className="text-2xl font-bold text-black">{sampleCompany.shop_name}</h1>
                   <p className="text-sm text-gray-600">{sampleCompany.shop_address}</p>
                 </div>
                 <div className="text-right">
@@ -127,11 +127,11 @@ export default function TemplatePreview({ template, onClick }: TemplatePreviewPr
                   {sampleCompany.logo_url && (
                     <img src={sampleCompany.logo_url} alt="Logo" className="h-10 mb-2" />
                   )}
-                  <h1 className="text-xl font-bold text-gray-900">{sampleCompany.shop_name}</h1>
+                  <h1 className="text-xl font-bold text-black">{sampleCompany.shop_name}</h1>
                   <p className="text-xs text-gray-600">{sampleCompany.shop_address}</p>
                 </div>
                 <div className="text-right">
-                  <h2 className="text-xl font-bold text-gray-900">Invoice</h2>
+                  <h2 className="text-xl font-bold text-black">Invoice</h2>
                   <p className="text-xs text-gray-600">#{sampleInvoice.invoice_number}</p>
                 </div>
               </div>
@@ -139,7 +139,7 @@ export default function TemplatePreview({ template, onClick }: TemplatePreviewPr
             <div className="grid grid-cols-2 gap-3 mb-4 text-xs">
               <div>
                 <h3 className="font-semibold mb-1">Bill To:</h3>
-                <p className="text-gray-900">{sampleCustomer.name}</p>
+                <p className="text-black">{sampleCustomer.name}</p>
                 <p className="text-gray-600">{sampleCustomer.address}</p>
               </div>
               <div>
@@ -199,7 +199,7 @@ export default function TemplatePreview({ template, onClick }: TemplatePreviewPr
               <div className="grid grid-cols-2 gap-3 mb-3">
                 <div>
                   <h3 className="font-semibold mb-1">Bill To:</h3>
-                  <p className="text-gray-900">{sampleCustomer.name}</p>
+                  <p className="text-black">{sampleCustomer.name}</p>
                   <p className="text-gray-600 text-xs">{sampleCustomer.email}</p>
                 </div>
                 <div>
@@ -245,11 +245,11 @@ export default function TemplatePreview({ template, onClick }: TemplatePreviewPr
                   {sampleCompany.logo_url && (
                     <img src={sampleCompany.logo_url} alt="Logo" className="h-12 mb-2" />
                   )}
-                  <h1 className="text-2xl font-serif text-gray-900 mb-1">{sampleCompany.shop_name}</h1>
+                  <h1 className="text-2xl font-serif text-black mb-1">{sampleCompany.shop_name}</h1>
                   <p className="text-gray-700 text-xs">{sampleCompany.shop_address}</p>
                 </div>
                 <div className="text-right border-l-2 border-gray-800 pl-3">
-                  <h2 className="text-2xl font-serif text-gray-900">INVOICE</h2>
+                  <h2 className="text-2xl font-serif text-black">INVOICE</h2>
                   <p className="text-gray-700 text-xs">#{sampleInvoice.invoice_number}</p>
                 </div>
               </div>
@@ -257,7 +257,7 @@ export default function TemplatePreview({ template, onClick }: TemplatePreviewPr
             <div className="grid grid-cols-2 gap-3 mb-3 text-xs border-r-2 border-gray-300 pr-3">
               <div>
                 <h3 className="font-semibold mb-1">Bill To:</h3>
-                <p className="text-gray-900">{sampleCustomer.name}</p>
+                <p className="text-black">{sampleCustomer.name}</p>
                 <p className="text-gray-600">{sampleCustomer.address}</p>
               </div>
             </div>
@@ -299,7 +299,7 @@ export default function TemplatePreview({ template, onClick }: TemplatePreviewPr
                   {sampleCompany.logo_url && (
                     <img src={sampleCompany.logo_url} alt="Logo" className="h-8 mb-1" />
                   )}
-                  <h1 className="text-xl font-light text-gray-900">{sampleCompany.shop_name}</h1>
+                  <h1 className="text-xl font-light text-black">{sampleCompany.shop_name}</h1>
                 </div>
                 <div className="text-right">
                   <p className="text-xs text-gray-500">Invoice #{sampleInvoice.invoice_number}</p>
@@ -308,17 +308,17 @@ export default function TemplatePreview({ template, onClick }: TemplatePreviewPr
             </div>
             <div className="mb-4 text-xs">
               <p className="text-gray-400 mb-0.5">Bill To</p>
-              <p className="text-gray-900">{sampleCustomer.name}</p>
+              <p className="text-black">{sampleCustomer.name}</p>
               <p className="text-gray-500 text-xs mt-0.5">{sampleCustomer.email}</p>
             </div>
             <div className="space-y-2 mb-4 text-xs">
               {sampleItems.map((item, idx) => (
                 <div key={idx} className="flex justify-between border-b border-gray-100 pb-1">
                   <div>
-                    <p className="text-gray-900">{item.description}</p>
+                    <p className="text-black">{item.description}</p>
                     <p className="text-gray-500">{item.quantity} × {formatCurrency(item.unit_price, sampleInvoice.currency)}</p>
                   </div>
-                  <p className="text-gray-900 font-medium">{formatCurrency(item.line_total, sampleInvoice.currency)}</p>
+                  <p className="text-black font-medium">{formatCurrency(item.line_total, sampleInvoice.currency)}</p>
                 </div>
               ))}
             </div>

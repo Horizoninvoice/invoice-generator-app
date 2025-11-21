@@ -42,7 +42,7 @@ export default function ModernTemplate({ invoice, items, customer, company }: Mo
         <div className="grid md:grid-cols-2 gap-6 mb-6 pb-6 border-b border-gray-200">
           <div>
             <h3 className="text-xs font-semibold text-gray-500 uppercase mb-2">Bill To</h3>
-            <p className="text-lg font-semibold text-gray-900">{customer?.name || 'N/A'}</p>
+            <p className="text-lg font-semibold text-black">{customer?.name || 'N/A'}</p>
             {customer?.address && <p className="text-gray-600 text-sm mt-1">{customer.address}</p>}
             {customer?.email && <p className="text-gray-600 text-sm">{customer.email}</p>}
           </div>

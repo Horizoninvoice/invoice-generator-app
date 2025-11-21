@@ -71,7 +71,7 @@ export default function CreateCustomerPage() {
               Back
             </Button>
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Add Customer</h1>
+          <h1 className="text-3xl font-bold text-black dark:text-white">Add Customer</h1>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -79,7 +79,7 @@ export default function CreateCustomerPage() {
             <div className="space-y-6">
               {/* Basic Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Basic Information</h3>
+                <h3 className="text-lg font-semibold text-black dark:text-white mb-4">Basic Information</h3>
                 <div className="grid md:grid-cols-2 gap-4">
                   <Input
                     label="Customer Name"
@@ -112,7 +112,7 @@ export default function CreateCustomerPage() {
 
               {/* Address Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Address Information</h3>
+                <h3 className="text-lg font-semibold text-black dark:text-white mb-4">Address Information</h3>
                 <div className="space-y-4">
                   <Textarea
                     label="Street Address"
@@ -152,7 +152,7 @@ export default function CreateCustomerPage() {
 
               {/* Additional Notes */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Additional Information</h3>
+                <h3 className="text-lg font-semibold text-black dark:text-white mb-4">Additional Information</h3>
                 <Textarea
                   label="Notes"
                   rows={3}

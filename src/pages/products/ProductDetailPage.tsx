@@ -112,7 +112,7 @@ export default function ProductDetailPage() {
               </Button>
             </Link>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{product.name}</h1>
+              <h1 className="text-3xl font-bold text-black dark:text-white">{product.name}</h1>
               <p className="text-gray-600 dark:text-gray-400">Product Details</p>
             </div>
           </div>
@@ -137,23 +137,23 @@ export default function ProductDetailPage() {
               <div className="space-y-4">
                 <div>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Product Name</p>
-                  <p className="text-lg font-semibold text-gray-900 dark:text-white">{product.name}</p>
+                  <p className="text-lg font-semibold text-black dark:text-white">{product.name}</p>
                 </div>
                 {product.sku && (
                   <div>
                     <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">SKU</p>
-                    <p className="text-sm text-gray-900 dark:text-white">{product.sku}</p>
+                    <p className="text-sm text-black dark:text-white">{product.sku}</p>
                   </div>
                 )}
                 {product.description && (
                   <div>
                     <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Description</p>
-                    <p className="text-sm text-gray-900 dark:text-white whitespace-pre-line">{product.description}</p>
+                    <p className="text-sm text-black dark:text-white whitespace-pre-line">{product.description}</p>
                   </div>
                 )}
                 <div>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Unit</p>
-                  <p className="text-sm text-gray-900 dark:text-white capitalize">{product.unit || 'unit'}</p>
+                  <p className="text-sm text-black dark:text-white capitalize">{product.unit || 'unit'}</p>
                 </div>
               </div>
             </Card>
@@ -163,13 +163,13 @@ export default function ProductDetailPage() {
               <div className="space-y-4">
                 <div>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Unit Price</p>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                  <p className="text-2xl font-bold text-black dark:text-white">
                     {formatCurrency(product.price, profile?.currency || 'INR')}
                   </p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Tax Rate</p>
-                  <p className="text-lg font-semibold text-gray-900 dark:text-white">{product.tax_rate || 0}%</p>
+                  <p className="text-lg font-semibold text-black dark:text-white">{product.tax_rate || 0}%</p>
                 </div>
               </div>
             </Card>
@@ -179,7 +179,7 @@ export default function ProductDetailPage() {
               <div className="space-y-4">
                 <div>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Times Used</p>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">{usageCount}</p>
+                  <p className="text-2xl font-bold text-black dark:text-white">{usageCount}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">in invoices</p>
                 </div>
               </div>
@@ -217,13 +217,13 @@ export default function ProductDetailPage() {
                           key={invoice.id}
                           className="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50"
                         >
-                          <td className="py-3 px-4 text-sm font-medium text-gray-900 dark:text-white">
+                          <td className="py-3 px-4 text-sm font-medium text-black dark:text-white">
                             {invoice.invoice_number}
                           </td>
                           <td className="py-3 px-4 text-sm text-gray-600 dark:text-gray-400">
                             {new Date(invoice.issue_date).toLocaleDateString()}
                           </td>
-                          <td className="py-3 px-4 text-sm font-medium text-gray-900 dark:text-white">
+                          <td className="py-3 px-4 text-sm font-medium text-black dark:text-white">
                             {formatCurrency(invoice.total_amount, invoice.currency || profile?.currency || 'INR')}
                           </td>
                           <td className="py-3 px-4">

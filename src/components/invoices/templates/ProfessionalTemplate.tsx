@@ -27,7 +27,7 @@ export default function ProfessionalTemplate({ invoice, items, customer, company
                     }}
                   />
                 )}
-                <h1 className="text-3xl font-bold text-gray-900">{company?.shop_name || 'Your Company'}</h1>
+                <h1 className="text-3xl font-bold text-black">{company?.shop_name || 'Your Company'}</h1>
             {company?.shop_address && (
               <p className="text-gray-600 mt-2">{company.shop_address}</p>
             )}
@@ -45,7 +45,7 @@ export default function ProfessionalTemplate({ invoice, items, customer, company
       {/* Invoice Details */}
       <div className="grid md:grid-cols-2 gap-8 mb-8">
         <div>
-          <h3 className="font-semibold text-gray-900 mb-2">Bill To:</h3>
+          <h3 className="font-semibold text-black mb-2">Bill To:</h3>
           <p className="text-gray-700 font-medium">{customer?.name || 'N/A'}</p>
           {customer?.address && <p className="text-gray-600">{customer.address}</p>}
           {customer?.city && <p className="text-gray-600">{customer.city}, {customer.state} {customer.zip_code}</p>}
@@ -134,13 +134,13 @@ export default function ProfessionalTemplate({ invoice, items, customer, company
         <div className="border-t border-gray-200 pt-6">
           {invoice.notes && (
             <div className="mb-4">
-              <h4 className="font-semibold text-gray-900 mb-2">Notes:</h4>
+              <h4 className="font-semibold text-black mb-2">Notes:</h4>
               <p className="text-gray-600 whitespace-pre-line">{invoice.notes}</p>
             </div>
           )}
           {invoice.terms && (
             <div>
-              <h4 className="font-semibold text-gray-900 mb-2">Terms & Conditions:</h4>
+              <h4 className="font-semibold text-black mb-2">Terms & Conditions:</h4>
               <p className="text-gray-600 whitespace-pre-line text-sm">{invoice.terms}</p>
             </div>
           )}

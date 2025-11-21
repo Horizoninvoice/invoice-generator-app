@@ -41,7 +41,7 @@ export default function ResendConfirmationPage() {
         <Card>
           <div className="text-center mb-6">
             <Mail className="w-12 h-12 text-primary-600 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Resend Confirmation Email</h2>
+            <h2 className="text-2xl font-bold text-black dark:text-white mb-2">Resend Confirmation Email</h2>
             <p className="text-gray-600 dark:text-gray-400">
               Enter your email address and we'll send you a new confirmation link.
             </p>

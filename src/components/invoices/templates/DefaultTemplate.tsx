@@ -26,12 +26,12 @@ export default function DefaultTemplate({ invoice, items, customer, company }: D
                 }}
               />
             )}
-            <h1 className="text-2xl font-bold text-gray-900">{company?.shop_name || 'Your Company'}</h1>
+            <h1 className="text-2xl font-bold text-black">{company?.shop_name || 'Your Company'}</h1>
             {company?.shop_address && <p className="text-gray-600 text-sm mt-1">{company.shop_address}</p>}
             {company?.shop_email && <p className="text-gray-600 text-sm">{company.shop_email}</p>}
           </div>
           <div className="text-right">
-            <h2 className="text-2xl font-bold text-gray-900">Invoice</h2>
+            <h2 className="text-2xl font-bold text-black">Invoice</h2>
             <p className="text-gray-600 text-sm mt-1">#{invoice.invoice_number}</p>
           </div>
         </div>
@@ -41,7 +41,7 @@ export default function DefaultTemplate({ invoice, items, customer, company }: D
       <div className="grid md:grid-cols-2 gap-6 mb-8">
         <div>
           <h3 className="text-sm font-semibold text-gray-700 mb-2">Bill To:</h3>
-          <p className="text-gray-900">{customer?.name || 'N/A'}</p>
+          <p className="text-black">{customer?.name || 'N/A'}</p>
           {customer?.address && <p className="text-gray-600 text-sm">{customer.address}</p>}
           {customer?.email && <p className="text-gray-600 text-sm">{customer.email}</p>}
         </div>

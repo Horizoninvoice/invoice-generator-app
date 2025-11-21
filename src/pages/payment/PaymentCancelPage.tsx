@@ -11,7 +11,7 @@ export default function PaymentCancelPage() {
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Card className="text-center">
           <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Payment Cancelled</h1>
+          <h1 className="text-2xl font-bold text-black dark:text-white mb-4">Payment Cancelled</h1>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
             Your payment was cancelled. You can try again anytime or contact support if you need assistance.
           </p>

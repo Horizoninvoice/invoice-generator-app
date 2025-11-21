@@ -142,7 +142,7 @@ export default function ConfirmEmailPage() {
           {status === 'loading' && (
             <>
               <Loader className="w-16 h-16 text-primary-600 mx-auto mb-4 animate-spin" />
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Confirming Your Email</h2>
+              <h2 className="text-2xl font-bold text-black dark:text-white mb-4">Confirming Your Email</h2>
               <p className="text-gray-600 dark:text-gray-400">Please wait while we verify your email address...</p>
             </>
           )}
@@ -150,7 +150,7 @@ export default function ConfirmEmailPage() {
           {status === 'success' && (
             <>
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Email Confirmed!</h2>
+              <h2 className="text-2xl font-bold text-black dark:text-white mb-4">Email Confirmed!</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-6">{message}</p>
               <Link to="/dashboard">
                 <Button>Go to Dashboard</Button>
@@ -161,7 +161,7 @@ export default function ConfirmEmailPage() {
           {status === 'error' && (
             <>
               <XCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Confirmation Failed</h2>
+              <h2 className="text-2xl font-bold text-black dark:text-white mb-4">Confirmation Failed</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-6">{message}</p>
               <div className="flex gap-4 justify-center">
                 <Button variant="outline" onClick={handleResendConfirmation}>
@@ -178,7 +178,7 @@ export default function ConfirmEmailPage() {
           {status === 'expired' && (
             <>
               <XCircle className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Link Expired</h2>
+              <h2 className="text-2xl font-bold text-black dark:text-white mb-4">Link Expired</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-6">{message}</p>
               <div className="flex gap-4 justify-center">
                 <Button onClick={handleResendConfirmation}>

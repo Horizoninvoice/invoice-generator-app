@@ -68,7 +68,7 @@ export default function CreateProductPage() {
               Back
             </Button>
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Add Product</h1>
+          <h1 className="text-3xl font-bold text-black dark:text-white">Add Product</h1>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -76,7 +76,7 @@ export default function CreateProductPage() {
             <div className="space-y-6">
               {/* Product Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Product Information</h3>
+                <h3 className="text-lg font-semibold text-black dark:text-white mb-4">Product Information</h3>
                 <div className="space-y-4">
                   <Input
                     label="Product Name"
@@ -111,7 +111,7 @@ export default function CreateProductPage() {
 
               {/* Pricing */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Pricing</h3>
+                <h3 className="text-lg font-semibold text-black dark:text-white mb-4">Pricing</h3>
                 <div className="grid md:grid-cols-2 gap-4">
                   <Input
                     label="Unit Price"

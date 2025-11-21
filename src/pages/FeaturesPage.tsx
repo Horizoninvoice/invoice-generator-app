@@ -63,7 +63,7 @@ export default function FeaturesPage() {
       <main className="flex-1">
         <div className="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white text-center mb-4">
+            <h1 className="text-4xl font-bold text-black dark:text-white text-center mb-4">
               Powerful Features for Your Business
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400 text-center max-w-2xl mx-auto">
@@ -83,7 +83,7 @@ export default function FeaturesPage() {
                       <Icon className="text-primary-600 dark:text-primary-400" size={24} />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                      <h3 className="text-lg font-semibold text-black dark:text-white mb-2">
                         {feature.title}
                       </h3>
                       <p className="text-gray-600 dark:text-gray-400 text-sm">

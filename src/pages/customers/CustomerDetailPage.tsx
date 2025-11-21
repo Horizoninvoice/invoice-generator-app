@@ -146,7 +146,7 @@ export default function CustomerDetailPage() {
               </Button>
             </Link>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{customer.name}</h1>
+              <h1 className="text-3xl font-bold text-black dark:text-white">{customer.name}</h1>
               <p className="text-gray-600 dark:text-gray-400">Customer Details</p>
             </div>
           </div>
@@ -174,7 +174,7 @@ export default function CustomerDetailPage() {
                     <Mail className="text-gray-400 mt-0.5" size={18} />
                     <div>
                       <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">Email</p>
-                      <p className="text-sm text-gray-900 dark:text-white">{customer.email}</p>
+                      <p className="text-sm text-black dark:text-white">{customer.email}</p>
                     </div>
                   </div>
                 )}
@@ -183,7 +183,7 @@ export default function CustomerDetailPage() {
                     <Phone className="text-gray-400 mt-0.5" size={18} />
                     <div>
                       <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">Phone</p>
-                      <p className="text-sm text-gray-900 dark:text-white">{customer.phone}</p>
+                      <p className="text-sm text-black dark:text-white">{customer.phone}</p>
                     </div>
                   </div>
                 )}
@@ -192,7 +192,7 @@ export default function CustomerDetailPage() {
                     <MapPin className="text-gray-400 mt-0.5" size={18} />
                     <div>
                       <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">Address</p>
-                      <p className="text-sm text-gray-900 dark:text-white">
+                      <p className="text-sm text-black dark:text-white">
                         {customer.address}
                         {customer.city && `, ${customer.city}`}
                         {customer.state && `, ${customer.state}`}
@@ -205,7 +205,7 @@ export default function CustomerDetailPage() {
                 {customer.tax_id && (
                   <div>
                     <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">Tax ID</p>
-                    <p className="text-sm text-gray-900 dark:text-white">{customer.tax_id}</p>
+                    <p className="text-sm text-black dark:text-white">{customer.tax_id}</p>
                   </div>
                 )}
               </div>
@@ -216,7 +216,7 @@ export default function CustomerDetailPage() {
               <div className="space-y-4">
                 <div>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Total Invoices</p>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">{stats.totalInvoices}</p>
+                  <p className="text-2xl font-bold text-black dark:text-white">{stats.totalInvoices}</p>
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Paid Invoices</p>
@@ -224,7 +224,7 @@ export default function CustomerDetailPage() {
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Total Revenue</p>
-                  <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                  <p className="text-2xl font-bold text-black dark:text-white">
                     {formatCurrency(stats.totalAmount, profile?.currency || 'INR')}
                   </p>
                 </div>
@@ -280,7 +280,7 @@ export default function CustomerDetailPage() {
                           key={invoice.id}
                           className="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50"
                         >
-                          <td className="py-3 px-4 text-sm font-medium text-gray-900 dark:text-white">
+                          <td className="py-3 px-4 text-sm font-medium text-black dark:text-white">
                             {invoice.invoice_number}
                           </td>
                           <td className="py-3 px-4 text-sm text-gray-600 dark:text-gray-400">
@@ -289,7 +289,7 @@ export default function CustomerDetailPage() {
                           <td className="py-3 px-4 text-sm text-gray-600 dark:text-gray-400">
                             {invoice.due_date ? formatDate(invoice.due_date) : 'N/A'}
                           </td>
-                          <td className="py-3 px-4 text-sm font-medium text-gray-900 dark:text-white">
+                          <td className="py-3 px-4 text-sm font-medium text-black dark:text-white">
                             {formatCurrency(invoice.total_amount, invoice.currency || profile?.currency || 'INR')}
                           </td>
                           <td className="py-3 px-4">

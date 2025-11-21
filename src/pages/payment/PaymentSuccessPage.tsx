@@ -24,24 +24,24 @@ export default function PaymentSuccessPage() {
       <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Card className="text-center">
           <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Payment Successful!</h1>
+          <h1 className="text-2xl font-bold text-black dark:text-white mb-4">Payment Successful!</h1>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
             Your subscription has been activated. You now have access to all premium features.
           </p>
 
           {/* Payment Summary */}
           <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 mb-6 text-left">
-            <h3 className="font-semibold text-gray-900 dark:text-white mb-4">Payment Summary</h3>
+            <h3 className="font-semibold text-black dark:text-white mb-4">Payment Summary</h3>
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Plan:</span>
-                <span className="font-medium text-gray-900 dark:text-white">
+                <span className="font-medium text-black dark:text-white">
                   {plan === 'max' ? 'Max (Lifetime)' : 'Pro (Monthly)'}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600 dark:text-gray-400">Amount:</span>
-                <span className="font-medium text-gray-900 dark:text-white">
+                <span className="font-medium text-black dark:text-white">
                   {formatCurrency(parseFloat(amount) / 100, profile?.currency || 'INR')}
                 </span>
               </div>

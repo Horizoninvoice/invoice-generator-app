@@ -109,7 +109,7 @@ export default function EditCustomerPage() {
               Back
             </Button>
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Edit Customer</h1>
+          <h1 className="text-3xl font-bold text-black dark:text-white">Edit Customer</h1>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -117,7 +117,7 @@ export default function EditCustomerPage() {
             <div className="space-y-6">
               {/* Basic Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Basic Information</h3>
+                <h3 className="text-lg font-semibold text-black dark:text-white mb-4">Basic Information</h3>
                 <div className="grid md:grid-cols-2 gap-4">
                   <Input
                     label="Customer Name"
@@ -150,7 +150,7 @@ export default function EditCustomerPage() {
 
               {/* Address Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Address Information</h3>
+                <h3 className="text-lg font-semibold text-black dark:text-white mb-4">Address Information</h3>
                 <div className="space-y-4">
                   <Textarea
                     label="Street Address"
@@ -190,7 +190,7 @@ export default function EditCustomerPage() {
 
               {/* Additional Notes */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Additional Information</h3>
+                <h3 className="text-lg font-semibold text-black dark:text-white mb-4">Additional Information</h3>
                 <Textarea
                   label="Notes"
                   rows={3}

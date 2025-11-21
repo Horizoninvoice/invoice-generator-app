@@ -272,7 +272,7 @@ export default function CreateInvoicePage() {
             <ArrowLeft size={18} className="mr-2" />
             Back
           </Button>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Create Invoice</h1>
+          <h1 className="text-3xl font-bold text-black dark:text-gray-100">Create Invoice</h1>
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -422,7 +422,7 @@ export default function CreateInvoicePage() {
                         />
                         <div className="md:col-span-5 flex items-end">
                           <p className="text-sm text-gray-600 dark:text-gray-400">
-                            Line Total: <span className="font-semibold text-gray-900 dark:text-gray-100">
+                            Line Total: <span className="font-semibold text-black dark:text-gray-100">
                               {formatCurrency(item.line_total || 0, formData.currency)}
                             </span>
                           </p>
@@ -457,7 +457,7 @@ export default function CreateInvoicePage() {
                       <div className="w-64 space-y-2">
                         <div className="flex justify-between text-sm">
                           <span className="text-gray-600 dark:text-gray-400">Subtotal:</span>
-                          <span className="font-medium text-gray-900 dark:text-gray-100">
+                          <span className="font-medium text-black dark:text-gray-100">
                             {formatCurrency(subtotal, formData.currency)}
                           </span>
                         </div>
@@ -466,8 +466,8 @@ export default function CreateInvoicePage() {
                           <span className="font-medium">{formatCurrency(taxAmount, formData.currency)}</span>
                         </div>
                         <div className="flex justify-between text-lg font-bold pt-2 border-t border-gray-200 dark:border-gray-700">
-                          <span className="text-gray-900 dark:text-gray-100">Total:</span>
-                          <span className="text-gray-900 dark:text-gray-100">{formatCurrency(total, formData.currency)}</span>
+                          <span className="text-black dark:text-gray-100">Total:</span>
+                          <span className="text-black dark:text-gray-100">{formatCurrency(total, formData.currency)}</span>
                         </div>
                       </div>
                     </div>
@@ -503,7 +503,7 @@ export default function CreateInvoicePage() {
                 <div className="flex-shrink-0 flex flex-col overflow-hidden mb-4" style={{ maxHeight: '60vh', minHeight: '400px' }}>
                   <Card className="flex flex-col overflow-hidden h-full">
                   <div className="flex items-center justify-between mb-4 flex-shrink-0">
-                    <h3 className="font-semibold text-gray-900 dark:text-gray-100 flex items-center gap-2">
+                    <h3 className="font-semibold text-black dark:text-gray-100 flex items-center gap-2">
                       <Eye size={18} />
                       Live Preview
                     </h3>
@@ -561,24 +561,24 @@ export default function CreateInvoicePage() {
                 <Card className="flex-shrink-0 mt-auto">
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <h3 className="font-semibold text-gray-900 dark:text-gray-100">Quick Summary</h3>
+                      <h3 className="font-semibold text-black dark:text-gray-100">Quick Summary</h3>
                     </div>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className="text-gray-600 dark:text-gray-400">Subtotal</span>
-                        <span className="font-medium text-gray-900 dark:text-gray-100">
+                        <span className="font-medium text-black dark:text-gray-100">
                           {formatCurrency(subtotal, formData.currency)}
                         </span>
                       </div>
                       <div className="flex justify-between">
                         <span className="text-gray-600 dark:text-gray-400">Tax</span>
-                        <span className="font-medium text-gray-900 dark:text-gray-100">
+                        <span className="font-medium text-black dark:text-gray-100">
                           {formatCurrency(taxAmount, formData.currency)}
                         </span>
                       </div>
                       <div className="flex justify-between pt-2 border-t border-gray-200 dark:border-gray-700">
-                        <span className="font-semibold text-gray-900 dark:text-gray-100">Total</span>
-                        <span className="font-bold text-lg text-gray-900 dark:text-gray-100">
+                        <span className="font-semibold text-black dark:text-gray-100">Total</span>
+                        <span className="font-bold text-lg text-black dark:text-gray-100">
                           {formatCurrency(total, formData.currency)}
                         </span>
                       </div>

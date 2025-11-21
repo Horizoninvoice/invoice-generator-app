@@ -26,11 +26,11 @@ export default function ClassicTemplate({ invoice, items, customer, company }: C
                 }}
               />
             )}
-            <h1 className="text-3xl font-serif text-gray-900 mb-2">{company?.shop_name || 'Your Company'}</h1>
+            <h1 className="text-3xl font-serif text-black mb-2">{company?.shop_name || 'Your Company'}</h1>
             {company?.shop_address && <p className="text-gray-700 text-sm">{company.shop_address}</p>}
           </div>
           <div className="text-right border-l-2 border-gray-800 pl-4">
-            <h2 className="text-3xl font-serif text-gray-900">INVOICE</h2>
+            <h2 className="text-3xl font-serif text-black">INVOICE</h2>
             <p className="text-gray-700 mt-1">#{invoice.invoice_number}</p>
           </div>
         </div>
@@ -39,10 +39,10 @@ export default function ClassicTemplate({ invoice, items, customer, company }: C
       {/* Classic Layout */}
       <div className="grid md:grid-cols-2 gap-8 mb-8">
         <div className="border-r-2 border-gray-300 pr-6">
-          <h3 className="font-serif text-lg font-semibold text-gray-900 mb-3 border-b border-gray-300 pb-1">
+          <h3 className="font-serif text-lg font-semibold text-black mb-3 border-b border-gray-300 pb-1">
             Bill To:
           </h3>
-          <p className="text-gray-900 font-medium">{customer?.name || 'N/A'}</p>
+          <p className="text-black font-medium">{customer?.name || 'N/A'}</p>
           {customer?.address && <p className="text-gray-700 text-sm mt-1">{customer.address}</p>}
           {customer?.city && <p className="text-gray-700 text-sm">{customer.city}, {customer.state}</p>}
         </div>

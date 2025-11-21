@@ -62,7 +62,7 @@ export default function SignupPage() {
       <div className="flex items-center justify-center min-h-[calc(100vh-4rem)] px-4">
         <div className="w-full max-w-md">
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">Sign Up</h1>
+            <h1 className="text-3xl font-bold text-black dark:text-white mb-6 text-center">Sign Up</h1>
             <form onSubmit={handleSubmit} className="space-y-4">
               <Input
                 label="Email"
@@ -160,7 +160,7 @@ export default function SignupPage() {
                 <select
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500"
                   required
                 >
                   {countries.map((c) => (

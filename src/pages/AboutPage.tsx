@@ -10,7 +10,7 @@ export default function AboutPage() {
       <main className="flex-1">
         <div className="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h1 className="text-4xl font-bold text-black dark:text-white mb-4">
               About Horizon
             </h1>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
@@ -22,7 +22,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid md:grid-cols-2 gap-12 mb-16">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Our Mission</h2>
+              <h2 className="text-3xl font-bold text-black dark:text-white mb-4">Our Mission</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
                 At Horizon, we believe that invoicing should be simple, fast, and professional. Our mission is to 
                 empower businesses of all sizes to create beautiful, professional invoices without the complexity 
@@ -34,7 +34,7 @@ export default function AboutPage() {
               </p>
             </div>
             <div>
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">What We Offer</h2>
+              <h2 className="text-3xl font-bold text-black dark:text-white mb-4">What We Offer</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
                 Horizon is a cloud-based invoice generator that combines powerful features with an intuitive interface. 
                 Whether you're a freelancer, small business, or growing company, we have the tools you need to 
@@ -52,7 +52,7 @@ export default function AboutPage() {
               <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Target className="text-primary-600 dark:text-primary-400" size={32} />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Focused</h3>
+              <h3 className="text-lg font-semibold text-black dark:text-white mb-2">Focused</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
                 We focus on making invoicing simple and efficient
               </p>
@@ -61,7 +61,7 @@ export default function AboutPage() {
               <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Users className="text-primary-600 dark:text-primary-400" size={32} />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">User-Centric</h3>
+              <h3 className="text-lg font-semibold text-black dark:text-white mb-2">User-Centric</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
                 Built with your needs and feedback in mind
               </p>
@@ -70,7 +70,7 @@ export default function AboutPage() {
               <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Zap className="text-primary-600 dark:text-primary-400" size={32} />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Fast</h3>
+              <h3 className="text-lg font-semibold text-black dark:text-white mb-2">Fast</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
                 Lightning-fast performance and real-time updates
               </p>
@@ -79,7 +79,7 @@ export default function AboutPage() {
               <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Shield className="text-primary-600 dark:text-primary-400" size={32} />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Secure</h3>
+              <h3 className="text-lg font-semibold text-black dark:text-white mb-2">Secure</h3>
               <p className="text-gray-600 dark:text-gray-400 text-sm">
                 Your data is encrypted and protected
               </p>

@@ -9,7 +9,7 @@ export default function RefundPage() {
       <main className="flex-1">
         <div className="bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h1 className="text-4xl font-bold text-black dark:text-white mb-4">
               Refund & Cancellation Policy
             </h1>
             <p className="text-gray-600 dark:text-gray-400">
@@ -21,7 +21,7 @@ export default function RefundPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <Card className="p-8 prose dark:prose-invert max-w-none">
             <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">1. Subscription Refunds</h2>
+              <h2 className="text-2xl font-bold text-black dark:text-white mb-4">1. Subscription Refunds</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
                 All subscriptions (Pro Monthly & Max Lifetime) are digital services and are generally non-refundable once activated.
               </p>
@@ -36,7 +36,7 @@ export default function RefundPage() {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">2. Cancellation Policy</h2>
+              <h2 className="text-2xl font-bold text-black dark:text-white mb-4">2. Cancellation Policy</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
                 Pro Monthly subscription can be cancelled anytime. After cancellation, access remains active until the end of the billing cycle.
               </p>
@@ -46,7 +46,7 @@ export default function RefundPage() {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">3. How to Request a Refund</h2>
+              <h2 className="text-2xl font-bold text-black dark:text-white mb-4">3. How to Request a Refund</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
                 Email us at <a href="mailto:horizoninvoicegen@gmail.com" className="text-primary-600 dark:text-primary-400 hover:underline">horizoninvoicegen@gmail.com</a> with:
               </p>
@@ -61,7 +61,7 @@ export default function RefundPage() {
             </section>
 
             <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">4. No Shipping Policy</h2>
+              <h2 className="text-2xl font-bold text-black dark:text-white mb-4">4. No Shipping Policy</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
                 Horizon Invoice Generator is a digital SaaS product. No physical items are shipped.
               </p>

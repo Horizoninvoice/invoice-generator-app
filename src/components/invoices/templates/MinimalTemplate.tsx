@@ -26,7 +26,7 @@ export default function MinimalTemplate({ invoice, items, customer, company }: M
                 }}
               />
             )}
-            <h1 className="text-2xl font-light text-gray-900">{company?.shop_name || 'Your Company'}</h1>
+            <h1 className="text-2xl font-light text-black">{company?.shop_name || 'Your Company'}</h1>
           </div>
           <div className="text-right">
             <p className="text-sm text-gray-500">Invoice #{invoice.invoice_number}</p>
@@ -38,18 +38,18 @@ export default function MinimalTemplate({ invoice, items, customer, company }: M
       <div className="mb-12 space-y-8">
         <div>
           <p className="text-xs text-gray-400 mb-1">Bill To</p>
-          <p className="text-gray-900">{customer?.name || 'N/A'}</p>
+          <p className="text-black">{customer?.name || 'N/A'}</p>
           {customer?.email && <p className="text-sm text-gray-500 mt-1">{customer.email}</p>}
         </div>
         <div className="flex gap-8 text-sm">
           <div>
             <p className="text-xs text-gray-400 mb-1">Date</p>
-            <p className="text-gray-900">{formatDate(invoice.issue_date)}</p>
+            <p className="text-black">{formatDate(invoice.issue_date)}</p>
           </div>
           {invoice.due_date && (
             <div>
               <p className="text-xs text-gray-400 mb-1">Due</p>
-              <p className="text-gray-900">{formatDate(invoice.due_date)}</p>
+              <p className="text-black">{formatDate(invoice.due_date)}</p>
             </div>
           )}
         </div>
@@ -60,12 +60,12 @@ export default function MinimalTemplate({ invoice, items, customer, company }: M
         {items.map((item, index) => (
           <div key={index} className="flex justify-between items-start border-b border-gray-100 pb-4">
             <div className="flex-1">
-              <p className="text-gray-900">{item.description}</p>
+              <p className="text-black">{item.description}</p>
               <p className="text-xs text-gray-400 mt-1">
                 {item.quantity} × {formatCurrency(item.unit_price, invoice.currency || 'INR')}
               </p>
             </div>
-            <p className="text-gray-900 font-medium">
+            <p className="text-black font-medium">
               {formatCurrency(item.line_total, invoice.currency || 'INR')}
             </p>
           </div>
@@ -78,12 +78,12 @@ export default function MinimalTemplate({ invoice, items, customer, company }: M
           <div className="w-48 space-y-2">
             <div className="flex justify-between text-sm">
               <span className="text-gray-500">Subtotal</span>
-              <span className="text-gray-900">{formatCurrency(invoice.subtotal || 0, invoice.currency || 'INR')}</span>
+              <span className="text-black">{formatCurrency(invoice.subtotal || 0, invoice.currency || 'INR')}</span>
             </div>
             {invoice.tax_amount > 0 && (
               <div className="flex justify-between text-sm">
                 <span className="text-gray-500">Tax</span>
-                <span className="text-gray-900">{formatCurrency(invoice.tax_amount || 0, invoice.currency || 'INR')}</span>
+                <span className="text-black">{formatCurrency(invoice.tax_amount || 0, invoice.currency || 'INR')}</span>
               </div>
             )}
             <div className="flex justify-between pt-4 border-t border-gray-200">

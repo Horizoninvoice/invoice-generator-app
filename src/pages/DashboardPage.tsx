@@ -100,7 +100,7 @@ export default function DashboardPage() {
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+          <h1 className="text-3xl font-bold text-black dark:text-gray-100 mb-2">
             Welcome back, {profile?.shop_name || user?.email?.split('@')[0] || 'User'}!
           </h1>
           <p className="text-gray-600 dark:text-gray-400">Here's an overview of your business</p>
@@ -111,7 +111,7 @@ export default function DashboardPage() {
           <Card className="mb-6 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 border-primary-200 dark:border-primary-700">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">Upgrade to Pro</h3>
+                <h3 className="text-lg font-semibold text-black dark:text-gray-100 mb-1">Upgrade to Pro</h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
                   Unlock all features, remove ads, and get access to all invoice templates.
                 </p>
@@ -132,7 +132,7 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Total Invoices</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.invoices}</p>
+                <p className="text-2xl font-bold text-black dark:text-gray-100">{stats.invoices}</p>
               </div>
               <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
                 <FileText className="text-primary-600 dark:text-primary-400" size={24} />
@@ -144,7 +144,7 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Customers</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.customers}</p>
+                <p className="text-2xl font-bold text-black dark:text-gray-100">{stats.customers}</p>
               </div>
               <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
                 <Users className="text-primary-600 dark:text-primary-400" size={24} />
@@ -156,7 +156,7 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Products</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{stats.products}</p>
+                <p className="text-2xl font-bold text-black dark:text-gray-100">{stats.products}</p>
               </div>
               <div className="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center">
                 <Package className="text-primary-600 dark:text-primary-400" size={24} />
@@ -168,7 +168,7 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Total Revenue</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+                <p className="text-2xl font-bold text-black dark:text-gray-100">
                   {formatCurrency(stats.revenue, profile?.currency || 'INR')}
                 </p>
                 <p className="text-xs text-green-600 dark:text-green-400 mt-1 flex items-center gap-1">
@@ -223,14 +223,14 @@ export default function DashboardPage() {
                 <tbody>
                   {recentInvoices.map((invoice) => (
                     <tr key={invoice.id} className="border-b border-gray-100 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800/50">
-                      <td className="py-3 px-4 text-sm text-gray-900 dark:text-gray-100">{invoice.invoice_number}</td>
+                      <td className="py-3 px-4 text-sm text-black dark:text-gray-100">{invoice.invoice_number}</td>
                       <td className="py-3 px-4 text-sm text-gray-600 dark:text-gray-400">
                         {invoice.customers?.name || 'N/A'}
                       </td>
                       <td className="py-3 px-4 text-sm text-gray-600 dark:text-gray-400">
                         {formatDate(invoice.issue_date)}
                       </td>
-                      <td className="py-3 px-4 text-sm font-medium text-gray-900 dark:text-gray-100">
+                      <td className="py-3 px-4 text-sm font-medium text-black dark:text-gray-100">
                         {formatCurrency(invoice.total_amount, profile?.currency || 'INR')}
                       </td>
                       <td className="py-3 px-4">

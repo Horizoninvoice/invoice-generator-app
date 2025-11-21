@@ -99,7 +99,7 @@ export default function ProductsPage() {
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Products</h1>
+          <h1 className="text-3xl font-bold text-black dark:text-gray-100">Products</h1>
           <div className="flex gap-2">
             <Button variant="outline" onClick={handleExport}>
               <Download size={18} className="mr-2" />
@@ -136,7 +136,7 @@ export default function ProductsPage() {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <Package className="text-primary-600 dark:text-primary-400" size={20} />
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">{product.name}</h3>
+                      <h3 className="text-lg font-semibold text-black dark:text-gray-100">{product.name}</h3>
                     </div>
                     {product.sku && (
                       <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">SKU: {product.sku}</p>
@@ -171,13 +171,13 @@ export default function ProductsPage() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Price</p>
-                      <p className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                      <p className="text-xl font-bold text-black dark:text-gray-100">
                         {formatCurrency(product.price, profile?.currency || 'INR')}
                       </p>
                     </div>
                     <div className="text-right">
                       <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Tax Rate</p>
-                      <p className="text-sm font-medium text-gray-900 dark:text-gray-100">{product.tax_rate || 0}%</p>
+                      <p className="text-sm font-medium text-black dark:text-gray-100">{product.tax_rate || 0}%</p>
                     </div>
                   </div>
                   {product.unit && (
