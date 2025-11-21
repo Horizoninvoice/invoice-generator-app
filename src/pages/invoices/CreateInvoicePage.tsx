@@ -472,49 +472,48 @@ export default function CreateInvoicePage() {
                     </span>
                   </div>
                   <div className="border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-800 flex-1 flex flex-col min-h-0">
-                    <div className="flex-1 overflow-y-auto p-4 bg-white dark:bg-gray-900">
-                      <div className="transform scale-[0.65] origin-top-left" style={{ width: '153.85%', minHeight: '400px' }}>
-                        <InvoiceTemplateRenderer
-                          template={formData.template}
-                          invoice={{
-                            invoice_number: formData.invoice_number || 'INV-001',
-                            issue_date: formData.issue_date,
-                            due_date: formData.due_date,
-                            status: formData.status,
-                            currency: formData.currency,
-                            subtotal: subtotal,
-                            tax_amount: taxAmount,
-                            discount_amount: 0,
-                            total_amount: total,
-                            notes: formData.notes,
-                            terms: formData.terms,
-                          }}
-                          items={items.length > 0 ? items.map((item) => ({
-                            description: item.description || 'Item description',
-                            quantity: item.quantity || 1,
-                            unit_price: item.unit_price || 0,
-                            tax_rate: item.tax_rate || 0,
-                            line_total: item.line_total || 0,
-                          })) : [
-                            {
-                              description: 'Sample item',
-                              quantity: 1,
-                              unit_price: 0,
-                              tax_rate: 0,
-                              line_total: 0,
-                            }
-                          ]}
-                          customer={customers.find((c) => c.id === formData.customer_id) || null}
-                          company={profile}
-                        />
+                    {items.length > 0 ? (
+                      <div className="flex-1 overflow-y-auto p-4 bg-white dark:bg-gray-900">
+                        <div className="transform scale-[0.65] origin-top-left" style={{ width: '153.85%', minHeight: '400px' }}>
+                          <InvoiceTemplateRenderer
+                            template={formData.template}
+                            invoice={{
+                              invoice_number: formData.invoice_number || 'INV-001',
+                              issue_date: formData.issue_date,
+                              due_date: formData.due_date,
+                              status: formData.status,
+                              currency: formData.currency,
+                              subtotal: subtotal,
+                              tax_amount: taxAmount,
+                              discount_amount: 0,
+                              total_amount: total,
+                              notes: formData.notes,
+                              terms: formData.terms,
+                            }}
+                            items={items.map((item) => ({
+                              description: item.description || 'Item description',
+                              quantity: item.quantity || 1,
+                              unit_price: item.unit_price || 0,
+                              tax_rate: item.tax_rate || 0,
+                              line_total: item.line_total || 0,
+                            }))}
+                            customer={customers.find((c) => c.id === formData.customer_id) || null}
+                            company={profile}
+                          />
+                        </div>
                       </div>
-                    </div>
+                    ) : (
+                      <div className="flex-1 flex items-center justify-center p-8">
+                        <div className="text-center">
+                          <Eye size={48} className="mx-auto text-gray-400 dark:text-gray-500 mb-4" />
+                          <p className="text-gray-600 dark:text-gray-400 font-medium mb-2">No items added yet</p>
+                          <p className="text-sm text-gray-500 dark:text-gray-500">
+                            Add invoice items to see the live preview
+                          </p>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  {items.length === 0 && (
-                    <p className="mt-2 text-xs text-center text-gray-500 dark:text-gray-400 flex-shrink-0">
-                      Add items to see preview
-                    </p>
-                  )}
                 </Card>
               </div>
             </div>
