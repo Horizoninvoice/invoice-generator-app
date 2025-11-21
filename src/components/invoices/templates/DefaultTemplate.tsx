@@ -15,6 +15,17 @@ export default function DefaultTemplate({ invoice, items, customer, company }: D
       <div className="mb-8">
         <div className="flex justify-between items-center mb-6">
           <div>
+            {company?.logo_url && (
+              <img 
+                src={company.logo_url} 
+                alt="Company Logo" 
+                className="h-12 mb-3"
+                crossOrigin="anonymous"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none'
+                }}
+              />
+            )}
             <h1 className="text-2xl font-bold text-gray-900">{company?.shop_name || 'Your Company'}</h1>
             {company?.shop_address && <p className="text-gray-600 text-sm mt-1">{company.shop_address}</p>}
             {company?.shop_email && <p className="text-gray-600 text-sm">{company.shop_email}</p>}

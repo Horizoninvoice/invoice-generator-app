@@ -14,7 +14,20 @@ export default function MinimalTemplate({ invoice, items, customer, company }: M
       {/* Minimal Header */}
       <div className="mb-12">
         <div className="flex justify-between items-baseline border-b border-gray-200 pb-4">
-          <h1 className="text-2xl font-light text-gray-900">{company?.shop_name || 'Your Company'}</h1>
+          <div>
+            {company?.logo_url && (
+              <img 
+                src={company.logo_url} 
+                alt="Company Logo" 
+                className="h-10 mb-2"
+                crossOrigin="anonymous"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none'
+                }}
+              />
+            )}
+            <h1 className="text-2xl font-light text-gray-900">{company?.shop_name || 'Your Company'}</h1>
+          </div>
           <div className="text-right">
             <p className="text-sm text-gray-500">Invoice #{invoice.invoice_number}</p>
           </div>

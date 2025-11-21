@@ -15,6 +15,17 @@ export default function ModernTemplate({ invoice, items, customer, company }: Mo
       <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white p-6 rounded-t-lg mb-6">
         <div className="flex justify-between items-center">
           <div>
+            {company?.logo_url && (
+              <img 
+                src={company.logo_url} 
+                alt="Company Logo" 
+                className="h-14 mb-2 bg-white/20 p-1 rounded"
+                crossOrigin="anonymous"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none'
+                }}
+              />
+            )}
             <h1 className="text-3xl font-bold mb-2">{company?.shop_name || 'Your Company'}</h1>
             <p className="text-primary-100 text-sm">{company?.shop_email || ''}</p>
           </div>

@@ -133,10 +133,26 @@ export default function InvoiceDetailPage() {
         return
       }
 
+      // Wait for all images (including logos) to load before capturing
+      const images = element.querySelectorAll('img')
+      const imagePromises = Array.from(images).map((img: HTMLImageElement) => {
+        if (img.complete) return Promise.resolve()
+        return new Promise((resolve, reject) => {
+          img.onload = resolve
+          img.onerror = reject
+          // Timeout after 5 seconds
+          setTimeout(() => resolve(), 5000)
+        })
+      })
+      
+      await Promise.all(imagePromises)
+
       const canvas = await html2canvas(element, {
         scale: 2,
         useCORS: true,
+        allowTaint: true,
         logging: false,
+        backgroundColor: '#ffffff',
       })
 
       const imgData = canvas.toDataURL('image/png')

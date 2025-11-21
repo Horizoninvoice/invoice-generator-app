@@ -15,6 +15,17 @@ export default function ClassicTemplate({ invoice, items, customer, company }: C
       <div className="border-b-2 border-gray-800 pb-4 mb-6">
         <div className="flex justify-between items-start">
           <div>
+            {company?.logo_url && (
+              <img 
+                src={company.logo_url} 
+                alt="Company Logo" 
+                className="h-16 mb-3"
+                crossOrigin="anonymous"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none'
+                }}
+              />
+            )}
             <h1 className="text-3xl font-serif text-gray-900 mb-2">{company?.shop_name || 'Your Company'}</h1>
             {company?.shop_address && <p className="text-gray-700 text-sm">{company.shop_address}</p>}
           </div>
