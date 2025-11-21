@@ -43,6 +43,25 @@
 - `netlify.toml` - Build configuration and redirects
 - `public/_redirects` - SPA routing support (all routes → index.html)
 
+## Secrets Scanning Configuration
+
+If Netlify's secrets scanner blocks your build because it detects `VITE_SUPABASE_URL` or `VITE_SUPABASE_ANON_KEY` in the build output, this is **expected behavior**. These keys are intentionally bundled into client-side JavaScript by Vite.
+
+**Solution:** In Netlify Dashboard → Site settings → Build & deploy → Environment variables, add:
+
+```
+SECRETS_SCAN_OMIT_KEYS = VITE_SUPABASE_URL,VITE_SUPABASE_ANON_KEY
+```
+
+Or disable secrets scanning for the build output directory by adding to `netlify.toml`:
+
+```toml
+[build.processing]
+  skip_processing = false
+```
+
+**Note:** `VITE_SUPABASE_ANON_KEY` is safe to expose in client-side code - it's designed to be public. Only `SUPABASE_SERVICE_ROLE_KEY` must remain secret.
+
 ## Troubleshooting
 
 ### White Screen Issues
