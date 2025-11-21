@@ -312,36 +312,60 @@ export default function SettingsPage() {
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Default Terms & Conditions
+                <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">
+                  ({formData.defaultTerms.length}/30)
+                </span>
               </label>
               <Textarea
                 rows={4}
                 value={formData.defaultTerms}
-                onChange={(e) => setFormData({ ...formData, defaultTerms: e.target.value })}
+                onChange={(e) => {
+                  if (e.target.value.length <= 30) {
+                    setFormData({ ...formData, defaultTerms: e.target.value })
+                  }
+                }}
                 placeholder="Enter default terms and conditions that will be pre-filled in new invoices"
+                maxLength={30}
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Default Notes
+                <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">
+                  ({formData.defaultNotes.length}/30)
+                </span>
               </label>
               <Textarea
                 rows={3}
                 value={formData.defaultNotes}
-                onChange={(e) => setFormData({ ...formData, defaultNotes: e.target.value })}
+                onChange={(e) => {
+                  if (e.target.value.length <= 30) {
+                    setFormData({ ...formData, defaultNotes: e.target.value })
+                  }
+                }}
                 placeholder="Enter default notes that will be pre-filled in new invoices"
+                maxLength={30}
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Footer Message
+                <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">
+                  ({formData.defaultFooterMessage.length}/30)
+                </span>
               </label>
               <Input
                 value={formData.defaultFooterMessage}
-                onChange={(e) => setFormData({ ...formData, defaultFooterMessage: e.target.value })}
+                onChange={(e) => {
+                  if (e.target.value.length <= 30) {
+                    setFormData({ ...formData, defaultFooterMessage: e.target.value })
+                  }
+                }}
                 placeholder="Enter footer message (e.g., Thank you for your business!)"
+                maxLength={30}
               />
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                This message will appear at the bottom of all invoices
+                This message will appear at the bottom of all invoices (max 30 characters)
               </p>
             </div>
             <Button onClick={handleSaveDefaults} variant="outline">
