@@ -94,10 +94,15 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
     const currency = 'INR'
 
     // Create Razorpay order
+    // Receipt must be max 40 characters - use short format
+    const shortUserId = user_id.substring(0, 8) // First 8 chars of user ID
+    const timestamp = Date.now().toString().slice(-8) // Last 8 digits of timestamp
+    const receipt = `${plan}_${shortUserId}_${timestamp}` // Format: pro_1b2465c1_37146148 (max 40 chars)
+    
     const options = {
       amount: amount,
       currency: currency,
-      receipt: `receipt_${user_id}_${Date.now()}`,
+      receipt: receipt,
       notes: {
         plan: plan,
         user_id: user_id,
@@ -122,17 +127,30 @@ export const handler: Handler = async (event: HandlerEvent, context: HandlerCont
       })
     } catch (razorpayError: any) {
       console.error('Razorpay API error:', razorpayError)
+      
+      // Extract error message from Razorpay error object
+      let errorMessage = 'Razorpay API error'
+      if (razorpayError.error?.description) {
+        errorMessage = razorpayError.error.description
+      } else if (razorpayError.description) {
+        errorMessage = razorpayError.description
+      } else if (razorpayError.message) {
+        errorMessage = razorpayError.message
+      }
+      
       console.error('Razorpay error details:', {
         message: razorpayError.message,
-        description: razorpayError.description,
+        description: razorpayError.description || razorpayError.error?.description,
+        code: razorpayError.error?.code,
         field: razorpayError.field,
-        source: razorpayError.source,
-        step: razorpayError.step,
-        reason: razorpayError.reason,
-        metadata: razorpayError.metadata,
-        error: razorpayError.error,
+        source: razorpayError.source || razorpayError.error?.source,
+        step: razorpayError.step || razorpayError.error?.step,
+        reason: razorpayError.reason || razorpayError.error?.reason,
+        metadata: razorpayError.metadata || razorpayError.error?.metadata,
+        fullError: razorpayError,
       })
-      throw new Error(razorpayError.description || razorpayError.message || 'Razorpay API error')
+      
+      throw new Error(errorMessage)
     }
 
     return {
