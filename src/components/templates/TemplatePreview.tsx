@@ -59,7 +59,7 @@ export default function TemplatePreview({ template, name }: TemplatePreviewProps
     switch (template) {
       case 'professional':
         return (
-          <div className="bg-white p-6 max-w-md mx-auto shadow-lg transform scale-75 origin-top">
+          <div className="bg-white p-4 max-w-sm mx-auto shadow-lg transform scale-[0.6] origin-top">
             <div className="border-b-4 border-primary-600 pb-4 mb-4">
               <div className="flex justify-between items-start">
                 <div>
@@ -119,7 +119,7 @@ export default function TemplatePreview({ template, name }: TemplatePreviewProps
 
       case 'default':
         return (
-          <div className="bg-white p-6 max-w-md mx-auto shadow-lg transform scale-75 origin-top">
+          <div className="bg-white p-4 max-w-sm mx-auto shadow-lg transform scale-[0.6] origin-top">
             <div className="mb-4">
               <div className="flex justify-between items-center mb-3">
                 <div>
