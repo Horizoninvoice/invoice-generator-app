@@ -41,8 +41,12 @@ export default function ReportsPage() {
       let startDateStr: string
       let endDateStr: string | undefined
       
-      if (dateRange === 'custom' && customDateRange.from && customDateRange.to) {
-        // Custom date range
+      if (dateRange === 'custom') {
+        // Custom date range - only fetch if both dates are set
+        if (!customDateRange.from || !customDateRange.to) {
+          setLoading(false)
+          return
+        }
         startDateStr = customDateRange.from
         endDateStr = customDateRange.to
       } else if (dateRange === 'today') {
@@ -205,7 +209,7 @@ export default function ReportsPage() {
           <Card>
             <div className="text-center py-12">
               <BarChart3 className="mx-auto text-gray-400 mb-4" size={48} />
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Reports & Analytics</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">Reports & Analytics</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-6">
                 Advanced reporting and analytics are available for Pro and Max subscribers.
               </p>
@@ -235,7 +239,7 @@ export default function ReportsPage() {
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Reports & Analytics</h1>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Reports & Analytics</h1>
           <div className="flex gap-2 items-center">
             <Select
               options={[
@@ -301,7 +305,7 @@ export default function ReportsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Total Revenue</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                   {formatCurrency(reports.totalRevenue, profile?.currency || 'INR')}
                 </p>
               </div>
@@ -312,7 +316,7 @@ export default function ReportsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Total Invoices</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">{reports.totalInvoices}</p>
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{reports.totalInvoices}</p>
               </div>
               <FileText className="text-blue-500" size={32} />
             </div>
@@ -330,7 +334,7 @@ export default function ReportsPage() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Avg Invoice Value</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white">
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">
                   {formatCurrency(reports.averageInvoiceValue, profile?.currency || 'INR')}
                 </p>
               </div>
@@ -347,10 +351,10 @@ export default function ReportsPage() {
                 {reports.topCustomers.map((customer, index) => (
                   <div key={index} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded">
                     <div>
-                      <p className="font-medium text-gray-900 dark:text-white">{customer.name}</p>
+                      <p className="font-medium text-gray-900 dark:text-gray-100">{customer.name}</p>
                       <p className="text-sm text-gray-600 dark:text-gray-400">{customer.count} invoices</p>
                     </div>
-                    <p className="font-semibold text-gray-900 dark:text-white">
+                    <p className="font-semibold text-gray-900 dark:text-gray-100">
                       {formatCurrency(customer.revenue, profile?.currency || 'INR')}
                     </p>
                   </div>

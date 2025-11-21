@@ -296,14 +296,14 @@ export default function SubscriptionPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Subscription Management</h1>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-8">Subscription Management</h1>
 
         {/* Current Plan */}
         {profile && (
           <Card className="mb-8">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Current Plan</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-2">Current Plan</h3>
                 <p className="text-gray-600 dark:text-gray-400">
                   {isMax
                     ? 'Max (Lifetime) - You have lifetime access to all features'
@@ -349,10 +349,10 @@ export default function SubscriptionPage() {
               <div className="text-center mb-6">
                 <div className="flex items-center justify-center gap-2 mb-2">
                   {plan.id === 'max' && <Crown className="text-yellow-500" size={24} />}
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{plan.name}</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{plan.name}</h3>
                 </div>
                 <div className="mb-4">
-                  <span className="text-4xl font-bold text-gray-900 dark:text-white">
+                  <span className="text-4xl font-bold text-gray-900 dark:text-gray-100">
                     {formatCurrency(plan.price, profile?.currency || 'INR')}
                   </span>
                   {plan.period && <span className="text-gray-600 dark:text-gray-400">{plan.period}</span>}
@@ -438,7 +438,7 @@ export default function SubscriptionPage() {
         <Card>
           <div className="text-center">
             <Mail className="mx-auto text-primary-600 dark:text-primary-400 mb-4" size={48} />
-            <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Need a Custom Solution?</h3>
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Need a Custom Solution?</h3>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
               Contact us for personalized enterprise plans and custom features tailored to your business needs.
             </p>

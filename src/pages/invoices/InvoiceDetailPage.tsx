@@ -235,7 +235,7 @@ export default function InvoiceDetailPage() {
               </Button>
             </Link>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{invoice.invoice_number}</h1>
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">{invoice.invoice_number}</h1>
               <p className="text-gray-600 dark:text-gray-400">Invoice Details</p>
             </div>
           </div>
