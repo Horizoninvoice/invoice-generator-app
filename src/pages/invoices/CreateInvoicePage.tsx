@@ -44,6 +44,10 @@ export default function CreateInvoicePage() {
     template: 'professional',
   })
 
+  const [enableNotes, setEnableNotes] = useState(false)
+  const [enableTerms, setEnableTerms] = useState(false)
+  const [enableFooterMessage, setEnableFooterMessage] = useState(false)
+
   useEffect(() => {
     if (user) {
       fetchCustomers()
@@ -481,12 +485,21 @@ export default function CreateInvoicePage() {
               <Card title="Additional Information">
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Notes
-                      <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">
-                        ({formData.notes.length}/30)
-                      </span>
-                    </label>
+                    <div className="flex items-center gap-2 mb-1">
+                      <input
+                        type="checkbox"
+                        id="enable-notes"
+                        checked={enableNotes}
+                        onChange={(e) => setEnableNotes(e.target.checked)}
+                        className="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      />
+                      <label htmlFor="enable-notes" className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer">
+                        Notes
+                        <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">
+                          ({formData.notes.length}/30)
+                        </span>
+                      </label>
+                    </div>
                     <Textarea
                       rows={3}
                       value={formData.notes}
@@ -497,15 +510,25 @@ export default function CreateInvoicePage() {
                       }}
                       placeholder="Additional notes for the customer"
                       maxLength={30}
+                      disabled={!enableNotes}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Terms & Conditions
-                      <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">
-                        ({formData.terms.length}/30)
-                      </span>
-                    </label>
+                    <div className="flex items-center gap-2 mb-1">
+                      <input
+                        type="checkbox"
+                        id="enable-terms"
+                        checked={enableTerms}
+                        onChange={(e) => setEnableTerms(e.target.checked)}
+                        className="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      />
+                      <label htmlFor="enable-terms" className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer">
+                        Terms & Conditions
+                        <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">
+                          ({formData.terms.length}/30)
+                        </span>
+                      </label>
+                    </div>
                     <Textarea
                       rows={3}
                       value={formData.terms}
@@ -516,15 +539,25 @@ export default function CreateInvoicePage() {
                       }}
                       placeholder="Payment terms and conditions"
                       maxLength={30}
+                      disabled={!enableTerms}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                      Footer Message
-                      <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">
-                        ({formData.footer_message.length}/30)
-                      </span>
-                    </label>
+                    <div className="flex items-center gap-2 mb-1">
+                      <input
+                        type="checkbox"
+                        id="enable-footer"
+                        checked={enableFooterMessage}
+                        onChange={(e) => setEnableFooterMessage(e.target.checked)}
+                        className="w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                      />
+                      <label htmlFor="enable-footer" className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer">
+                        Footer Message
+                        <span className="text-xs text-gray-500 dark:text-gray-400 ml-2">
+                          ({formData.footer_message.length}/30)
+                        </span>
+                      </label>
+                    </div>
                     <Input
                       value={formData.footer_message}
                       onChange={(e) => {
@@ -534,6 +567,7 @@ export default function CreateInvoicePage() {
                       }}
                       placeholder="Enter footer message (e.g., Thank you for your business!)"
                       maxLength={30}
+                      disabled={!enableFooterMessage}
                     />
                     <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                       This message will appear at the bottom of the invoice (max 30 characters)
