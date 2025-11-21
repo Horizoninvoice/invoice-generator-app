@@ -253,11 +253,13 @@ export default function SignupPage() {
               </div>
               <div className="flex items-start gap-2 p-3 bg-gray-50 dark:bg-gray-900/50 rounded-lg border border-gray-200 dark:border-gray-700 transition-all duration-300 hover:border-primary-300 dark:hover:border-primary-700">
                 <input 
+                  id="terms-checkbox"
                   type="checkbox" 
                   required 
                   className="mt-0.5 rounded w-4 h-4 text-primary-600 focus:ring-primary-500 border-gray-300 dark:border-gray-600 transition-all duration-200" 
+                  aria-label="I agree to the Terms of Service and Privacy Policy"
                 />
-                <label className="text-sm text-gray-600 dark:text-gray-400">
+                <label htmlFor="terms-checkbox" className="text-sm text-gray-600 dark:text-gray-400 cursor-pointer">
                   I agree to the{' '}
                   <Link to="/terms" className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 hover:underline font-medium transition-colors">
                     Terms of Service
