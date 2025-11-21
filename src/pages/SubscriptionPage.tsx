@@ -78,20 +78,32 @@ export default function SubscriptionPage() {
       })
 
       if (!response.ok) {
-        let error
+        let errorMessage = `HTTP ${response.status}: ${response.statusText}`
+        
+        // Try to get error message from response
         try {
-          error = await response.json()
+          const contentType = response.headers.get('content-type')
+          if (contentType && contentType.includes('application/json')) {
+            const error = await response.json()
+            errorMessage = error.error || error.message || errorMessage
+          } else {
+            const text = await response.text()
+            errorMessage = text || errorMessage
+          }
         } catch (e) {
-          // If response is not JSON, get text
-          const text = await response.text()
-          throw new Error(text || `HTTP ${response.status}: ${response.statusText}`)
+          // If we can't parse the response, use the status
+          console.error('Error parsing error response:', e)
         }
-        if (response.status === 503) {
-          toast.error('Payment gateway is not configured yet. Please contact support or try again later.')
+        
+        if (response.status === 404) {
+          toast.error('Payment service not available. Please use "npm run dev:netlify" for local development or deploy to Netlify.')
+        } else if (response.status === 503) {
+          toast.error('Payment gateway is not configured yet. Please add RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET to your environment variables.')
         } else {
-          throw new Error(error.error || 'Failed to create payment order')
+          toast.error(errorMessage || 'Failed to create payment order')
         }
         setIsProcessing(false)
+        setProcessingPlan(null)
         return
       }
 
@@ -132,14 +144,22 @@ export default function SubscriptionPage() {
               })
 
               if (!verifyResponse.ok) {
-                let error
+                let errorMessage = `HTTP ${verifyResponse.status}: ${verifyResponse.statusText}`
+                
                 try {
-                  error = await verifyResponse.json()
+                  const contentType = verifyResponse.headers.get('content-type')
+                  if (contentType && contentType.includes('application/json')) {
+                    const error = await verifyResponse.json()
+                    errorMessage = error.error || error.message || errorMessage
+                  } else {
+                    const text = await verifyResponse.text()
+                    errorMessage = text || errorMessage
+                  }
                 } catch (e) {
-                  const text = await verifyResponse.text()
-                  throw new Error(text || `HTTP ${verifyResponse.status}: ${verifyResponse.statusText}`)
+                  console.error('Error parsing verification error response:', e)
                 }
-                throw new Error(error.error || 'Payment verification failed')
+                
+                throw new Error(errorMessage || 'Payment verification failed')
               }
 
               const verifyData = await verifyResponse.json()
